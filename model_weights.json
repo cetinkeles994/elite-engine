@@ -1,0 +1,11 @@
+{
+    "Premier League": {
+        "confidence_modifier": -30
+    },
+    "La Liga": {
+        "confidence_modifier": -15
+    },
+    "S\u00fcper Lig": {
+        "confidence_modifier": -30
+    }
+}

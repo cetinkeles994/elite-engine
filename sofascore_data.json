@@ -1,0 +1,128 @@
+{
+    "15362429": {
+        "name": "FC St. Pauli vs RB Leipzig",
+        "homeTeam": "FC St. Pauli",
+        "awayTeam": "RB Leipzig",
+        "xG": [
+            0.51,
+            0.67
+        ],
+        "momentum": "Leipzig Üstünlüğü",
+        "momentum_score": 5.8,
+        "global_odds": {
+            "1": 4.33,
+            "X": 2.75,
+            "2": 2.2
+        },
+        "league_id": 35
+    },
+    "15362425": {
+        "name": "SV Werder Bremen vs TSG Hoffenheim",
+        "homeTeam": "SV Werder Bremen",
+        "awayTeam": "TSG Hoffenheim",
+        "xG": [
+            0.14,
+            0.41
+        ],
+        "momentum": "Hoffenheim Baskın",
+        "momentum_score": -15.2,
+        "global_odds": {
+            "1": 13.0,
+            "X": 4.75,
+            "2": 1.29
+        },
+        "league_id": 35
+    },
+    "14787859": {
+        "name": "Fiorentina vs Como",
+        "homeTeam": "Fiorentina",
+        "awayTeam": "Como",
+        "momentum": "Como Aktif",
+        "momentum_score": -7.4,
+        "global_odds": {
+            "1": 4.5,
+            "X": 2.88,
+            "2": 2.05
+        },
+        "league_id": 14787859
+    },
+    "14061199": {
+        "name": "Cardiff City vs Barnsley",
+        "homeTeam": "Cardiff City",
+        "awayTeam": "Barnsley",
+        "momentum": "Cardiff Kontrolünde",
+        "momentum_score": -1.6,
+        "global_odds": {
+            "1": 1.03,
+            "X": 15.0,
+            "2": 41.0
+        }
+    },
+    "14061205": {
+        "name": "Huddersfield Town vs Luton Town",
+        "homeTeam": "Huddersfield Town",
+        "awayTeam": "Luton Town",
+        "momentum_score": -24.4,
+        "global_odds": {
+            "1": 5.5,
+            "X": 2.5,
+            "2": 2.05
+        }
+    },
+    "14061211": {
+        "name": "Plymouth Argyle vs Mansfield Town",
+        "homeTeam": "Plymouth Argyle",
+        "awayTeam": "Mansfield Town",
+        "momentum_score": -34.0,
+        "global_odds": {
+            "1": 2.2,
+            "X": 2.75,
+            "2": 4.33
+        }
+    },
+    "14061194": {
+        "name": "Blackpool vs Stockport County",
+        "homeTeam": "Blackpool",
+        "awayTeam": "Stockport County",
+        "momentum": "Stockport Hücumda",
+        "momentum_score": -5.8,
+        "global_odds": {
+            "1": 41.0,
+            "X": 15.0,
+            "2": 1.04
+        }
+    },
+    "14061222": {
+        "name": "Reading vs Exeter City",
+        "homeTeam": "Reading",
+        "awayTeam": "Exeter City",
+        "momentum_score": 12.4,
+        "global_odds": {
+            "1": 5.0,
+            "X": 3.4,
+            "2": 1.8
+        }
+    },
+    "14061202": {
+        "name": "Doncaster Rovers vs Leyton Orient",
+        "homeTeam": "Doncaster Rovers",
+        "awayTeam": "Leyton Orient",
+        "momentum_score": 30.2,
+        "global_odds": {
+            "1": 1.33,
+            "X": 4.75,
+            "2": 10.0
+        }
+    },
+    "14061219": {
+        "name": "Wycombe Wanderers vs Wigan Athletic",
+        "homeTeam": "Wycombe Wanderers",
+        "awayTeam": "Wigan Athletic",
+        "momentum_score": -27.2,
+        "global_odds": {
+            "1": 1.4,
+            "X": 4.0,
+            "2": 9.5
+        }
+    }
+}

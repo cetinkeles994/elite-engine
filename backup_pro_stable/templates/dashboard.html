@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRA-PRO ANALİZ v5.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        term: '#050505',
+                        panel: '#101010',
+                        border: '#222',
+                        accent: '#00ff41',
+                        danger: '#ff3333',
+                        text: '#e0e0e0',
+                        muted: '#666'
+                    },
+                    fontFamily: {
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px;
+            font-size: 0.70rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            border-bottom: 1px solid #222;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 0.85rem;
+        }
+
+        .data-table tr:hover {
+            background-color: #111;
+        }
+
+        .profit-badge {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.70rem;
+            font-weight: bold;
+        }
+
+        .live-pulse {
+            animation: pulse 2s infinite;
+            color: #ff3333;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Tabs */
+        .tab-btn {
+            padding: 8px 16px;
+            border-bottom: 2px solid transparent;
+            color: #666;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            border-color: #00ff41;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Bar -->
+    <header class="bg-panel border-b border-border p-3 flex justify-between items-center h-14">
+        <div class="flex items-center gap-4">
+            <div class="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(0,255,65,0.8)]"></div>
+            <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                SİSTEM DASHBOARD
+                <span id="match-counter"
+                    class="ml-2 text-sm text-accent border border-accent rounded px-2 py-0.5 align-middle">0 Maç</span>
+            </h1>
+            <div class="h-4 w-px bg-border mx-2"></div>
+            <nav class="flex gap-4 text-xs font-bold tracking-wide">
+                <button onclick="setSport('soccer')" id="btn-soccer"
+                    class="text-white hover:text-accent opacity-100">FUTBOL</button>
+                <button onclick="setSport('basketball')" id="btn-basketball"
+                    class="text-muted hover:text-white opacity-50">BASKETBOL</button>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4 text-[10px] text-muted font-mono uppercase">
+            <span>Server: <span class="text-green-500">ONLINE</span></span>
+            <span>API: <span class="text-white">ESPN V2</span></span>
+            <span>Mode: <span class="text-accent">GOD MODE</span></span>
+        </div>
+    </header>
+
+    <!-- Sub Header (View Modes) -->
+    <div class="bg-term border-b border-border p-2 flex justify-center">
+        <div class="flex gap-2">
+            <button onclick="setView('main')" id="tab-main"
+                class="tab-btn active px-4 py-2 rounded text-sm font-bold transition-all bg-gray-800 text-white hover:bg-gray-700">ANA
+                TABLO</button>
+            <button onclick="setView('goals')" id="tab-goals"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-gray-800">GOL
+                / SAYI</button>
+            <button onclick="setView('props')" id="tab-props"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-gray-800">KART
+                & KORNER</button>
+            <button onclick="setView('baron')" id="tab-baron"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-red-500 border border-red-500 hover:bg-red-500 hover:text-white animate-pulse">📉
+                BARON SİNYALLERİ</button>
+            <button onclick="setView('history')" id="tab-history"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-accent border border-accent hover:bg-accent hover:text-black">GEÇMİŞ
+                SONUÇLAR</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 overflow-auto">
+        <div class="max-w-[1400px] mx-auto">
+
+            <!-- Data Table -->
+            <div class="bg-panel border border-border rounded overflow-hidden shadow-2xl">
+                <table class="w-full data-table">
+                    <thead id="table-head">
+                        <!-- Dynamic Headers -->
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data injected via JS -->
+                        <tr>
+                            <td colspan="10" class="text-center py-12 text-muted font-mono animate-pulse">Analiz Motoru
+                                Başlatılıyor...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Match Details Modal -->
+    <div id="match-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-panel border border-border w-[600px] rounded-lg shadow-2xl p-6 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSport = 'soccer';
+        let currentView = 'main'; // main, goals, props
+        let lastData = [];
+
+        function openModal(index) {
+            const m = lastData[index];
+            if (!m) return;
+
+            const stats = m.live_details || {};
+            const pro = m.pro_stats || {};
+
+            const html = `
+                <div class="text-center mb-6">
+                    <div class="text-xs text-accent font-mono tracking-widest mb-2">${m.league}</div>
+                    <div class="flex justify-between items-center px-8">
+                        <div class="text-2xl font-bold text-white w-1/3 text-right">${m.home}</div>
+                        <div class="text-4xl font-mono text-accent w-1/3">${m.score}</div>
+                        <div class="text-2xl font-bold text-white w-1/3 text-left">${m.away}</div>
+                    </div>
+                    <div class="text-sm text-gray-500 mt-2 font-mono">${m.time}</div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-black/50 p-4 rounded border border-gray-800">
+                        <div class="text-xs text-gray-400 mb-2">CANLI İSTATİSTİKLER</div>
+                        
+                        ${currentSport === 'soccer' ? `
+                            <!-- Soccer Stats -->
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span>${stats.home_shots || 0} (${stats.home_sot || 0})</span>
+                                        <span class="text-muted">ŞUT (İSABET)</span>
+                                        <span>${stats.away_shots || 0} (${stats.away_sot || 0})</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 h-1">
+                                        <div class="bg-blue-500 h-1" style="width: ${(stats.home_shots / (stats.home_shots + stats.away_shots + 0.1)) * 100}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span>${stats.home_corners || 0}</span>
+                                        <span class="text-muted text-yellow-400">KORNER</span>
+                                        <span>${stats.away_corners || 0}</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 h-1">
+                                        <div class="bg-yellow-500 h-1" style="width: ${(stats.home_corners / (stats.home_corners + stats.away_corners + 0.1)) * 100}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span>${stats.home_fouls || 0}</span>
+                                        <span class="text-muted text-gray-400">FAUL</span>
+                                        <span>${stats.away_fouls || 0}</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 h-1 mb-2">
+                                        <div class="bg-gray-500 h-1" style="width: ${(stats.home_fouls / (stats.home_fouls + stats.away_fouls + 0.1)) * 100}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-yellow-500 font-bold">${stats.home_yc || 0}</span>
+                                        <span class="text-muted text-red-500">KART (SARI)</span>
+                                        <span class="text-yellow-500 font-bold">${stats.away_yc || 0}</span>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span>%${stats.home_pos || 50}</span>
+                                        <span class="text-muted">TOPLA OYNAMA</span>
+                                        <span>%${stats.away_pos || 50}</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 h-1">
+                                        <div class="bg-green-500 h-1" style="width: ${stats.home_pos}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : `
+                            <!-- Basketball Stats (If available) or Placeholder -->
+                            <div class="text-center py-4 text-gray-500 text-sm">
+                                Basketbol canlı verileri (Ribaund/Asist) yakında eklenecek.
+                                <br><br>
+                                <span class="text-white">Şu anki Skor:</span>
+                                <div class="text-xl font-mono mt-1 text-accent">${m.score}</div>
+                            </div>
+                        `}
+                    </div>
+
+                    <div class="bg-black/50 p-4 rounded border border-gray-800">
+                        <div class="text-xs text-gray-400 mb-2">YAPAY ZEKA TAHMİNİ</div>
+                        <div class="space-y-3">
+                            ${currentSport === 'soccer' ? `
+                                <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Maç Sonucu:</span>
+                                    <span class="font-bold text-white">${m.recommendation || '-'}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Gol Tahmini:</span>
+                                    <span class="font-bold text-white">${pro.best_goal_pick || '-'}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Korner/Kart:</span>
+                                    <span class="font-bold text-white">${pro.best_props_pick || '-'}</span>
+                                </div>
+                                 <div class="flex justify-between">
+                                    <span class="text-gray-400">Güven:</span>
+                                    <span class="font-bold text-accent">%${Math.max(pro.best_goal_prob || 0, pro.best_props_prob || 0)}</span>
+                                </div>
+                            ` : `
+                                <!-- Basketball Predictions -->
+                                 <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Maç Sonucu:</span>
+                                    <span class="font-bold text-white">${m.recommendation || '-'}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Skor Tahmini:</span>
+                                    <span class="font-bold text-blue-300">${pro.home_points_pred} - ${pro.away_points_pred}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-800 pb-2">
+                                    <span class="text-gray-400">Toplam Sayı:</span>
+                                    <span class="font-bold text-white">${pro.total_points} (${pro.best_goal_pick})</span>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="bg-gray-900 p-3 rounded text-xs text-gray-300 font-mono border-l-2 border-accent">
+                    ${m.reasoning || 'Detaylı analiz verisi mevcut değil.'}
+                </div>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            document.getElementById('match-modal').classList.remove('hidden');
+            document.getElementById('match-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('match-modal').classList.add('hidden');
+            document.getElementById('match-modal').classList.remove('flex');
+        }
+
+        function setSport(s) {
+            currentSport = s;
+            document.getElementById('btn-soccer').className = s === 'soccer' ? 'text-white hover:text-accent opacity-100' : 'text-muted hover:text-white opacity-50';
+            document.getElementById('btn-basketball').className = s === 'basketball' ? 'text-white hover:text-accent opacity-100' : 'text-muted hover:text-white opacity-50';
+            renderTable();
+            fetchData();
+        }
+
+        function setView(v) {
+            currentView = v;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + v).classList.add('active');
+
+            if (v === 'history') {
+                fetchHistory();
+            } else if (v === 'main' && lastData.length < 5) {
+                // If switching back to main and empty, fetch fresh
+                fetchData();
+            } else {
+                renderTable();
+            }
+        }
+
+        async function fetchHistory() {
+            document.getElementById('table-body').innerHTML = `<tr><td colspan="8" class="text-center py-8 text-accent animate-pulse">GEÇMİŞ VERİLER YÜKLENİYOR...</td></tr>`;
+            try {
+                const res = await fetch(`/api/history?sport=${currentSport}`);
+                const matches = await res.json();
+                lastData = matches;
+                document.getElementById('match-counter').innerText = `${matches.length} Arşiv`;
+                renderTable();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function renderHeaders() {
+            const head = document.getElementById('table-head');
+            let cols = `
+                <th class="w-20">DAKİKA</th>
+                <th class="w-20">LİG</th>
+                <th>KARŞILAŞMA</th>
+                <th class="w-16 text-center">SKOR</th>
+            `;
+
+            if (currentView === 'main' || currentView === 'history') {
+                if (currentSport === 'basketball') {
+                    cols += `
+                        <th class="w-20 text-center text-blue-400">EV TAHMİN</th>
+                        <th class="w-20 text-center text-blue-400">DEP TAHMİN</th>
+                        <th class="w-48 text-center text-white">SİSTEM ÖNERİSİ</th>
+                    `;
+                } else {
+                    cols += `
+                        <th class="w-20 text-center text-gray-400">SKOR TAHMİNİ</th>
+                        <th class="w-20 text-right text-gray-400">EV ORAN</th>
+                        <th class="w-20 text-right text-gray-400">DEP ORAN</th>
+                        <th class="w-48 text-center text-white">SİSTEM ÖNERİSİ</th>
+                    `;
+                }
+            } else if (currentView === 'goals') {
+                if (currentSport === 'soccer') {
+                    cols += `
+                        <th class="w-32 text-center text-yellow-400">CANLI BASKI</th>
+                        <th class="w-24 text-center text-blue-400">BEKLENEN GOL (xG)</th>
+                        <th class="w-24 text-center text-accent">2.5 ÜST %</th>
+                        <th class="w-40 text-center text-white">GOL TAHMİNİ</th>
+                    `;
+                } else {
+                    cols += `
+                        <th class="w-24 text-center text-blue-400">EV TAHMİN</th>
+                        <th class="w-24 text-center text-blue-400">DEP TAHMİN</th>
+                        <th class="w-24 text-center text-accent">TOPLAM</th>
+                        <th class="w-40 text-center text-white">EN İYİ SEÇİM</th>
+                    `;
+                }
+            } else if (currentView === 'props') {
+                if (currentSport === 'soccer') {
+                    cols += `
+                        <th class="w-24 text-center text-yellow-400">BEKLENEN KART</th>
+                        <th class="w-24 text-center text-blue-400">BEKLENEN KORNER</th>
+                        <th class="w-40 text-center text-white">EN İYİ SEÇİM</th>
+                    `;
+                } else {
+                    cols += `<th colspan="3" class="text-center text-muted">KART/KORNER VERİSİ SADECE FUTBOL İÇİNDİR</th>`;
+                }
+            }
+
+            head.innerHTML = `<tr>${cols}</tr>`;
+        }
+
+        function renderTable() {
+            renderHeaders();
+            const tbody = document.getElementById('table-body');
+
+            // Filter Data based on View
+            let displayData = lastData;
+            if (currentView === 'baron') {
+                displayData = lastData.filter(m => m.recommendation && m.recommendation.includes("DÜŞÜYOR"));
+                if (displayData.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8" class="text-center py-12 text-gray-500 italic">
+                        Şu an aktif bir <span class="text-red-500 font-bold">Baron Operasyonu (Sert Düşüş)</span> tespit edilemedi.<br>
+                        Piyasa sakin görünüyor.
+                     </td></tr>`;
+                    return;
+                }
+            }
+
+            if (!displayData || displayData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-muted">Veri yok.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = displayData.map((m, index) => {
+                const isValue = m.value_found;
+                const timeClass = m.status === 'Live' ? 'live-pulse' : 'text-muted';
+
+                // Result Icons
+                let resultBadge = '';
+                if (m.status === 'Completed' || m.time.includes('Bitti')) {
+                    if (m.result === 'won') resultBadge = '<span class="text-green-500 font-bold ml-2">✅ TUTTU</span>';
+                    else if (m.result === 'lost') resultBadge = '<span class="text-red-500 font-bold ml-2">❌ YATTI</span>';
+                }
+
+                // Common Columns
+                let row = `
+                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal(${index})">
+                        <td class="${timeClass} font-mono">${m.time}</td>
+                        <td class="text-[10px] font-bold text-muted uppercase tracking-wider">${m.league}${resultBadge}</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-white font-bold">${m.home}</span>
+                                <span class="text-muted text-xs">vs</span>
+                                <span class="text-gray-400">${m.away}</span>
+                            </div>
+                        </td>
+                        <td class="text-center font-bold font-mono text-lg text-white">${m.score}</td>
+                `;
+
+                // View Specific Columns
+                if (currentView === 'main' || currentView === 'history') {
+                    // Main View
+                    if (currentSport === 'basketball') {
+                        row += `
+                            <td class="text-center font-mono text-blue-300 font-bold">${m.pro_stats.home_points_pred}</td>
+                            <td class="text-center font-mono text-blue-300 font-bold">${m.pro_stats.away_points_pred}</td>
+                        `;
+                    } else {
+                        // Soccer: Show Score Prediction
+                        row += `
+                            <td class="text-center font-mono text-blue-400 text-xs">${Math.round(m.pro_stats.home_goals)}-${Math.round(m.pro_stats.away_goals)}</td>
+                            <td class="text-right font-mono text-gray-400">${m.odds.home}</td>
+                            <td class="text-right font-mono text-gray-400">${m.odds.away}</td>
+                        `;
+                    }
+
+                    row += `
+                        <td class="text-center relative">
+                            ${isValue ? `
+                                <div class="inline-flex flex-col items-center cursor-help">
+                                    <span class="bg-accent text-black font-bold px-3 py-1 rounded text-xs shadow-[0_0_10px_rgba(0,255,65,0.4)]">OYNA: ${m.recommendation}</span>
+                                    ${resultBadge}
+                                    <div class="absolute bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-black border border-gray-700 rounded text-xs text-gray-300 shadow-2xl z-50 text-left">
+                                        <div class="font-bold text-white mb-1">Analiz Raporu:</div>
+                                        ${m.reasoning}
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="inline-flex flex-col items-center opacity-50">
+                                    <span class="text-xs text-gray-500 border border-gray-800 px-2 py-1 rounded">Analiz: ${m.recommendation}</span>
+                                    ${resultBadge}
+                                </div>
+                            `}
+                        </td>
+                    `;
+                } else if (currentView === 'goals') {
+                    // Goals / Points View
+                    const p = m.pro_stats;
+                    if (currentSport === 'soccer') {
+                        let mom = m.pro_stats.momentum || { home: 1.0, away: 1.0 };
+                        let momBadge = `<span class="text-gray-500 text-xs">-</span>`;
+                        if (mom.home > 1.2) momBadge = `<span class="text-green-500 font-bold text-xs">🔥 EV</span>`;
+                        else if (mom.away > 1.2) momBadge = `<span class="text-red-500 font-bold text-xs">🔥 DEP</span>`;
+
+                        const isOver = p.over_2_5_prob > 55;
+                        row += `
+                            <td class="text-center font-mono text-xs">${momBadge} <span class="text-gray-600">|</span> <span class="text-gray-400">${mom.home} - ${mom.away}</span></td>
+                            <td class="text-center font-mono text-blue-400">${p.home_goals} - ${p.away_goals}</td>
+                            <td class="text-center font-mono ${isOver ? 'text-accent' : 'text-muted'} font-bold">%${p.over_2_5_prob}</td>
+                            <td class="text-center">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-xs border border-gray-600 text-white px-2 py-1 rounded shadow mb-1">${p.best_goal_pick || 'ANALİZ'}</span>
+                                    ${p.best_goal_prob > 75 ? `<span class="text-[10px] text-black bg-accent px-1 rounded font-bold animate-pulse">⚡ BANKO %${p.best_goal_prob}</span>` :
+                                p.best_goal_prob > 0 ? `<span class="text-[10px] text-muted">%${p.best_goal_prob} İhtimal</span>` : ''}
+                                </div>
+                            </td>
+                        `;
+                    } else {
+                        row += `
+                            <td class="text-center font-mono text-blue-300 font-bold text-lg">${p.home_points_pred}</td>
+                            <td class="text-center font-mono text-blue-300 font-bold text-lg">${p.away_points_pred}</td>
+                            <td class="text-center font-mono text-accent font-bold text-xl">${p.total_points}</td>
+                            <td class="text-center">
+                                <span class="text-xs border border-gray-600 text-white px-2 py-1 rounded shadow">${p.best_goal_pick || 'ANALİZ'} ${goalResult}</span>
+                            </td>
+                        `;
+                    }
+                } else if (currentView === 'props') {
+                    // Props View
+                    const p = m.pro_stats;
+
+                    let propBadge = '';
+                    if ((m.status === 'Completed' || m.time.includes('Bitti')) && m.props_pick_result) {
+                        propBadge = m.props_pick_result === 'won' ? '✅' : '❌';
+                    }
+
+                    if (currentSport === 'soccer') {
+                        row += `
+                            <td class="text-center font-mono text-yellow-400">${p.cards_prediction}</td>
+                            <td class="text-center font-mono text-blue-400">${p.corners_prediction}</td>
+                            <td class="text-center">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-xs border border-gray-600 text-white px-2 py-1 rounded shadow mb-1">${p.best_props_pick || 'ANALİZ'} ${propBadge}</span>
+                                    ${p.best_props_prob > 80 ? `<span class="text-[10px] text-black bg-accent px-1 rounded font-bold animate-pulse">⚡ BANKO %${p.best_props_prob}</span>` :
+                                p.best_props_prob > 0 ? `<span class="text-[10px] text-muted">%${p.best_props_prob} İhtimal</span>` : ''}
+                                </div>
+                            </td>
+                        `;
+                    } else {
+                        row += `<td colspan="3"></td>`;
+                    }
+                }
+
+                row += `</tr>`;
+                return row;
+            }).join('');
+        }
+
+        async function fetchData() {
+            // STOP AUTO REFRESH IF BROWSING HISTORY OR BARON SIGNALS
+            if (currentView === 'history' || currentView === 'baron') return;
+
+            try {
+                const res = await fetch(`/api/fixtures?sport=${currentSport}`);
+                const matches = await res.json();
+                lastData = matches;
+                document.getElementById('match-counter').innerText = `${matches.length} Maç`;
+                renderTable();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHeaders();
+            fetchData();
+            setInterval(fetchData, 30000); // 30s auto refresh
+        });
+    </script>
+</body>
+
+</html>

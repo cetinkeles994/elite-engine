@@ -1,0 +1,288 @@
+date,league,home,away,home_odds,away_odds,prediction,confidence,result,h_score,a_score
+FT,Premier League,Crystal Palace,Chelsea,2.84,1.43,MS 2 [STAKE %11.9],0,won,1,3
+FT,Premier League,West Ham United,Sunderland,3.98,1.25,🔥 BANKO: MS 2 [STAKE %17.0],0,lost,3,1
+FT,Premier League,Burnley,Tottenham Hotspur,6.64,1.11,💎 KASA: MS 2 [STAKE %20.6],0,lost,2,2
+FT,Premier League,AFC Bournemouth,Liverpool,2.84,1.43,MS 2 [STAKE %11.9],0,lost,3,2
+FT,La Liga,Girona,Getafe,3.03,1.39,MS 2 [STAKE %13.1],0,lost,1,1
+FT,La Liga,Barcelona,Real Oviedo,1.07,8.7,💎 KASA: MS 1,89,won,3,0
+FT,La Liga,Alavés,Real Betis,3.03,1.39,MS 2 [STAKE %13.1],0,lost,2,1
+FT,La Liga,Rayo Vallecano,Osasuna,3.64,1.29,MS 2 [STAKE %15.7],0,won,1,3
+FT,La Liga,Valencia,Espanyol,3.64,1.29,MS 2 [STAKE %15.7],0,lost,3,2
+FT,Bundesliga,Borussia Mönchengladbach,VfB Stuttgart,3.29,1.34,MS 2 [STAKE %14.6],0,won,0,3
+FT,Bundesliga,1. FC Heidenheim 1846,RB Leipzig,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,won,0,3
+FT,Bundesliga,Bayern Munich,FC Augsburg,1.05,12.0,💎 KASA: MS 1,92,lost,1,2
+FT,Bundesliga,Mainz,VfL Wolfsburg,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,lost,3,1
+FT,Bundesliga,1. FC Union Berlin,Borussia Dortmund,2.74,1.46,MS 2 [STAKE %11.2],0,won,0,3
+FT,Serie A,Hellas Verona,Udinese,9.52,1.06,💎 KASA: MS 2 [STAKE %22.2],0,won,1,3
+FT,Serie A,Genoa,Bologna,3.81,1.27,🔥 BANKO: MS 2 [STAKE %16.5],0,lost,3,2
+FT,Serie A,Fiorentina,Cagliari,6.35,1.12,💎 KASA: MS 2 [STAKE %20.5],0,won,1,2
+FT,Serie A,Lecce,Lazio,4.76,1.19,🔥 BANKO: MS 2 [STAKE %18.7],0,lost,0,0
+FT,Ligue 1,Nantes,Nice,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,won,1,4
+FT,Ligue 1,Brest,Toulouse,2.74,1.46,MS 2 [STAKE %11.2],0,won,0,2
+FT,Ligue 1,Metz,Lyon,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,won,2,5
+FT,Ligue 1,Paris FC,Angers,3.29,1.34,MS 2 [STAKE %14.6],0,lost,0,0
+FT,Ligue 1,Le Havre AC,AS Monaco,4.11,1.24,🔥 BANKO: MS 2 [STAKE %17.1],0,lost,0,0
+FT,Süper Lig,Eyupspor,Besiktas,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,lost,2,2
+FT,Süper Lig,Gaziantep FK,Konyaspor,2.74,1.46,MS 2 [STAKE %11.2],0,lost,1,1
+FT,Süper Lig,Antalyaspor,Genclerbirligi,3.29,1.34,MS 2 [STAKE %14.6],0,lost,2,1
+FT,Süper Lig,Caykur Rizespor,Alanyaspor,4.11,1.24,🔥 BANKO: MS 2 [STAKE %17.1],0,lost,1,1
+FT,Süper Lig,Kayserispor,Istanbul Basaksehir,8.23,1.08,💎 KASA: MS 2 [STAKE %21.6],0,won,0,3
+FT,Süper Lig,Samsunspor,Kocaelispor,2.74,1.46,MS 2 [STAKE %11.2],0,lost,0,0
+FT,Süper Lig,Fatih Karagümrük,Galatasaray,8.23,1.08,💎 KASA: MS 2 [STAKE %21.6],0,won,1,3
+Bitti,NBA,Pistons,Kings,1.15,5.44,🔥 BANKO: MS 1,82,won,139,116
+Bitti,NBA,Thunder,Raptors,1.1,7.11,💎 KASA: MS 1,86,lost,101,103
+FT,Premier League,Burnley,Tottenham Hotspur,6.64,1.11,MS 2 [STAKE %16.2],0,lost,2,2
+FT,La Liga,Atlético Madrid,Mallorca,1.4,2.99,🔥 BANKO: MS 1 [STAKE %5.8],0,won,3,0
+FT,La Liga,Barcelona,Real Oviedo,1.07,8.7,💎 KASA: MS 1 [STAKE %21.2],0,won,3,0
+FT,La Liga,Real Sociedad,Celta Vigo,2.6,1.5,MS 2 [STAKE %14.0],0,lost,3,1
+FT,La Liga,Sevilla,Athletic Club,2.6,1.5,MS 2 [STAKE %14.0],0,lost,2,1
+FT,La Liga,Villarreal,Real Madrid,1.33,3.34,🔥 BANKO: MS 1 [STAKE %5.9],0,lost,0,2
+FT,Bundesliga,Borussia Mönchengladbach,VfB Stuttgart,3.29,1.34,🔥 BANKO: MS 2 [STAKE %18.2],0,won,0,3
+FT,Bundesliga,SC Freiburg,FC Cologne,2.35,1.6,MS 2 [STAKE %11.5],0,lost,2,1
+FT,Bundesliga,Bayer Leverkusen,Werder Bremen,1.56,2.45,MS 1 [STAKE %4.8],0,won,1,0
+FT,Bundesliga,Bayern Munich,FC Augsburg,1.05,12.0,🔥 BANKO: MS 1,77,lost,1,2
+FT,Bundesliga,Eintracht Frankfurt,TSG Hoffenheim,2.35,1.6,MS 2 [STAKE %11.5],0,won,1,3
+FT,Bundesliga,1. FC Union Berlin,Borussia Dortmund,2.74,1.46,🔥 BANKO: MS 2 [STAKE %15.2],0,won,0,3
+FT,Serie A,Hellas Verona,Udinese,9.52,1.06,💎 KASA: MS 2 [STAKE %25.0],0,won,1,3
+FT,Serie A,Fiorentina,Cagliari,6.35,1.12,💎 KASA: MS 2 [STAKE %23.5],0,won,1,2
+FT,Serie A,Lecce,Lazio,4.76,1.19,MS 2 [STAKE %13.9],0,lost,0,0
+FT,Ligue 1,Nantes,Nice,5.48,1.15,💎 KASA: MS 2 [STAKE %22.6],0,won,1,4
+FT,Ligue 1,Brest,Toulouse,2.74,1.46,🔥 BANKO: MS 2 [STAKE %15.2],0,won,0,2
+FT,Ligue 1,Metz,Lyon,5.48,1.15,💎 KASA: MS 2 [STAKE %22.6],0,won,2,5
+FT,Ligue 1,Lille,Strasbourg,1.65,2.26,MS 1 [STAKE %4.1],0,lost,1,4
+FT,Ligue 1,Marseille,Lens,1.37,3.12,🔥 BANKO: MS 1 [STAKE %5.6],0,won,3,1
+FT,Süper Lig,Eyupspor,Besiktas,5.48,1.15,MS 2 [STAKE %14.9],0,lost,2,2
+FT,Süper Lig,Kayserispor,Istanbul Basaksehir,8.23,1.08,💎 KASA: MS 2 [STAKE %24.4],0,won,0,3
+FT,Süper Lig,Fatih Karagümrük,Galatasaray,8.23,1.08,💎 KASA: MS 2 [STAKE %24.4],0,won,1,3
+Bitti,NBA,Cavaliers,Magic,1.48,2.66,MS 1 [STAKE %5.0],0,won,114,98
+Bitti,NBA,Celtics,Trail Blazers,1.37,3.11,🔥 BANKO: MS 1 [STAKE %5.6],0,won,102,94
+Bitti,NBA,Rockets,Grizzlies,1.36,3.17,🔥 BANKO: MS 1 [STAKE %6.1],0,won,108,99
+Bitti,NBA,Timberwolves,Warriors,1.45,2.76,🔥 BANKO: MS 1 [STAKE %4.9],0,won,108,83
+Bitti,NBA,Pistons,Kings,1.15,5.44,💎 KASA: MS 1 [STAKE %9.7],0,won,139,116
+Bitti,NBA,Timberwolves,Warriors,1.48,2.69,MS 1 [STAKE %5.0],0,lost,85,111
+Bitti,NBA,Spurs,Pelicans,1.28,3.68,🔥 BANKO: MS 1 [STAKE %6.7],0,lost,95,104
+Bitti,NBA,Suns,Heat,1.48,2.69,MS 1 [STAKE %5.0],0,lost,102,111
+Bitti,NBA,76ers,Knicks,1.59,2.38,MS 1 [STAKE %4.8],0,lost,109,112
+Postponed,NBA,Timberwolves,Warriors,1.45,2.76,🔥 BANKO: MS 1 [STAKE %4.9],0,lost,0,0
+Bitti,NBA,Jazz,Heat,2.66,1.49,MS 2 [STAKE %14.6],0,won,116,147
+FT,Premier League,Wolverhampton Wanderers,Newcastle United,12.0,1.05,💎 KASA: MS 2 [STAKE %26.4],0,lost,0,0
+FT,Premier League,Arsenal,Liverpool,1.21,4.44,🔥 BANKO: MS 1,78,lost,0,0
+FT,Premier League,Burnley,Manchester United,6.06,1.13,🔥 BANKO: MS 2 [STAKE %20.2],0,lost,2,2
+FT,Premier League,West Ham United,Nottingham Forest,6.06,1.13,🔥 BANKO: MS 2 [STAKE %20.2],0,won,1,2
+FT,Premier League,Wolverhampton Wanderers,West Ham United,12.0,1.05,💎 KASA: MS 2 [STAKE %26.1],0,lost,3,0
+FT,Premier League,Burnley,Newcastle United,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,won,1,3
+FT,Premier League,West Ham United,Brighton & Hove Albion,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,lost,2,2
+FT,Premier League,Arsenal,Aston Villa,1.18,5.03,🔥 BANKO: MS 1,81,won,4,1
+FT,La Liga,Levante,Elche,4.33,1.22,🔥 BANKO: MS 2 [STAKE %17.8],0,lost,3,2
+FT,La Liga,Elche,Sevilla,3.46,1.31,MS 2 [STAKE %15.2],0,lost,2,2
+FT,La Liga,Atlético Madrid,Alavés,1.44,2.8,🔥 BANKO: MS 1 [STAKE %5.4],0,won,1,0
+FT,La Liga,Celta Vigo,Rayo Vallecano,2.16,1.7,MS 2 [STAKE %8.7],0,lost,3,0
+FT,La Liga,Real Madrid,Levante,1.15,5.44,💎 KASA: MS 1 [STAKE %9.7],0,won,2,0
+FT,La Liga,Mallorca,Athletic Club,3.46,1.31,MS 2 [STAKE %15.2],0,lost,3,2
+FT,La Liga,Real Betis,Villarreal,2.16,1.7,MS 2 [STAKE %8.7],0,lost,2,0
+FT,La Liga,Sevilla,Celta Vigo,2.74,1.46,🔥 BANKO: MS 2 [STAKE %15.2],0,won,0,1
+FT,La Liga,Rayo Vallecano,Mallorca,3.29,1.34,MS 2 [STAKE %14.6],0,lost,2,1
+FT,La Liga,Levante,Espanyol,5.19,1.17,🔥 BANKO: MS 2 [STAKE %19.1],0,lost,1,1
+FT,La Liga,Real Oviedo,Real Betis,8.23,1.08,💎 KASA: MS 2 [STAKE %24.4],0,lost,1,1
+FT,La Liga,Villarreal,Alavés,1.2,4.63,💎 KASA: MS 1 [STAKE %8.5],0,won,3,1
+FT,La Liga,Girona,Osasuna,3.29,1.34,MS 2 [STAKE %14.6],0,lost,1,0
+FT,La Liga,Valencia,Elche,5.48,1.15,🔥 BANKO: MS 2 [STAKE %19.5],0,lost,1,1
+FT,La Liga,Getafe,Real Sociedad,2.74,1.46,🔥 BANKO: MS 2 [STAKE %15.2],0,won,1,2
+FT,La Liga,Sevilla,Levante,2.6,1.5,MS 2 [STAKE %14.0],0,won,0,3
+FT,La Liga,Real Madrid,Real Betis,1.18,5.03,💎 KASA: MS 1 [STAKE %10.2],0,won,5,1
+FT,La Liga,Mallorca,Girona,3.9,1.26,🔥 BANKO: MS 2 [STAKE %16.6],0,won,1,2
+FT,La Liga,Real Sociedad,Atlético Madrid,3.9,1.26,🔥 BANKO: MS 2 [STAKE %16.6],0,lost,1,1
+FT,La Liga,Celta Vigo,Valencia,2.6,1.5,MS 2 [STAKE %14.0],0,lost,4,1
+FT,La Liga,Espanyol,Barcelona,1.56,2.45,MS 1 [STAKE %4.8],0,lost,0,2
+FT,La Liga,Rayo Vallecano,Getafe,3.9,1.26,🔥 BANKO: MS 2 [STAKE %16.6],0,lost,1,1
+FT,Bundesliga,St. Pauli,Hamburg SV,5.19,1.17,🔥 BANKO: MS 2 [STAKE %19.1],0,lost,0,0
+FT,Bundesliga,VfB Stuttgart,1. FC Union Berlin,1.56,2.45,MS 1 [STAKE %4.8],0,lost,1,1
+FT,Bundesliga,FC Augsburg,SC Freiburg,3.9,1.26,🔥 BANKO: MS 2 [STAKE %16.6],0,lost,2,2
+FT,Bundesliga,Borussia Dortmund,St. Pauli,1.42,2.91,🔥 BANKO: MS 1 [STAKE %5.6],0,won,3,2
+FT,Bundesliga,FC Cologne,Mainz,3.12,1.37,MS 2 [STAKE %13.6],0,lost,2,1
+FT,Bundesliga,Hamburg SV,Borussia Mönchengladbach,3.68,1.28,MS 2 [STAKE %16.1],0,lost,0,0
+FT,Bundesliga,TSG Hoffenheim,Bayer Leverkusen,1.47,2.7,MS 1 [STAKE %4.7],0,won,1,0
+FT,Bundesliga,VfL Wolfsburg,1. FC Heidenheim 1846,3.12,1.37,MS 2 [STAKE %13.6],0,lost,1,1
+FT,Bundesliga,RB Leipzig,Bayern Munich,1.47,2.7,MS 1 [STAKE %4.7],0,lost,1,5
+FT,Bundesliga,Werder Bremen,Eintracht Frankfurt,3.68,1.28,MS 2 [STAKE %16.1],0,lost,3,3
+FT,Bundesliga,FC Augsburg,1. FC Union Berlin,3.68,1.28,MS 2 [STAKE %16.1],0,lost,1,1
+FT,Bundesliga,VfL Wolfsburg,St. Pauli,2.94,1.41,MS 2 [STAKE %12.5],0,lost,2,1
+FT,Bundesliga,FC Cologne,Bayern Munich,3.68,1.28,MS 2 [STAKE %16.1],0,won,1,3
+FT,Bundesliga,RB Leipzig,SC Freiburg,1.39,3.05,🔥 BANKO: MS 1 [STAKE %5.4],0,won,2,0
+FT,Bundesliga,TSG Hoffenheim,Borussia Mönchengladbach,1.54,2.5,MS 1 [STAKE %4.3],0,won,5,1
+FT,Bundesliga,VfB Stuttgart,Eintracht Frankfurt,1.47,2.7,MS 1 [STAKE %4.7],0,won,3,2
+FT,Bundesliga,Borussia Dortmund,Werder Bremen,1.47,2.7,MS 1 [STAKE %4.7],0,won,3,0
+FT,Bundesliga,Mainz,1. FC Heidenheim 1846,7.36,1.09,💎 KASA: MS 2 [STAKE %21.2],0,lost,2,1
+FT,Bundesliga,Borussia Mönchengladbach,FC Augsburg,2.77,1.45,🔥 BANKO: MS 2 [STAKE %15.2],0,lost,4,0
+FT,Bundesliga,Bayern Munich,VfL Wolfsburg,1.05,12.0,🔥 BANKO: MS 1,81,won,8,1
+FT,Bundesliga,1. FC Heidenheim 1846,FC Cologne,4.62,1.2,🔥 BANKO: MS 2 [STAKE %18.3],0,lost,2,2
+FT,Bundesliga,1. FC Union Berlin,Mainz,2.31,1.62,MS 2 [STAKE %10.9],0,lost,2,2
+FT,Bundesliga,SC Freiburg,Hamburg SV,2.31,1.62,MS 2 [STAKE %10.9],0,lost,2,1
+FT,Bundesliga,Bayer Leverkusen,VfB Stuttgart,1.54,2.5,MS 1 [STAKE %4.3],0,lost,1,4
+FT,Serie A,Pisa,Atalanta,12.0,1.05,💎 KASA: MS 2 [STAKE %26.1],0,lost,1,1
+FT,Serie A,Hellas Verona,Bologna,8.66,1.07,💎 KASA: MS 2 [STAKE %24.7],0,won,2,3
+FT,Serie A,Internazionale,Lecce,1.15,5.44,🔥 BANKO: MS 1,82,won,1,0
+FT,Serie A,Fiorentina,AC Milan,8.66,1.07,💎 KASA: MS 2 [STAKE %24.7],0,lost,1,1
+FT,Serie A,Hellas Verona,Lazio,8.23,1.08,💎 KASA: MS 2 [STAKE %24.4],0,won,0,1
+FT,Serie A,Internazionale,Napoli,1.18,5.03,🔥 BANKO: MS 1,81,lost,2,2
+FT,Serie A,Lazio,Fiorentina,2.74,1.46,MS 2 [STAKE %11.2],0,lost,2,2
+FT,Serie A,Torino,Udinese,2.74,1.46,MS 2 [STAKE %11.2],0,won,1,2
+FT,Serie A,Pisa,Como,12.0,1.05,💎 KASA: MS 2 [STAKE %26.1],0,won,0,3
+FT,Serie A,Sassuolo,Juventus,2.74,1.46,MS 2 [STAKE %11.2],0,won,0,3
+FT,Serie A,Fiorentina,Cremonese,7.79,1.08,💎 KASA: MS 2 [STAKE %24.1],0,lost,1,0
+FT,Serie A,Hellas Verona,Torino,7.36,1.09,💎 KASA: MS 2 [STAKE %21.2],0,won,0,3
+FT,Serie A,Internazionale,Bologna,1.13,6.0,🔥 BANKO: MS 1,84,won,3,1
+FT,Serie A,Genoa,Pisa,5.19,1.17,🔥 BANKO: MS 2 [STAKE %19.1],0,lost,1,1
+FT,Ligue 1,AJ Auxerre,Paris Saint-Germain,5.48,1.15,💎 KASA: MS 2 [STAKE %22.6],0,won,0,1
+FT,Ligue 1,Nantes,Paris FC,5.19,1.17,💎 KASA: MS 2 [STAKE %22.2],0,won,1,2
+FT,Ligue 1,Lyon,Brest,1.56,2.45,MS 1 [STAKE %4.8],0,won,2,1
+FT,Ligue 1,Lens,AJ Auxerre,1.11,6.59,💎 KASA: MS 1,85,won,1,0
+FT,Ligue 1,Toulouse,Nice,2.23,1.66,MS 2 [STAKE %10.0],0,lost,5,1
+FT,Ligue 1,Angers,Marseille,2.6,1.5,MS 2 [STAKE %14.0],0,won,2,5
+FT,Ligue 1,AS Monaco,Lorient,2.23,1.66,MS 2 [STAKE %10.0],0,won,1,3
+FT,Ligue 1,Paris Saint-Germain,Lille,1.2,4.63,💎 KASA: MS 1 [STAKE %8.5],0,won,3,0
+FT,Ligue 1,Marseille,Nantes,1.47,2.7,MS 1 [STAKE %4.7],0,lost,0,2
+FT,Ligue 1,Brest,AJ Auxerre,2.45,1.56,MS 2 [STAKE %12.8],0,lost,2,0
+FT,Ligue 1,Paris Saint-Germain,Paris FC,1.23,4.26,💎 KASA: MS 1 [STAKE %7.6],0,won,2,1
+FT,Ligue 1,Lille,Stade Rennais,1.47,2.7,MS 1 [STAKE %4.7],0,lost,0,2
+FT,Ligue 1,Toulouse,Lens,2.45,1.56,MS 2 [STAKE %12.8],0,won,0,3
+FT,Süper Lig,Kasimpasa,Antalyaspor,5.19,1.17,MS 2 [STAKE %14.5],0,lost,0,0
+FT,Champions League,Atalanta,Athletic Club,1.52,2.56,MS 1 [STAKE %4.5],0,lost,2,3
+FT,Champions League,Bayern Munich,Union St.-Gilloise,1.05,12.0,🔥 BANKO: MS 1,79,won,2,0
+FT,Champions League,Chelsea,Pafos,1.52,2.56,MS 1 [STAKE %4.5],0,won,1,0
+FT,Champions League,Newcastle United,PSV Eindhoven,1.52,2.56,MS 1 [STAKE %4.5],0,won,3,0
+FT,Champions League,Bodo/Glimt,Manchester City,6.06,1.13,🔥 BANKO: MS 2 [STAKE %20.2],0,lost,3,1
+FT,Champions League,F.C. København,Napoli,3.03,1.39,MS 2 [STAKE %13.1],0,lost,1,1
+FT,Champions League,Internazionale,Arsenal,1.52,2.56,MS 1 [STAKE %4.5],0,lost,1,3
+FT,Champions League,Olympiacos,Bayer Leverkusen,3.03,1.39,MS 2 [STAKE %13.1],0,lost,2,0
+FT,Champions League,Real Madrid,AS Monaco,1.21,4.44,💎 KASA: MS 1 [STAKE %7.7],0,won,6,1
+FT,Champions League,Sporting CP,Paris Saint-Germain,1.52,2.56,MS 1 [STAKE %4.5],0,won,2,1
+FT,Champions League,Tottenham Hotspur,Borussia Dortmund,1.52,2.56,MS 1 [STAKE %4.5],0,won,2,0
+FT,Europa League,Feyenoord Rotterdam,SK Sturm Graz,3.03,1.39,MS 2 [STAKE %13.1],0,lost,3,0
+FT,Europa League,SC Freiburg,Maccabi Tel-Aviv,1.21,4.44,💎 KASA: MS 1 [STAKE %7.7],0,won,1,0
+FT,Europa League,SK Brann,FC Midtjylland,3.03,1.39,MS 2 [STAKE %13.1],0,lost,3,3
+FT,Europa League,Viktoria Plzen,FC Porto,3.03,1.39,MS 2 [STAKE %13.1],0,lost,1,1
+FT,Europa League,AS Roma,VfB Stuttgart,1.21,4.44,💎 KASA: MS 1 [STAKE %7.7],0,won,2,0
+FT,Europa League,Braga,Nottingham Forest,1.21,4.44,💎 KASA: MS 1 [STAKE %7.7],0,won,1,0
+FT,Europa League,Celta Vigo,Lille,1.52,2.56,MS 1 [STAKE %4.5],0,won,2,1
+FT,Europa League,Ferencvaros,Panathinaikos,1.52,2.56,MS 1 [STAKE %4.5],0,lost,1,1
+FT,Europa League,Nice,Go Ahead Eagles,6.06,1.13,🔥 BANKO: MS 2 [STAKE %20.2],0,lost,3,1
+FT,Europa League,Rangers,Ludogorets Razgrad,6.06,1.13,🔥 BANKO: MS 2 [STAKE %20.2],0,lost,1,0
+FT,Europa League,RB Salzburg,FC Basel,3.03,1.39,MS 2 [STAKE %13.1],0,lost,3,1
+Bitti,NBA,Pistons,Rockets,1.16,5.25,💎 KASA: MS 1 [STAKE %8.7],0,lost,104,111
+Bitti,NBA,Cavaliers,Kings,1.53,2.52,MS 1 [STAKE %4.8],0,won,123,118
+Bitti,NBA,Thunder,Pacers,1.08,8.27,💎 KASA: MS 1,88,lost,114,117
+Bitti/OT,NBA,76ers,Rockets,1.55,2.47,MS 1 [STAKE %4.6],0,won,128,122
+Bitti,NBA,Timberwolves,Bulls,1.44,2.8,🔥 BANKO: MS 1 [STAKE %5.4],0,lost,115,120
+Bitti,NBA,Jazz,Spurs,2.6,1.5,MS 2 [STAKE %14.0],0,won,109,126
+Bitti,NBA,Hornets,Cavaliers,2.38,1.59,MS 2 [STAKE %12.1],0,won,87,94
+Bitti,NBA,Celtics,Pacers,1.38,3.08,🔥 BANKO: MS 1 [STAKE %5.9],0,won,119,104
+Bitti,NBA,Knicks,Nets,1.47,2.72,🔥 BANKO: MS 1 [STAKE %5.5],0,won,120,66
+Bitti,NBA,76ers,Suns,1.58,2.4,MS 1 [STAKE %4.6],0,lost,110,116
+Bitti,NBA,Rockets,Spurs,1.37,3.15,🔥 BANKO: MS 1 [STAKE %5.6],0,won,111,106
+Bitti,NBA,Jazz,Timberwolves,2.54,1.52,MS 2 [STAKE %13.5],0,lost,127,122
+Bitti,NBA,Nuggets,Lakers,1.31,3.46,🔥 BANKO: MS 1 [STAKE %6.0],0,lost,107,115
+Bitti,NBA,Warriors,Raptors,1.56,2.45,MS 1 [STAKE %4.8],0,lost,127,145
+Bitti,NBA,Cavaliers,Thunder,1.59,2.38,MS 1 [STAKE %4.8],0,lost,104,136
+Bitti,NBA,Wizards,Clippers,3.64,1.29,MS 2 [STAKE %15.7],0,won,106,110
+Bitti,NBA,Knicks,Mavericks,1.49,2.64,MS 1 [STAKE %4.5],0,lost,97,114
+Bitti,NBA,Spurs,Jazz,1.24,4.1,💎 KASA: MS 1 [STAKE %6.9],0,won,123,110
+Bitti,NBA,76ers,Pacers,1.54,2.49,MS 1 [STAKE %4.3],0,won,113,104
+Bitti,NBA,Pistons,Celtics,1.15,5.66,💎 KASA: MS 1 [STAKE %11.6],0,won,104,103
+Bitti,NBA,Warriors,Heat,1.52,2.54,MS 1 [STAKE %4.5],0,won,135,112
+Bitti,NBA,Rockets,Pelicans,1.39,3.05,🔥 BANKO: MS 1 [STAKE %5.4],0,won,119,110
+Bitti,NBA,Nuggets,Hornets,1.28,3.69,🔥 BANKO: MS 1 [STAKE %6.7],0,lost,87,110
+Bitti,NBA,Lakers,Raptors,1.42,2.89,🔥 BANKO: MS 1 [STAKE %5.6],0,won,110,93
+Bitti,NBA,Pistons,Pacers,1.15,5.44,💎 KASA: MS 1 [STAKE %9.7],0,won,121,78
+Bitti,NBA,Knicks,Suns,1.45,2.76,🔥 BANKO: MS 1 [STAKE %4.9],0,lost,99,106
+Bitti,NBA,Spurs,Timberwolves,1.25,3.96,💎 KASA: MS 1 [STAKE %6.2],0,won,126,123
+Bitti,NBA,Warriors,Hornets,1.55,2.47,MS 1 [STAKE %4.6],0,won,136,116
+Bitti,NBA,Nuggets,Wizards,1.25,3.96,💎 KASA: MS 1 [STAKE %6.2],0,won,121,115
+Bitti,NBA,Pacers,Pelicans,3.64,1.29,MS 2 [STAKE %15.7],0,lost,127,119
+Bitti,NBA,76ers,Cavaliers,1.57,2.41,MS 1 [STAKE %4.3],0,lost,115,117
+Bitti,NBA,Nets,Bulls,2.81,1.44,MS 2 [STAKE %11.8],0,lost,112,109
+Bitti/OT,NBA,Raptors,Clippers,1.49,2.64,MS 1 [STAKE %4.5],0,lost,117,121
+Bitti,NBA,Rockets,Timberwolves,1.41,2.95,🔥 BANKO: MS 1 [STAKE %5.2],0,won,110,105
+Bitti,NBA,Magic,Grizzlies,1.54,2.49,MS 1 [STAKE %4.3],0,won,118,111
+Bitti,NBA,Pistons,Suns,1.16,5.23,💎 KASA: MS 1 [STAKE %8.7],0,won,108,105
+Bitti,NBA,Rockets,Thunder,1.43,2.85,🔥 BANKO: MS 1 [STAKE %5.0],0,lost,91,111
+Bitti,NBA,Spurs,Bucks,1.27,3.83,💎 KASA: MS 1 [STAKE %7.4],0,won,119,101
+Bitti,NBA,Warriors,Knicks,1.58,2.4,MS 1 [STAKE %4.6],0,won,126,113
+Bitti,NBA,Lakers,Hornets,1.41,2.95,🔥 BANKO: MS 1 [STAKE %5.2],0,lost,117,135
+Bitti,NBA,76ers,Cavaliers,1.53,2.51,MS 1 [STAKE %4.8],0,lost,107,133
+Bitti,NBA,Rockets,Bulls,1.39,3.01,🔥 BANKO: MS 1 [STAKE %5.4],0,won,119,113
+Bitti,NBA,Thunder,Spurs,1.05,10.85,🔥 BANKO: MS 1,76,won,119,98
+Bitti,NBA,Lakers,Hawks,1.37,3.12,🔥 BANKO: MS 1 [STAKE %5.6],0,won,141,116
+Bitti,NBA,Raptors,76ers,1.48,2.67,MS 1 [STAKE %5.0],0,lost,102,115
+Bitti,NBA,Magic,Pelicans,1.57,2.41,MS 1 [STAKE %4.3],0,won,128,118
+Bitti/OT,NBA,Raptors,76ers,1.44,2.8,🔥 BANKO: MS 1 [STAKE %5.4],0,won,116,115
+Bitti,NBA,Timberwolves,Spurs,1.33,3.34,🔥 BANKO: MS 1 [STAKE %5.9],0,won,104,103
+Bitti,NBA,Thunder,Heat,1.05,10.3,💎 KASA: MS 1,90,won,124,112
+Bitti,NBA,Nuggets,Bucks,1.3,3.57,🔥 BANKO: MS 1 [STAKE %6.6],0,won,108,104
+Bitti,NBA,Suns,Wizards,1.41,2.95,🔥 BANKO: MS 1 [STAKE %5.2],0,won,112,93
+Bitti,NBA,Cavaliers,Timberwolves,1.57,2.41,MS 1 [STAKE %4.3],0,won,146,134
+Bitti,NBA,Pistons,Clippers,1.18,5.03,💎 KASA: MS 1 [STAKE %10.2],0,lost,92,98
+Bitti,NBA,Celtics,Spurs,1.37,3.12,🔥 BANKO: MS 1 [STAKE %5.6],0,lost,95,100
+Bitti,NBA,Jazz,Hornets,2.53,1.53,MS 2 [STAKE %13.4],0,won,95,150
+Bitti,NBA,Celtics,Raptors,1.33,3.32,🔥 BANKO: MS 1 [STAKE %5.9],0,won,125,117
+Bitti,NBA,Nets,Clippers,2.75,1.46,🔥 BANKO: MS 2 [STAKE %15.2],0,won,105,121
+Bitti,NBA,Nuggets,Hawks,1.32,3.45,🔥 BANKO: MS 1 [STAKE %6.4],0,lost,87,110
+Bitti,NBA,Suns,Knicks,1.43,2.85,🔥 BANKO: MS 1 [STAKE %5.0],0,won,112,107
+Bitti,NBA,Lakers,Bucks,1.36,3.2,🔥 BANKO: MS 1 [STAKE %6.1],0,lost,101,105
+Bitti,NBA,Hornets,Pacers,2.53,1.53,MS 2 [STAKE %13.4],0,won,112,114
+Bitti,NBA,Timberwolves,Cavaliers,1.32,3.45,🔥 BANKO: MS 1 [STAKE %6.4],0,won,131,122
+Bitti,NBA,Jazz,Mavericks,2.46,1.55,MS 2 [STAKE %12.8],0,lost,116,114
+Bitti,NBA,Hornets,Raptors,2.46,1.55,MS 2 [STAKE %12.8],0,won,96,97
+Bitti,NBA,Pistons,Bulls,1.14,5.68,💎 KASA: MS 1 [STAKE %10.8],0,won,108,93
+Bitti,NBA,76ers,Wizards,1.52,2.56,MS 1 [STAKE %4.5],0,won,131,110
+Bitti,NBA,Celtics,Nuggets,1.36,3.2,🔥 BANKO: MS 1 [STAKE %6.1],0,lost,110,114
+Bitti/OT,NBA,Nets,Magic,2.68,1.48,MS 2 [STAKE %14.6],0,won,103,104
+Bitti,NBA,Knicks,Clippers,1.33,3.32,🔥 BANKO: MS 1 [STAKE %5.9],0,won,123,111
+Bitti/OT,NBA,Thunder,Jazz,1.06,9.28,💎 KASA: MS 1,89,won,129,125
+Bitti,NBA,Spurs,Lakers,1.23,4.2,💎 KASA: MS 1 [STAKE %7.6],0,won,107,91
+Bitti,NBA,Pacers,Cavaliers,5.34,1.16,💎 KASA: MS 2 [STAKE %22.5],0,won,116,120
+Bitti,NBA,Timberwolves,Heat,1.33,3.32,🔥 BANKO: MS 1 [STAKE %5.9],0,won,122,94
+Bitti,NBA,Pistons,Knicks,1.15,5.44,💎 KASA: MS 1 [STAKE %9.7],0,won,121,90
+Bitti,NBA,Celtics,Bulls,1.32,3.44,🔥 BANKO: MS 1 [STAKE %6.4],0,won,115,101
+Bitti,NBA,Raptors,Hawks,1.46,2.75,🔥 BANKO: MS 1 [STAKE %5.2],0,won,118,100
+Bitti,NBA,Rockets,Suns,1.3,3.57,🔥 BANKO: MS 1 [STAKE %6.6],0,won,100,97
+Bitti,NBA,Thunder,Hornets,1.07,8.81,💎 KASA: MS 1,89,lost,97,124
+Bitti/OT,NBA,76ers,Nuggets,1.55,2.47,MS 1 [STAKE %4.6],0,lost,124,125
+Bitti,NBA,Magic,Pacers,1.56,2.45,MS 1 [STAKE %4.8],0,won,135,127
+Bitti,NBA,Nets,Nuggets,2.6,1.5,MS 2 [STAKE %14.0],0,lost,127,115
+Bitti,NBA,Heat,Pelicans,1.56,2.45,MS 1 [STAKE %4.8],0,won,125,106
+Bitti,NBA,Suns,Thunder,1.44,2.8,🔥 BANKO: MS 1 [STAKE %5.4],0,won,108,105
+Bitti,NBA,Lakers,Grizzlies,1.3,3.57,🔥 BANKO: MS 1 [STAKE %6.6],0,won,120,114
+Bitti,NBA,Knicks,76ers,1.32,3.44,🔥 BANKO: MS 1 [STAKE %6.4],0,lost,119,130
+Bitti,NBA,Raptors,Hawks,1.48,2.66,MS 1 [STAKE %5.0],0,won,134,117
+Bitti,NBA,Spurs,Trail Blazers,1.21,4.44,💎 KASA: MS 1 [STAKE %7.7],0,lost,110,115
+Bitti,NBA,Mavericks,Rockets,2.4,1.58,MS 2 [STAKE %12.1],0,lost,110,104
+Bitti,NBA,Clippers,Celtics,2.45,1.56,MS 2 [STAKE %12.8],0,won,115,146
+Bitti,NBA,Pacers,Spurs,5.05,1.17,🔥 BANKO: MS 2 [STAKE %19.1],0,won,113,123
+Bitti,NBA,Wizards,Nets,3.17,1.36,🔥 BANKO: MS 2 [STAKE %17.7],0,lost,119,99
+Bitti,NBA,Cavaliers,Nuggets,1.56,2.45,MS 1 [STAKE %4.8],0,won,113,108
+Bitti,NBA,Knicks,Hawks,1.28,3.72,🔥 BANKO: MS 1 [STAKE %6.7],0,lost,99,111
+Bitti,NBA,Suns,Kings,1.47,2.7,MS 1 [STAKE %4.7],0,won,129,102
+Bitti,NBA,Lakers,Grizzlies,1.32,3.42,🔥 BANKO: MS 1 [STAKE %6.4],0,won,128,121
+Bitti,NBA,Nets,Rockets,2.68,1.48,MS 2 [STAKE %14.6],0,won,96,120
+Bitti,NBA,Pistons,Heat,1.18,4.98,💎 KASA: MS 1 [STAKE %8.6],0,lost,112,118
+Bitti,NBA,Mavericks,76ers,2.53,1.53,MS 2 [STAKE %13.4],0,won,108,123
+Bitti,NBA,Clippers,Jazz,2.38,1.59,MS 2 [STAKE %12.1],0,lost,118,101
+Bitti,NBA,Hornets,Warriors,2.6,1.5,MS 2 [STAKE %14.0],0,won,125,132
+Bitti,NBA,Pacers,Magic,4.91,1.18,🔥 BANKO: MS 2 [STAKE %18.7],0,won,110,112
+Bitti,NBA,Spurs,Knicks,1.19,4.76,💎 KASA: MS 1 [STAKE %9.3],0,won,134,132
+Bitti,NBA,Raptors,Nuggets,1.43,2.84,🔥 BANKO: MS 1 [STAKE %5.0],0,lost,103,106
+Bitti,NBA,Thunder,Trail Blazers,1.05,12.0,🔥 BANKO: MS 1,78,won,124,95
+Bitti,NBA,Lakers,Pistons,1.39,3.02,🔥 BANKO: MS 1 [STAKE %5.4],0,lost,106,128
+Bitti,NBA,Clippers,Kings,2.52,1.53,MS 2 [STAKE %13.4],0,lost,131,90
+Bitti,NBA,Hornets,Bucks,2.52,1.53,MS 2 [STAKE %13.4],0,won,113,123
+Bitti,NBA,Nets,Warriors,2.6,1.5,MS 2 [STAKE %14.0],0,won,107,120
+Bitti,NBA,Heat,Nuggets,1.59,2.38,MS 1 [STAKE %4.8],0,won,147,123
+Bitti,NBA,Raptors,Magic,1.47,2.7,MS 1 [STAKE %4.7],0,won,107,106
+Bitti,NBA,Rockets,Pacers,1.3,3.57,🔥 BANKO: MS 1 [STAKE %6.6],0,won,126,119
+Bitti,NBA,Thunder,Hawks,1.05,12.0,🔥 BANKO: MS 1,78,won,140,129
+Bitti,NBA,Spurs,Cavaliers,1.2,4.55,💎 KASA: MS 1 [STAKE %8.5],0,lost,101,113
+Bitti/OT,NBA,Raptors,Warriors,1.5,2.6,MS 1 [STAKE %4.7],0,won,141,127
+Bitti,NBA,Thunder,76ers,1.05,12.0,🔥 BANKO: MS 1,77,won,129,104
+Bitti,NBA,Clippers,Pistons,2.68,1.48,MS 2 [STAKE %14.6],0,lost,112,99
+Bitti,NBA,Lakers,Kings,1.3,3.57,🔥 BANKO: MS 1 [STAKE %6.6],0,won,125,101

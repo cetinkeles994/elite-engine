@@ -1,0 +1,37 @@
+name: "Elite Data Updater"
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Run every 30 minutes
+  workflow_dispatch:        # Allow manual trigger button
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        pip install requests cloudscraper pandas beautifulsoup4 joblib
+
+    - name: Fetch Elite Data
+      run: |
+        python data_fetcher.py
+        
+    - name: Commit and Push
+      run: |
+        git config --global user.name "EliteBot"
+        git config --global user.email "bot@elite.com"
+        git add sofascore_data.json
+        git commit -m "Auto-update: Elite Data & Global Odds" || echo "No changes to commit"
+        git push
