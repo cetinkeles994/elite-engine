@@ -2,6 +2,7 @@ import requests
 import json
 import cloudscraper
 import time
+import os
 from datetime import datetime
 
 # Initialize CloudScraper to bypass basic bot checks
@@ -26,19 +27,25 @@ def fetch_live_elite_data():
     # For now, we update the timestamp to trigger a rebuild
     
     try:
-        with open("sofascore_data.json", "r") as f:
-            data = json.load(f)
+        if not os.path.exists("sofascore_data.json"):
+            print("⚠️ sofascore_data.json not found, creating new one.")
+            data = {"last_update": "never"}
+        else:
+            with open("sofascore_data.json", "r") as f:
+                data = json.load(f)
             
         # Update timestamp to prove the bot ran
-        data["last_update"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        data["last_update"] = now
         
         with open("sofascore_data.json", "w") as f:
             json.dump(data, f, indent=4)
             
-        print("✅ Data timestamp updated successfully.")
+        print(f"✅ Data timestamp updated to {now} successfully.")
         
     except Exception as e:
-        print(f"Error updating local file: {e}")
+        print(f"❌ Error updating local file: {e}")
+        exit(1) # Ensure GitHub Actions marks this as a failure if it breaks
 
 if __name__ == "__main__":
     fetch_live_elite_data()
