@@ -7,7 +7,7 @@
             0.51,
             0.67
         ],
-        "momentum": "Leipzig Üstünlüğü",
+        "momentum": "Leipzig \u00dcst\u00fcnl\u00fc\u011f\u00fc",
         "momentum_score": 5.8,
         "global_odds": {
             "1": 4.33,
@@ -24,7 +24,7 @@
             0.14,
             0.41
         ],
-        "momentum": "Hoffenheim Baskın",
+        "momentum": "Hoffenheim Bask\u0131n",
         "momentum_score": -15.2,
         "global_odds": {
             "1": 13.0,
@@ -50,7 +50,7 @@
         "name": "Cardiff City vs Barnsley",
         "homeTeam": "Cardiff City",
         "awayTeam": "Barnsley",
-        "momentum": "Cardiff Kontrolünde",
+        "momentum": "Cardiff Kontrol\u00fcnde",
         "momentum_score": -1.6,
         "global_odds": {
             "1": 1.03,
@@ -84,7 +84,7 @@
         "name": "Blackpool vs Stockport County",
         "homeTeam": "Blackpool",
         "awayTeam": "Stockport County",
-        "momentum": "Stockport Hücumda",
+        "momentum": "Stockport H\u00fccumda",
         "momentum_score": -5.8,
         "global_odds": {
             "1": 41.0,
@@ -124,5 +124,6 @@
             "X": 4.0,
             "2": 9.5
         }
-    }
+    },
+    "last_update": "2026-01-28 11:20:10"
 }
