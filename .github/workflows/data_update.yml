@@ -34,6 +34,6 @@ jobs:
       run: |
         git config --global user.name "EliteBot"
         git config --global user.email "bot@elite.com"
-        git add sofascore_data.json
-        git commit -m "Auto-update: Elite Data & Global Odds" || echo "No changes to commit"
+        git add sofascore_data.json matches_cache.json
+        git commit -m "Auto-update: Elite Data & Matches Cache" || echo "No changes to commit"
         git push

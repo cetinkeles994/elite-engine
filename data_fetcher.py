@@ -1,51 +1,31 @@
-import requests
 import json
-import cloudscraper
-import time
 import os
 from datetime import datetime
+from scraper_engine import scrape_todays_fixtures
 
-# Initialize CloudScraper to bypass basic bot checks
-scraper = cloudscraper.create_scraper()
-
-def fetch_live_elite_data():
+def run_elite_update():
     """
-    Fetches live matches and their deep stats (xG, Odds) using a simulated browser.
+    The main robot function. Scrapes all data and saves to a static cache.
     """
-    print("--- Starting Elite Data Fetch ---")
-    
-    # 1. Get List of Live Matches (API Endpoint)
-    try:
-        # Note: In a real cloud env, we might scrape the HTML of the live page if API is protected
-        # For broken API access, we use a fallback or known endpoints
-        pass 
-    except Exception as e:
-        print(f"Error fetching live list: {e}")
-
-    # MOCK UPDATE FOR DEMO (Since we can't easily bypass 403 in headless CI without proxies)
-    # The real solution requires a paid Proxy Service or Headless Selenium
-    # For now, we update the timestamp to trigger a rebuild
+    print(f"--- 🚀 Elite Data Update Started: {datetime.now()} ---")
     
     try:
-        if not os.path.exists("sofascore_data.json"):
-            print("⚠️ sofascore_data.json not found, creating new one.")
-            data = {"last_update": "never"}
-        else:
-            with open("sofascore_data.json", "r") as f:
-                data = json.load(f)
-            
-        # Update timestamp to prove the bot ran
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        data["last_update"] = now
+        # 1. Scrape all fixtures (This does the heavy lifting: ESPN + SofaScore blending)
+        print("🔍 Scraping fixtures and deep stats...")
+        matches = scrape_todays_fixtures()
         
-        with open("sofascore_data.json", "w") as f:
-            json.dump(data, f, indent=4)
+        # 2. Save to Static Cache
+        cache_file = "matches_cache.json"
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(matches, f, indent=4, ensure_ascii=False)
             
-        print(f"✅ Data timestamp updated to {now} successfully.")
+        print(f"✅ SUCCESS: {len(matches)} matches saved to {cache_file}")
         
     except Exception as e:
-        print(f"❌ Error updating local file: {e}")
-        exit(1) # Ensure GitHub Actions marks this as a failure if it breaks
+        print(f"❌ CRITICAL ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)
 
 if __name__ == "__main__":
-    fetch_live_elite_data()
+    run_elite_update()
