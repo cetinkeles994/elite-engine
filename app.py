@@ -30,10 +30,20 @@ def api_fixtures():
         
     return jsonify(matches)
 
+HISTORY_CACHE_FILE = "history_cache.json"
+
 @app.route('/api/history')
 def api_history():
     sport_filter = request.args.get('sport')
-    matches = scrape_history()
+    matches = []
+    
+    if os.path.exists(HISTORY_CACHE_FILE):
+        try:
+            with open(HISTORY_CACHE_FILE, "r", encoding="utf-8") as f:
+                matches = json.load(f)
+        except:
+             matches = []
+
     if sport_filter:
         matches = [m for m in matches if m.get('sport') == sport_filter]
     return jsonify(matches)

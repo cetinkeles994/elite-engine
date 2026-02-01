@@ -376,6 +376,8 @@ def scrape_history():
     dates_to_fetch = []
     for i in range(1, 4): # Yesterday, Day before, etc.
         target = today - timedelta(days=i)
+        dates_to_fetch.append(target.strftime("%Y%m%d"))
+        
     return fetch_matches_for_dates(dates_to_fetch, LEAGUES)
 
 # --- STANDINGS API UPGRADE (Tier 1 Data) ---

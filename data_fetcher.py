@@ -20,6 +20,17 @@ def run_elite_update():
             json.dump(matches, f, indent=4, ensure_ascii=False)
             
         print(f"✅ SUCCESS: {len(matches)} matches saved to {cache_file}")
+
+        # 3. Scrape History (Last 3 Days)
+        print("📜 Scraping history data...")
+        from scraper_engine import scrape_history
+        history = scrape_history()
+        
+        history_file = "history_cache.json"
+        with open(history_file, "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=4, ensure_ascii=False)
+            
+        print(f"✅ HISTORY SUCCESS: {len(history)} past matches saved to {history_file}")
         
     except Exception as e:
         print(f"❌ CRITICAL ERROR: {e}")
