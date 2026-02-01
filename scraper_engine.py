@@ -328,19 +328,40 @@ def get_stat(team_data, abbr):
             except: return 0
     return 0
 
+# --- CONFIGURATION: SUPPORTED LEAGUES ---
+SUPPORTED_LEAGUES = [
+    # --- MAJOR EUROPEAN ---
+    {"name": "Premier League", "code": "eng.1", "sport": "soccer"},
+    {"name": "La Liga", "code": "esp.1", "sport": "soccer"},
+    {"name": "Bundesliga", "code": "ger.1", "sport": "soccer"},
+    {"name": "Serie A", "code": "ita.1", "sport": "soccer"},
+    {"name": "Ligue 1", "code": "fra.1", "sport": "soccer"},
+    
+    # --- TURKEY ---
+    {"name": "Süper Lig", "code": "tur.1", "sport": "soccer"},
+    {"name": "TFF 1. Lig", "code": "tur.2", "sport": "soccer"}, # New!
+    
+    # --- OTHER TOP LEAGUES ---
+    {"name": "Eredivisie", "code": "ned.1", "sport": "soccer"}, # New!
+    {"name": "Primeira Liga", "code": "por.1", "sport": "soccer"}, # New!
+    {"name": "Championship", "code": "eng.2", "sport": "soccer"}, # New!
+    {"name": "Serie B", "code": "ita.2", "sport": "soccer"}, # New!
+    {"name": "2. Bundesliga", "code": "ger.2", "sport": "soccer"}, # New!
+    {"name": "Belgian Pro League", "code": "bel.1", "sport": "soccer"}, # New!
+    
+    # --- UEFA ---
+    {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
+    {"name": "Europa League", "code": "uefa.europa", "sport": "soccer"},
+    {"name": "Conference Lg", "code": "uefa.europa.conf", "sport": "soccer"},
+    
+    # --- BASKETBALL ---
+    {"name": "NBA", "code": "nba", "sport": "basketball"},
+    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball"} # New!
+]
+
 def scrape_todays_fixtures():
-    LEAGUES = [
-        {"name": "Premier League", "code": "eng.1", "sport": "soccer"},
-        {"name": "La Liga", "code": "esp.1", "sport": "soccer"},
-        {"name": "Bundesliga", "code": "ger.1", "sport": "soccer"},
-        {"name": "Serie A", "code": "ita.1", "sport": "soccer"},
-        {"name": "Ligue 1", "code": "fra.1", "sport": "soccer"},
-        {"name": "Süper Lig", "code": "tur.1", "sport": "soccer"},
-        {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
-        {"name": "Europa League", "code": "uefa.europa", "sport": "soccer"},
-        {"name": "Conference Lg", "code": "uefa.europa.conf", "sport": "soccer"},
-        {"name": "NBA", "code": "nba", "sport": "basketball"}
-    ]
+    LEAGUES = SUPPORTED_LEAGUES
+
     
     matches = []
     
@@ -359,18 +380,7 @@ def scrape_todays_fixtures():
 
 def scrape_history():
     # Fetch last 3 days
-    LEAGUES = [
-        {"name": "Premier League", "code": "eng.1", "sport": "soccer"},
-        {"name": "La Liga", "code": "esp.1", "sport": "soccer"},
-        {"name": "Bundesliga", "code": "ger.1", "sport": "soccer"},
-        {"name": "Serie A", "code": "ita.1", "sport": "soccer"},
-        {"name": "Ligue 1", "code": "fra.1", "sport": "soccer"},
-        {"name": "Süper Lig", "code": "tur.1", "sport": "soccer"},
-        {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
-        {"name": "Europa League", "code": "uefa.europa", "sport": "soccer"},
-        {"name": "Conference Lg", "code": "uefa.europa.conf", "sport": "soccer"},
-        {"name": "NBA", "code": "nba", "sport": "basketball"}
-    ]
+    LEAGUES = SUPPORTED_LEAGUES
     
     today = datetime.now()
     dates_to_fetch = []
