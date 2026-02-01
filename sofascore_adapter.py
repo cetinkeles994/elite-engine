@@ -35,6 +35,8 @@ class SofaScoreAdapter:
         away_team = away_team.lower()
         
         for event_id, data in self.data_map.items():
+            if not isinstance(data, dict): continue
+            
             # Check the "name" field or homeTeam/awayTeam fields
             match_name = data.get('name', '').lower()
             h_data = data.get('homeTeam', '').lower()

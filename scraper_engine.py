@@ -129,6 +129,11 @@ class StatEngine:
         h_att, h_def = 1.0, 1.0
         a_att, a_def = 1.0, 1.0
         
+        # Type Check for safety
+        if h_real and not isinstance(h_real, dict): h_real = None
+        if a_real and not isinstance(a_real, dict): a_real = None
+        if sofa_data and not isinstance(sofa_data, dict): sofa_data = None
+        
         if h_real and a_real and sport == 'soccer':
             # Use Real GF/GA per game
             h_att = h_real.get('att', 1.0)
@@ -581,7 +586,11 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         if odds_data:
                             try:
                                 provider = odds_data[0]
-                                ml = provider.get('moneyline', {})
+                                ml = {}
+                                if isinstance(provider, dict):
+                                    ml = provider.get('moneyline', {})
+                                else:
+                                    pass # Invalid provider format
                                 def am_to_dec(am_str):
                                        if not am_str: return 0
                                        try:
@@ -615,7 +624,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             except: pass
 
                         # --- BARON SIGNALS 2.0: CROSS-MARKET CROSSOVER ---
-                        if sofa_data and sofa_data.get('global_odds') and bookie_home_odds > 0:
+                        if sofa_data and isinstance(sofa_data, dict) and sofa_data.get('global_odds') and bookie_home_odds > 0:
                             g_odds = sofa_data['global_odds']
                             g_home = g_odds.get('1')
                             if g_home and g_home > 0:
@@ -949,7 +958,9 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         matches.append(match)
                         
                     except Exception as e:
-                         print(f"MATCH ERROR: {e}")
+                         print(f"MATCH ERROR for {home_team} vs {away_team}: {e} | Type: {type(e)}")
+                         import traceback
+                         traceback.print_exc()
                          continue
 
             except Exception as e:
