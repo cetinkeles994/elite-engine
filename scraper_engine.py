@@ -127,6 +127,12 @@ class StatEngine:
 
     ms_h = int(best_score.split('-')[0])
     ms_a = int(best_score.split('-')[1])
+    
+    # Extract Top 3 for UI Transparency
+    top_scores = []
+    for s_key, s_count in sorted_scores[:3]:
+        prob = int((s_count / iterations) * 100)
+        top_scores.append({'score': s_key, 'prob': prob})
         
     return {
         'home_win_prob': (home_wins / iterations) * 100,
@@ -138,7 +144,8 @@ class StatEngine:
         'over_0_5_prob': (over_0_5 / iterations) * 100,
         'mode_score_home': ms_h,
         'mode_score_away': ms_a,
-        'mode_score_prob': (score_matrix[best_score] / iterations) * 100
+        'mode_score_prob': (score_matrix[best_score] / iterations) * 100,
+        'top_scores': top_scores
     }
 
     def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):

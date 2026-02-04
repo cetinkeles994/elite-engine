@@ -504,8 +504,26 @@
                     } else {
                         // Soccer: Show Score Prediction
                         const drp = m.dropping_odds || {};
+                        const simDetails = m.pro_stats.sim_details || { top_scores: [] };
+                        let tooltipContent = "";
+                        if (simDetails.top_scores && simDetails.top_scores.length > 0) {
+                            tooltipContent = `<div class='text-left font-mono'><b>📊 1000 Maç Simülasyonu:</b><br>`;
+                            simDetails.top_scores.forEach((s, idx) => {
+                                const isSelected = (s.score === `${m.pro_stats.score_pred_home}-${m.pro_stats.score_pred_away}`);
+                                tooltipContent += `<div class='flex justify-between ${isSelected ? "text-green-400 font-bold" : "text-gray-400"}'><span>${idx + 1}. Skor [${s.score}]</span> <span>%${s.prob}</span></div>`;
+                            });
+                            tooltipContent += `</div>`;
+                        }
+
                         row += `
-                            <td class="text-center font-mono text-blue-400 text-xs">${m.pro_stats.score_pred_home}-${m.pro_stats.score_pred_away}</td>
+                            <td class="text-center font-mono text-blue-400 text-xs relative group cursor-help">
+                                ${m.pro_stats.score_pred_home}-${m.pro_stats.score_pred_away}
+                                ${tooltipContent ? `
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-black border border-gray-700 rounded text-[10px] shadow-xl z-50 pointer-events-none data-tooltip">
+                                        ${tooltipContent}
+                                    </div>
+                                ` : ''}
+                            </td>
                             <td class="text-right font-mono ${drp.side === 'home' ? 'text-red-500 font-bold underline' : 'text-gray-400'}">
                                 ${m.odds.home}
                                 ${drp.side === 'home' ? `<span class="block text-[8px] font-bold">-%${drp.pct}</span>` : ''}
