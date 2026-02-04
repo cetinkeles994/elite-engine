@@ -89,6 +89,10 @@ class StatEngine:
             elif a_score > h_score: away_wins += 1
             else: draws += 1
             
+            # BTTS Tracking
+            if h_score > 0 and a_score > 0: btts_yes += 1
+            else: btts_no += 1
+            
             total_goals = h_score + a_score
             if total_goals > 2.5: over_2_5 += 1
             if total_goals > 1.5: over_1_5 += 1
@@ -138,6 +142,7 @@ class StatEngine:
         'home_win_prob': (home_wins / iterations) * 100,
         'away_win_prob': (away_wins / iterations) * 100,
         'draw_prob': (draws / iterations) * 100,
+        'btts_prob': (btts_yes / iterations) * 100,
         'over_2_5_prob': (over_2_5 / iterations) * 100,
         'over_1_5_prob': (over_1_5 / iterations) * 100,
         'over_3_5_prob': (over_3_5 / iterations) * 100,
@@ -149,16 +154,15 @@ class StatEngine:
     }
 
     def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
-    "tur.2": {"goals": 2.3, "home_adv": 0.25, "points": 220.0}, # Tight League
-        "ger.1": {"goals": 3.1, "home_adv": 0.35, "points": 220.0}, # Over League
-        "ita.1": {"goals": 2.5, "home_adv": 0.30, "points": 220.0}, # Tactical
-        "esp.1": {"goals": 2.4, "home_adv": 0.35, "points": 220.0}, # Underish
-    })
-    
-    def simulate_match(self, h_goals, a_goals, iterations=1000):
-        # ... (unchanged) ...
-    
-    def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
+    # This line seems to be misplaced in the original document, it should be part of the baselines dictionary or similar.
+    # "tur.2": {"goals": 2.3, "home_adv": 0.25, "points": 220.0}, # Tight League
+    # "ger.1": {"goals": 3.1, "home_adv": 0.35, "points": 220.0}, # Over League
+    # "ita.1": {"goals": 2.5, "home_adv": 0.30, "points": 220.0}, # Tactical
+    # "esp.1": {"goals": 2.4, "home_adv": 0.35, "points": 220.0}, # Underish
+    # Assuming the user intended to add these to the baselines dictionary if they were not already there.
+    # Since the instruction only specifies adding BTTS logic, I will not modify the baselines here.
+    # The provided code snippet for predict_match seems to have some extraneous lines from a previous edit.
+    # I will focus on the BTTS logic insertion as requested.
         base = self.baselines.get(league_code, {"goals": 2.7, "home_adv": 0.35, "points": 220.0})
         
         preds = {
@@ -190,6 +194,68 @@ class StatEngine:
                 data_source += " | Sıkışık Maç Modu (x%85)"
             
             # ... (Live Momentum) ...
+            
+            # --- GOD MODE: RUN 1000 SIMULATIONS ---
+            sim_results = self.simulate_match(h_exp, a_exp, iterations=1000)
+            
+            # Use Simulated Probability
+            home_prob = sim_results['home_win_prob'] / 100.0
+            away_prob = sim_results['away_win_prob'] / 100.0
+            preds['over_2_5_prob'] = int(sim_results['over_2_5_prob'])
+            
+            # EXACT SCORE PREDICTION
+            preds['score_pred_home'] = sim_results['mode_score_home']
+            preds['score_pred_away'] = sim_results['mode_score_away']
+            
+            # Pack details
+            preds['sim_details'] = sim_results
+            
+            # Update Betting Probabilities for Kelly
+            sys_confidence = max(sim_results['home_win_prob'], sim_results['away_win_prob'])
+            
+            # Best Goal Pick (Enhanced with BTTS)
+            probs = sim_results
+            picks = []
+            
+            # 1. Over/Under Candidates
+            if probs['over_2_5_prob'] > 65: picks.append(("2.5 ÜST", int(probs['over_2_5_prob'])))
+            if probs['over_3_5_prob'] > 55: picks.append(("3.5 ÜST", int(probs['over_3_5_prob'])))
+            if probs['over_1_5_prob'] > 80: picks.append(("1.5 ÜST", int(probs['over_1_5_prob'])))
+            
+            # Under Candidates
+            if probs['over_2_5_prob'] < 35:
+                if probs['over_1_5_prob'] < 45: picks.append(("1.5 ALT", int(100 - probs['over_1_5_prob'])))
+                else: picks.append(("2.5 ALT", int(100 - probs['over_2_5_prob'])))
+                
+            # 2. BTTS Candidates
+            if probs['btts_prob'] > 60: picks.append(("KG VAR", int(probs['btts_prob'])))
+            elif probs['btts_prob'] < 40: picks.append(("KG YOK", int(100 - probs['btts_prob'])))
+            
+            # Sort by Probability (Highest Confidence First)
+            if picks:
+                picks.sort(key=lambda x: x[1], reverse=True)
+                preds['best_goal_pick'] = picks[0][0]
+                preds['best_goal_prob'] = picks[0][1]
+            else:
+                preds['best_goal_pick'] = "GOL ANALİZ"
+                preds['best_goal_prob'] = 50
+
+            # Synergy Check (Updated for BTTS)
+            # ... (Existing Synergy Check - mostly valid, but maybe need to check BTTS conflict?)
+            # Actually, let's keep synergy simple for now (Score vs Over/Under).
+            # BTTS doesn't strictly conflict with score unless score is "1-0" and pick is "KG VAR".
+            
+            if "KG VAR" in preds['best_goal_pick'] and (preds['score_pred_home'] == 0 or preds['score_pred_away'] == 0):
+                # Force both to score
+                if preds['score_pred_home'] == 0: preds['score_pred_home'] = 1
+                if preds['score_pred_away'] == 0: preds['score_pred_away'] = 1
+            
+            elif "KG YOK" in preds['best_goal_pick'] and (preds['score_pred_home'] > 0 and preds['score_pred_away'] > 0):
+                 # Force one to zero (remove from weak side)
+                 if preds['home_win_rate'] > preds['away_win_rate']: preds['score_pred_away'] = 0
+                 else: preds['score_pred_home'] = 0
+
+            # ... (Rest of Synergy Check for Over/Under) ...
     
     # --- UEFA ---
     {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
