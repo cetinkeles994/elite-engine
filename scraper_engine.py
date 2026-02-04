@@ -99,23 +99,47 @@ class StatEngine:
             s_key = f"{h_score}-{a_score}"
             score_matrix[s_key] = score_matrix.get(s_key, 0) + 1
             
-        # Find Most Common Score (Mode)
-        mode_score = max(score_matrix, key=score_matrix.get)
-        ms_h = int(mode_score.split('-')[0])
-        ms_a = int(mode_score.split('-')[1])
+        s_key = f"{h_score}-{a_score}"
+        score_matrix[s_key] = score_matrix.get(s_key, 0) + 1
+        
+    # --- SMART SELECTION (Tie-Breaker Logic) ---
+    # Sort scores by frequency (descending)
+    sorted_scores = sorted(score_matrix.items(), key=lambda x: x[1], reverse=True)
+    
+    # Default to the most frequent
+    best_score = sorted_scores[0][0]
+    best_count = sorted_scores[0][1]
+    
+    # Check for "Split Vote" (if 2nd place is close to 1st)
+    if len(sorted_scores) > 1:
+        runner_up = sorted_scores[1][0]
+        runner_up_count = sorted_scores[1][1]
+        
+        # If runner-up is within 10% of the winner (Close Call)
+        if runner_up_count > (best_count * 0.90):
+            # TIE BREAKER: Choose the "Safer" option (Fewer Goals)
+            bs_h, bs_a = map(int, best_score.split('-'))
+            ru_h, ru_a = map(int, runner_up.split('-'))
             
-        return {
-            'home_win_prob': (home_wins / iterations) * 100,
-            'away_win_prob': (away_wins / iterations) * 100,
-            'draw_prob': (draws / iterations) * 100,
-            'over_2_5_prob': (over_2_5 / iterations) * 100,
-            'over_1_5_prob': (over_1_5 / iterations) * 100,
-            'over_3_5_prob': (over_3_5 / iterations) * 100,
-            'over_0_5_prob': (over_0_5 / iterations) * 100,
-            'mode_score_home': ms_h,
-            'mode_score_away': ms_a,
-            'mode_score_prob': (score_matrix[mode_score] / iterations) * 100
-        }
+            if (ru_h + ru_a) < (bs_h + bs_a):
+                best_score = runner_up # Swap to safer option
+                # print(f"DEBUG: Swapped {best_score} for {runner_up} (Safety First)")
+
+    ms_h = int(best_score.split('-')[0])
+    ms_a = int(best_score.split('-')[1])
+        
+    return {
+        'home_win_prob': (home_wins / iterations) * 100,
+        'away_win_prob': (away_wins / iterations) * 100,
+        'draw_prob': (draws / iterations) * 100,
+        'over_2_5_prob': (over_2_5 / iterations) * 100,
+        'over_1_5_prob': (over_1_5 / iterations) * 100,
+        'over_3_5_prob': (over_3_5 / iterations) * 100,
+        'over_0_5_prob': (over_0_5 / iterations) * 100,
+        'mode_score_home': ms_h,
+        'mode_score_away': ms_a,
+        'mode_score_prob': (score_matrix[best_score] / iterations) * 100
+    }
 
     def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
     "tur.2": {"goals": 2.3, "home_adv": 0.25, "points": 220.0}, # Tight League
