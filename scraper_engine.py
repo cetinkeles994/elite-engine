@@ -24,16 +24,16 @@ class StatEngine:
     def __init__(self):
         # Professional League Baselines (Goals / Points avg)
         self.baselines = {
-            "eng.1": {"goals": 2.9,  "home_adv": 0.35},  # PL is high scroing
-            "esp.1": {"goals": 2.5,  "home_adv": 0.30},
-            "ita.1": {"goals": 2.6,  "home_adv": 0.32},
+            "eng.1": {"goals": 2.9, "home_adv": 0.35},  # PL is high scroing
+            "esp.1": {"goals": 2.5, "home_adv": 0.30},
+            "ita.1": {"goals": 2.6, "home_adv": 0.32},
             # Bundesliga is goal fest
-            "ger.1": {"goals": 3.2,  "home_adv": 0.38},
+            "ger.1": {"goals": 3.2, "home_adv": 0.38},
             # Turkey has huge home advantage
-            "tur.1": {"goals": 2.8,  "home_adv": 0.45},
+            "tur.1": {"goals": 2.8, "home_adv": 0.45},
             "uefa.champions": {"goals": 3.0, "home_adv": 0.25},
             "uefa.europa": {"goals": 2.9, "home_adv": 0.30},
-            "nba":   {"points": 230.0, "home_adv": 3.5},
+            "nba": {"points": 230.0, "home_adv": 3.5},
             "basketball.euroleague": {"points": 165.0, "home_adv": 4.5}
         }
 
@@ -61,6 +61,8 @@ class StatEngine:
         over_1_5 = 0
         over_3_5 = 0
         over_0_5 = 0
+        btts_yes = 0
+        btts_no = 0
 
         score_matrix = {}
 
@@ -97,7 +99,8 @@ class StatEngine:
             # BTTS Tracking
             if h_score > 0 and a_score > 0: btts_yes += 1
             else: btts_no += 1
-
+            
+            # Total Goals
             total_goals = h_score + a_score
             if total_goals > 2.5: over_2_5 += 1
             if total_goals > 1.5: over_1_5 += 1
@@ -108,61 +111,66 @@ class StatEngine:
             s_key = f"{h_score}-{a_score}"
             score_matrix[s_key] = score_matrix.get(s_key, 0) + 1
 
-        s_key = f"{h_score}-{a_score}"
-        score_matrix[s_key] = score_matrix.get(s_key, 0) + 1
+        # --- SMART SELECTION (Tie-Breaker Logic) ---
+        # Sort scores by frequency (descending)
+        sorted_scores = sorted(score_matrix.items(), key=lambda x: x[1], reverse=True)
+        
+        # Default to the most frequent
+        best_score = sorted_scores[0][0]
+        best_count = sorted_scores[0][1]
+        
+        # Check for "Split Vote" (if 2nd place is close to 1st)
+        if len(sorted_scores) > 1:
+            runner_up = sorted_scores[1][0]
+            runner_up_count = sorted_scores[1][1]
+            
+            # If runner-up is within 10% of the winner (Close Call)
+            if runner_up_count > (best_count * 0.90):
+                # TIE BREAKER: Choose the "Safer" option (Fewer Goals)
+                bs_h, bs_a = map(int, best_score.split('-'))
+                ru_h, ru_a = map(int, runner_up.split('-'))
+                
+                if (ru_h + ru_a) < (bs_h + bs_a):
+                    best_score = runner_up # Swap to safer option
+        
+        ms_h = int(best_score.split('-')[0])
+        ms_a = int(best_score.split('-')[1])
 
-    # --- SMART SELECTION (Tie-Breaker Logic) ---
-    # Sort scores by frequency (descending)
-    sorted_scores = sorted(score_matrix.items(),
-                           key=lambda x: x[1], reverse=True)
+        # Extract Top 3 for UI Transparency
+        top_scores = []
+        for s_key, s_count in sorted_scores[:3]:
+            prob = int((s_count / iterations) * 100)
+            top_scores.append({'score': s_key, 'prob': prob})
 
-    # Default to the most frequent
-    best_score = sorted_scores[0][0]
-    best_count = sorted_scores[0][1]
+        return {
+            'home_win_prob': (home_wins / iterations) * 100,
+            'away_win_prob': (away_wins / iterations) * 100,
+            'draw_prob': (draws / iterations) * 100,
+            'btts_prob': (btts_yes / iterations) * 100,
+            'over_2_5_prob': (over_2_5 / iterations) * 100,
+            'over_1_5_prob': (over_1_5 / iterations) * 100,
+            'over_3_5_prob': (over_3_5 / iterations) * 100,
+            'over_0_5_prob': (over_0_5 / iterations) * 100,
+            'mode_score_home': ms_h,
+            'mode_score_away': ms_a,
+            'mode_score_prob': (score_matrix[best_score] / iterations) * 100,
+            'top_scores': top_scores
+        }
 
-    # Check for "Split Vote" (if 2nd place is close to 1st)
-    if len(sorted_scores) > 1:
-        runner_up = sorted_scores[1][0]
-        runner_up_count = sorted_scores[1][1]
 
-        # If runner-up is within 10% of the winner (Close Call)
-        if runner_up_count > (best_count * 0.90):
-            # TIE BREAKER: Choose the "Safer" option (Fewer Goals)
-            bs_h, bs_a = map(int, best_score.split('-'))
-            ru_h, ru_a = map(int, runner_up.split('-'))
-
-            if (ru_h + ru_a) < (bs_h + bs_a):
-                best_score = runner_up  # Swap to safer option
-                # print(f"DEBUG: Swapped {best_score} for {runner_up} (Safety First)")
-
-    ms_h = int(best_score.split('-')[0])
-    ms_a = int(best_score.split('-')[1])
-
-    # Extract Top 3 for UI Transparency
-    top_scores = []
-    for s_key, s_count in sorted_scores[:3]:
-        prob = int((s_count / iterations) * 100)
-        top_scores.append({'score': s_key, 'prob': prob})
-
-    return {
-        'home_win_prob': (home_wins / iterations) * 100,
-        'away_win_prob': (away_wins / iterations) * 100,
-        'draw_prob': (draws / iterations) * 100,
-        'btts_prob': (btts_yes / iterations) * 100,
-        'over_2_5_prob': (over_2_5 / iterations) * 100,
-        'over_1_5_prob': (over_1_5 / iterations) * 100,
-        'over_3_5_prob': (over_3_5 / iterations) * 100,
-        'over_0_5_prob': (over_0_5 / iterations) * 100,
-        'mode_score_home': ms_h,
-        'mode_score_away': ms_a,
-        'mode_score_prob': (score_matrix[best_score] / iterations) * 100,
-        'top_scores': top_scores
-    }
-
-    def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
-
+    def predict_match(
+    self,
+    home_win_rate,
+    away_win_rate,
+    league_code,
+    sport="soccer",
+    live_stats=None,
+    h_real=None,
+    a_real=None,
+     sofa_data=None):
         base = self.baselines.get(
-            league_code, {"goals": 2.7, "home_adv": 0.35, "points": 220.0})
+    league_code, {
+        "goals": 2.7, "home_adv": 0.35, "points": 220.0})
 
         preds = {
             "home_goals": 0, "away_goals": 0,
@@ -217,7 +225,8 @@ class StatEngine:
             strength_diff = abs(home_strength - away_strength)
             if strength_diff < 0.15 and avg_goals < 2.6:
                 # Force tighter game
-                # Reduce xG by 15% to prevent "2-2" predictions in tight tactical games
+                # Reduce xG by 15% to prevent "2-2" predictions in tight
+                # tactical games
                 h_exp *= 0.85
                 a_exp *= 0.85
                 data_source += " | Sıkışık Maç Modu (x%85)"
@@ -246,17 +255,13 @@ class StatEngine:
             picks = []
 
             # 1. Over/Under Candidates
-            if probs['over_2_5_prob'] > 65: picks.append(
-                ("2.5 ÜST", int(probs['over_2_5_prob'])))
-            if probs['over_3_5_prob'] > 55: picks.append(
-                ("3.5 ÜST", int(probs['over_3_5_prob'])))
-            if probs['over_1_5_prob'] > 80: picks.append(
-                ("1.5 ÜST", int(probs['over_1_5_prob'])))
+            if probs['over_2_5_prob'] > 65: picks.append(("2.5 ÜST", int(probs['over_2_5_prob'])))
+            if probs['over_3_5_prob'] > 55: picks.append(("3.5 ÜST", int(probs['over_3_5_prob'])))
+            if probs['over_1_5_prob'] > 80: picks.append(("1.5 ÜST", int(probs['over_1_5_prob'])))
 
             # Under Candidates
             if probs['over_2_5_prob'] < 35:
-                if probs['over_1_5_prob'] < 45: picks.append(
-                    ("1.5 ALT", int(100 - probs['over_1_5_prob'])))
+                if probs['over_1_5_prob'] < 45: picks.append(("1.5 ALT", int(100 - probs['over_1_5_prob'])))
                 else: picks.append(("2.5 ALT", int(100 - probs['over_2_5_prob'])))
 
             # 2. BTTS Candidates
@@ -441,7 +446,9 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
         league_standings = fetch_standings(league['code'], league['sport'])
 
         for date_str in dates_to_fetch:
-            url = f"http://site.api.espn.com/apis/site/v2/sports/{league['sport']}/{league['code']}/scoreboard?dates={date_str}"
+            url = f"http://site.api.espn.com/apis/site/v2/sports/{
+    league['sport']}/{
+        league['code']}/scoreboard?dates={date_str}"
             try:
                 # 1. TRY ESPN Scoreboard First
                 espn_events = []
@@ -471,7 +478,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                 # Fallback Discovery via SofaScore
                 if league.get('sofascore_id') and league['sport'] == 'soccer':
                     ss_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-                    ss_events = adapter.fetch_daily_fixtures(ss_date)
+                    ss_events = [] # adapter.fetch_daily_fixtures(ss_date)
                     target_id = league['sofascore_id']
 
                     added_count = 0
@@ -588,7 +595,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         if league_standings:
                             # Fuzzy matching or direct lookup
-                            # ESPN names usually match, but we check contains or exact
+                            # ESPN names usually match, but we check contains
+                            # or exact
                             h_stats_real = league_standings.get(home_team)
                             a_stats_real = league_standings.get(away_team)
 
@@ -744,7 +752,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             except: pass
 
                         # --- BARON SIGNALS 2.0: CROSS-MARKET CROSSOVER ---
-                        if sofa_data and isinstance(sofa_data, dict) and sofa_data.get('global_odds') and bookie_home_odds > 0:
+                        if sofa_data and isinstance(sofa_data, dict) and sofa_data.get(
+                            'global_odds') and bookie_home_odds > 0:
                             g_odds = sofa_data['global_odds']
                             g_home = g_odds.get('1')
                             if g_home and g_home > 0:
@@ -753,7 +762,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                 if bookie_home_odds > g_home * 1.05:
                                     market_lag = round(
                                         ((bookie_home_odds - g_home) / bookie_home_odds) * 100, 1)
-                                    if not drop_info or market_lag > drop_info.get('pct', 0):
+                                    if not drop_info or market_lag > drop_info.get(
+                                        'pct', 0):
                                          drop_info = {
                                              'side': 'home',
                                              'pct': market_lag,
@@ -768,11 +778,11 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         if bookie_home_odds == 0 or bookie_home_odds == "-":
                              h_p_safe = max(0.01, home_prob)
                              bookie_home_odds = round(
-                                 max(1.05, min((1/h_p_safe)/1.05, 12.0)), 2)
+                                 max(1.05, min((1 / h_p_safe) / 1.05, 12.0)), 2)
 
                              away_p = max(0.01, 1.0 - home_prob)
                              bookie_away_odds = round(
-                                 max(1.05, min((1/away_p)/1.05, 12.0)), 2)
+                                 max(1.05, min((1 / away_p) / 1.05, 12.0)), 2)
 
                         if bookie_away_odds == 0: bookie_away_odds = "-"
 
@@ -780,13 +790,15 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         match_date = event.get('date', '')
                         display_time = status_detail
 
-                        # If match is upcoming (Scheduled), show the actual Time (HH:MM)
+                        # If match is upcoming (Scheduled), show the actual
+                        # Time (HH:MM)
                         if status_state == 'pre':
                             try:
                                 # ESPN Date Format: 2023-10-25T19:00Z
                                 dt = datetime.strptime(
                                     match_date, "%Y-%m-%dT%H:%MZ")
-                                # Convert to Local Time (Assuming GMT+3 for Turkey Users)
+                                # Convert to Local Time (Assuming GMT+3 for
+                                # Turkey Users)
                                 dt = dt + timedelta(hours=3)
                                 display_time = dt.strftime("%d.%m %H:%M")
                             except:
@@ -850,7 +862,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         # --- AI ADJUSTMENT (Learner Engine) ---
                         # Apply penalty/boost from model_weights.json
-                        # sport code vs league code mapping? scraper uses 'league' field which matches baselines keys
+                        # sport code vs league code mapping? scraper uses
+                        # 'league' field which matches baselines keys
 
                         # Note: 'league' variable holds the code e.g. 'eng.1'
                         if str(league) in stat_engine.learned_weights:
@@ -902,10 +915,12 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                 # AI Insight Logic
                                 if ai_prob > 75:
                                     ai_conf_boost = 10
-                                    ai_note_text = f"YAPAY ZEKA ONAYLI (%{int(ai_prob)} Güven). Random Forest modeli bu maçı 'Kazanır' olarak görüyor."
+                                    ai_note_text = f"YAPAY ZEKA ONAYLI (%{
+    int(ai_prob)} Güven). Random Forest modeli bu maçı 'Kazanır' olarak görüyor."
                                 elif ai_prob < 30:
                                     ai_conf_boost = -15
-                                    ai_note_text = f"YAPAY ZEKA UYARISI (%{int(ai_prob)}). Model bu maça güvenmiyor."
+                                    ai_note_text = f"YAPAY ZEKA UYARISI (%{
+    int(ai_prob)}). Model bu maça güvenmiyor."
 
                         except Exception as e:
                             print(f"AI PREDICT ERROR: {e}")
@@ -947,7 +962,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         market_vig = 0.05  # Standard bookie margin 5%
 
-                        if isinstance(bookie_home_odds, (int, float)) and bookie_home_odds > 1.0:
+                        if isinstance(bookie_home_odds, (int, float)
+                                      ) and bookie_home_odds > 1.0:
                              # 1. Vig-Free Probability (True Market Price) implied by bookie?
                              # No, we trust OUR probability (sys_confidence).
 
@@ -967,7 +983,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                              # Percentage of Bankroll
                              safe_stake = max(0, (kelly_fraction * 0.25) * 100)
 
-                             edge = (real_prob - (1/decimal_odds)) * 100
+                             edge = (real_prob - (1 / decimal_odds)) * 100
 
                              if safe_stake > 0 and edge > 0:
                                   match['value_found'] = True
@@ -979,31 +995,27 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                   elif safe_stake > 2.5: stake_advice = "YÜKSEK"
                                   elif safe_stake > 1.0: stake_advice = "ORTA"
 
-                                  match['recommendation'] = f"{sys_rec} [STAKE %{safe_stake:.1f}]"
+                                  match['recommendation'] = f"{sys_rec} [STAKE %{
+    safe_stake:.1f}]"
                                   if "KASA" in stake_advice:
-                                       match['recommendation'] = f"💎 KASA: {match['recommendation']}"
+                                       match['recommendation'] = f"💎 KASA: {
+    match['recommendation']}"
                                   elif "YÜKSEK" in stake_advice:
-                                       match['recommendation'] = f"🔥 BANKO: {match['recommendation']}"
+                                       match['recommendation'] = f"🔥 BANKO: {
+    match['recommendation']}"
 
                                   match['reasoning'] = (
-                                      f"🧠 KELLY ANALİZİ: Kasanın %{safe_stake:.2f}'si Basılmalı.\n"
-                                      f"📊 Matematiksel Avantaj (Edge): +%{edge:.1f}\n"
-                                      f"🎯 Hedef Oran: {round(1/real_prob, 2)} | Alınan: {decimal_odds} | Güven: {stake_advice}"
+                                      f"🧠 KELLY ANALİZİ: Kasanın %{
+    safe_stake:.2f}'si Basılmalı.\n"
+                                      f"📊 Matematiksel Avantaj (Edge): +%{
+    edge:.1f}\n"
+                                      f"🎯 Hedef Oran: {
+    round(
+        1 / real_prob,
+         2)} | Alınan: {decimal_odds} | Güven: {stake_advice}"
                                   )
 
-                            # Update displayed score
-                            match['score'] = f"0-0" # live score placeholder
-                            # But pro_stats has the prediction, dashboard uses pro_stats.score_pred_home
-                                  elif safe_stake > 1.0: stake_advice = "ORTA"
-                                  
-                                  match['recommendation'] += f" [STAKE %{round(safe_stake, 1)}]"
-                                  
-                                  # Detailed Financial Report
-                                  match['reasoning'] = (
-                                      f"🧠 KELLY ANALİZİ: Kasanın %{round(safe_stake, 2)}'si Basılmalı.\n"
-                                      f"📊 Matematiksel Avantaj (Edge): +%{round(edge, 1)}\n"
-                                      f"🎯 Hedef Oran: {round(1/real_prob, 2)} | Alınan: {decimal_odds} | Güven: {stake_advice}"
-                                  )
+
                              elif edge < -10:
                                    match['reasoning'] += f" | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp."
                         

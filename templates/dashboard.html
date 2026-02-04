@@ -416,6 +416,7 @@
                         <th class="w-32 text-center text-yellow-400">CANLI BASKI</th>
                         <th class="w-24 text-center text-gray-400">SKOR TAHMİNİ</th>
                         <th class="w-24 text-center text-blue-400">BEKLENEN GOL (xG)</th>
+                        <th class="w-24 text-center text-green-400">KG VAR %</th>
                         <th class="w-24 text-center text-accent">2.5 ÜST %</th>
                         <th class="w-40 text-center text-white">GOL TAHMİNİ</th>
                     `;
@@ -588,6 +589,7 @@
                                     ${p.sofa_elite && p.sofa_elite.xG ? `<span class="xg-badge mt-1">xG ${p.sofa_elite.xG[0]} - ${p.sofa_elite.xG[1]}</span>` : ''}
                                 </div>
                             </td>
+                            <td class="text-center font-mono ${p.sim_details && p.sim_details.btts_prob > 55 ? 'text-green-400' : 'text-muted'} font-bold">%${p.sim_details ? parseInt(p.sim_details.btts_prob) : '-'}</td>
                             <td class="text-center font-mono ${isOver ? 'text-accent' : 'text-muted'} font-bold">%${p.over_2_5_prob}</td>
                             <td class="text-center relative group">
                                 <div class="flex flex-col items-center cursor-help">
