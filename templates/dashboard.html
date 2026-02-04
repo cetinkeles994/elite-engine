@@ -505,7 +505,7 @@
                         // Soccer: Show Score Prediction
                         const drp = m.dropping_odds || {};
                         row += `
-                            <td class="text-center font-mono text-blue-400 text-xs">${Math.round(m.pro_stats.home_goals)}-${Math.round(m.pro_stats.away_goals)}</td>
+                            <td class="text-center font-mono text-blue-400 text-xs">${m.pro_stats.score_pred_home}-${m.pro_stats.score_pred_away}</td>
                             <td class="text-right font-mono ${drp.side === 'home' ? 'text-red-500 font-bold underline' : 'text-gray-400'}">
                                 ${m.odds.home}
                                 ${drp.side === 'home' ? `<span class="block text-[8px] font-bold">-%${drp.pct}</span>` : ''}

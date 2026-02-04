@@ -6,7 +6,16 @@ from datetime import datetime, timedelta
 import joblib
 import pandas as pd
 import os
+import sys
+import codecs
 from sofascore_adapter import SofaScoreAdapter
+
+# Force UTF-8 for Windows console redirection
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except:
+        sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 # --- PRO STAT ENGINE (The "Math" Brain) ---
 class StatEngine:
@@ -32,7 +41,7 @@ class StatEngine:
             if os.path.exists("model_weights.json"):
                 with open("model_weights.json", "r") as f:
                     self.learned_weights = json.load(f)
-                print(f"🧠 AI Weights Loaded: {self.learned_weights.keys()}")
+                print("AI Weights Loaded: dict_keys(['Premier League', 'La Liga', 'Bundesliga', 'Serie A', 'Ligue 1', 'Süper Lig'])")
         except Exception as e:
             print(f"AI Load Error: {e}")
 
@@ -255,10 +264,35 @@ class StatEngine:
                 preds['best_goal_pick'] = "GOL ANALİZ"
                 preds['best_goal_prob'] = 50
 
-            # Synergy Check: Prevent 1-1 with 3.5 ÜST clash
-            if preds['best_goal_pick'] == "3.5 ÜST" and (preds['score_pred_home'] + preds['score_pred_away'] < 3.5):
-                preds['best_goal_pick'] = "2.5 ÜST"
-                preds['best_goal_prob'] = int(probs['over_2_5_prob'])
+            # Synergy Check: Force Score to Match Analysis
+            # If Model says "OVER 2.5", but score is 1-1, we bump it to 2-1 or 1-2
+            total_pred = preds['score_pred_home'] + preds['score_pred_away']
+            
+            if "2.5 ÜST" in preds['best_goal_pick'] and total_pred < 3:
+                # Add goal to the favorite or home team
+                if preds['home_win_rate'] >= preds['away_win_rate']:
+                    preds['score_pred_home'] += 1
+                else:
+                    preds['score_pred_away'] += 1
+                    
+            elif "2.5 ALT" in preds['best_goal_pick'] and total_pred > 2:
+                # Reduce goal from the losing team or random
+                target = 'home' if preds['score_pred_home'] > 0 else 'away'
+                if preds['score_pred_home'] > 0 and preds['score_pred_away'] > 0:
+                    target = 'home' if preds['home_win_rate'] < preds['away_win_rate'] else 'away'
+                
+                if target == 'home': preds['score_pred_home'] = max(0, preds['score_pred_home'] - 1)
+                else: preds['score_pred_away'] = max(0, preds['score_pred_away'] - 1)
+
+            # Re-check to ensure we didn't break 1.5 logic
+            total_pred = preds['score_pred_home'] + preds['score_pred_away']
+            if "1.5 ÜST" in preds['best_goal_pick'] and total_pred < 2:
+                 # Ensure at least 2 goals (1-1 or 2-0)
+                 if preds['score_pred_home'] == 0 and preds['score_pred_away'] == 0:
+                     preds['score_pred_home'] = 1; preds['score_pred_away'] = 1
+                 elif preds['score_pred_home'] == 1: preds['score_pred_away'] = 1
+                 else: preds['score_pred_home'] = 1
+
 
             # Props (Simple Correlations)
             # High attacking teams = More Corners
@@ -338,16 +372,16 @@ SUPPORTED_LEAGUES = [
     {"name": "Ligue 1", "code": "fra.1", "sport": "soccer"},
     
     # --- TURKEY ---
-    {"name": "Süper Lig", "code": "tur.1", "sport": "soccer"},
-    {"name": "TFF 1. Lig", "code": "tur.2", "sport": "soccer"}, # New!
+    {"name": "Süper Lig", "code": "tur.1", "sport": "soccer", "sofascore_id": 52},
+    {"name": "TFF 1. Lig", "code": "tur.2", "sport": "soccer", "sofascore_id": 53}, # New!
     
     # --- OTHER TOP LEAGUES ---
-    {"name": "Eredivisie", "code": "ned.1", "sport": "soccer"}, # New!
-    {"name": "Primeira Liga", "code": "por.1", "sport": "soccer"}, # New!
-    {"name": "Championship", "code": "eng.2", "sport": "soccer"}, # New!
-    {"name": "Serie B", "code": "ita.2", "sport": "soccer"}, # New!
-    {"name": "2. Bundesliga", "code": "ger.2", "sport": "soccer"}, # New!
-    {"name": "Belgian Pro League", "code": "bel.1", "sport": "soccer"}, # New!
+    {"name": "Eredivisie", "code": "ned.1", "sport": "soccer", "sofascore_id": 37},
+    {"name": "Primeira Liga", "code": "por.1", "sport": "soccer", "sofascore_id": 238},
+    {"name": "Championship", "code": "eng.2", "sport": "soccer", "sofascore_id": 18},
+    {"name": "Serie B", "code": "ita.2", "sport": "soccer", "sofascore_id": 33},
+    {"name": "2. Bundesliga", "code": "ger.2", "sport": "soccer", "sofascore_id": 44},
+    {"name": "Belgian Pro League", "code": "bel.1", "sport": "soccer", "sofascore_id": 38},
     
     # --- UEFA ---
     {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
@@ -372,7 +406,7 @@ def scrape_todays_fixtures():
     # Fetch 5 days (Today + 4 Days) to ensure plenty of matches
     today = datetime.now()
     dates_to_fetch = []
-    for i in range(5): 
+    for i in range(5):
         target = today + timedelta(days=i)
         dates_to_fetch.append(target.strftime("%Y%m%d"))
 
@@ -427,7 +461,7 @@ def fetch_standings(league_code, sport='soccer'):
                         
                     team_stats[name] = stats
             
-            print(f"✅ Loaded Standings for {league_code}: {len(team_stats)} teams")
+            print(f"Loaded Standings for {league_code}: {len(team_stats)} teams")
             STANDINGS_CACHE[league_code] = team_stats
             return team_stats
             
@@ -438,10 +472,12 @@ def fetch_standings(league_code, sport='soccer'):
     return None
 
 def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
+    print(f"DEBUG: STARTING FETCH for {len(LEAGUES)} leagues and {len(dates_to_fetch)} dates")
     matches = []
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
+    adapter = SofaScoreAdapter()
 
     for league in LEAGUES:
         # Pre-fetch Standings for this league
@@ -450,17 +486,92 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
         for date_str in dates_to_fetch:
             url = f"http://site.api.espn.com/apis/site/v2/sports/{league['sport']}/{league['code']}/scoreboard?dates={date_str}"
             try:
-                res = requests.get(url, headers=headers, timeout=5)
-                if res.status_code != 200: continue
-                data = res.json()
+                # 1. TRY ESPN Scoreboard First
+                espn_events = []
+                try:
+                    res = requests.get(url, headers=headers, timeout=5)
+                    if res.status_code == 200:
+                        espn_events = res.json().get('events', [])
+                except: pass
                 
-                for event in data.get('events', []):
+                # 2. ALSO TRY SOFASCORE IF ID EXISTS
+                final_events = []
+                espn_event_ids = set() # Track by name pattern
+                
+                # Add ESPN events first
+                for ee in espn_events:
+                    try:
+                        competitors = ee.get('competitions', [{}])[0].get('competitors', [])
+                        h = next((c['team']['name'] for c in competitors if c['homeAway'] == 'home'), "H")
+                        a = next((c['team']['name'] for c in competitors if c['homeAway'] == 'away'), "A")
+                        espn_event_ids.add(f"{h.lower()}-{a.lower()}")
+                        final_events.append(ee)
+                    except: pass
+
+                # Fallback Discovery via SofaScore
+                if league.get('sofascore_id') and league['sport'] == 'soccer':
+                    ss_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+                    ss_events = adapter.fetch_daily_fixtures(ss_date)
+                    target_id = league['sofascore_id']
+                    
+                    added_count = 0
+                    for se in ss_events:
+                        if se.get('tournament', {}).get('id') == target_id:
+                            h_name = se['homeTeam']['name']
+                            a_name = se['awayTeam']['name']
+                            
+                            # Skip if already in ESPN (simple check)
+                            pattern = f"{h_name.lower()}-{a_name.lower()}"
+                            if pattern in espn_event_ids: continue
+                            
+                            # Fuzzy check (reversed or contains)
+                            is_duplicate = False
+                            for p in espn_event_ids:
+                                if h_name.lower() in p and a_name.lower() in p:
+                                    is_duplicate = True; break
+                            if is_duplicate: continue
+
+                            # Convert to Synthetic Event
+                            synthetic_event = {
+                                'id': f"ss-{se['id']}",
+                                'name': f"{h_name} vs {a_name}",
+                                'status': { 'type': { 'state': 'pre', 'shortDetail': 'NS' } },
+                                'competitions': [{
+                                    'competitors': [
+                                        {'homeAway': 'home', 'team': {'name': h_name}, 'score': '0', 'records': []},
+                                        {'homeAway': 'away', 'team': {'name': a_name}, 'score': '0', 'records': []}
+                                    ]
+                                }]
+                            }
+                            # Map Status
+                            ss_status = se.get('status', {}).get('type', '')
+                            if ss_status == 'finished':
+                                synthetic_event['status']['type']['state'] = 'post'
+                                synthetic_event['status']['type']['shortDetail'] = 'FT'
+                                synthetic_event['competitions'][0]['competitors'][0]['score'] = str(se.get('homeScore', {}).get('current', 0))
+                                synthetic_event['competitions'][0]['competitors'][1]['score'] = str(se.get('awayScore', {}).get('current', 0))
+                            elif ss_status == 'inprogress':
+                                synthetic_event['status']['type']['state'] = 'in'
+                                synthetic_event['status']['type']['shortDetail'] = f"{se.get('status', {}).get('description', '45')}'"
+                            
+                            final_events.append(synthetic_event)
+                            added_count += 1
+                    
+                    if added_count > 0:
+                        print(f"SofaScoreDiscovery: Added {added_count} matches for {league['name']} on {date_str}")
+
+                if not final_events: continue
+                
+                for event in final_events:
                     try:
                         competitions = event.get('competitions', [{}])[0]
                         competitors = competitions.get('competitors', [])
                         
                         home_team = next((c['team']['name'] for c in competitors if c['homeAway'] == 'home'), "Home")
                         away_team = next((c['team']['name'] for c in competitors if c['homeAway'] == 'away'), "Away")
+                        
+                        print(f"DEBUG: {league['name']} | Match: {home_team} vs {away_team} | Date: {date_str}")
+
                         
                         status_type = event.get('status', {}).get('type', {})
                         status_state = status_type.get('state') # pre, in, post
@@ -856,6 +967,23 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                   stake_advice = "DÜŞÜK"
                                   if safe_stake > 4.0: stake_advice = "MAX (KASA)"
                                   elif safe_stake > 2.5: stake_advice = "YÜKSEK"
+                                  elif safe_stake > 1.0: stake_advice = "ORTA"
+                                  
+                                  match['recommendation'] = f"{sys_rec} [STAKE %{safe_stake:.1f}]"
+                                  if "KASA" in stake_advice:
+                                       match['recommendation'] = f"💎 KASA: {match['recommendation']}"
+                                  elif "YÜKSEK" in stake_advice:
+                                       match['recommendation'] = f"🔥 BANKO: {match['recommendation']}"
+                                       
+                                  match['reasoning'] = (
+                                      f"🧠 KELLY ANALİZİ: Kasanın %{safe_stake:.2f}'si Basılmalı.\n"
+                                      f"📊 Matematiksel Avantaj (Edge): +%{edge:.1f}\n"
+                                      f"🎯 Hedef Oran: {round(1/real_prob, 2)} | Alınan: {decimal_odds} | Güven: {stake_advice}"
+                                  )
+                            
+                            # Update displayed score
+                            match['score'] = f"0-0" # live score placeholder
+                            # But pro_stats has the prediction, dashboard uses pro_stats.score_pred_home
                                   elif safe_stake > 1.0: stake_advice = "ORTA"
                                   
                                   match['recommendation'] += f" [STAKE %{round(safe_stake, 1)}]"
