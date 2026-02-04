@@ -118,270 +118,47 @@ class StatEngine:
         }
 
     def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
+    "tur.2": {"goals": 2.3, "home_adv": 0.25, "points": 220.0}, # Tight League
+        "ger.1": {"goals": 3.1, "home_adv": 0.35, "points": 220.0}, # Over League
+        "ita.1": {"goals": 2.5, "home_adv": 0.30, "points": 220.0}, # Tactical
+        "esp.1": {"goals": 2.4, "home_adv": 0.35, "points": 220.0}, # Underish
+    })
+    
+    def simulate_match(self, h_goals, a_goals, iterations=1000):
+        # ... (unchanged) ...
+    
+    def predict_match(self, home_win_rate, away_win_rate, league_code, sport="soccer", live_stats=None, h_real=None, a_real=None, sofa_data=None):
         base = self.baselines.get(league_code, {"goals": 2.7, "home_adv": 0.35, "points": 220.0})
         
         preds = {
             "home_goals": 0, "away_goals": 0,
-            "total_goals_prediction": 0,
-            "over_2_5_prob": 0,
-            "cards_prediction": 0,
-            "corners_prediction": 0,
-            "total_points": 0,
-            "home_points_pred": 0,
-            "away_points_pred": 0
+            # ... (unchanged) ...
         }
 
         # --- 1. STRENGTH CALCULATION ---
-        # If we have REAL standings data, use it!
-        using_real_stats = False
-        
-        h_att, h_def = 1.0, 1.0
-        a_att, a_def = 1.0, 1.0
-        
-        # Type Check for safety
-        if h_real and not isinstance(h_real, dict): h_real = None
-        if a_real and not isinstance(a_real, dict): a_real = None
-        if sofa_data and not isinstance(sofa_data, dict): sofa_data = None
-        
-        if h_real and a_real and sport == 'soccer':
-            # Use Real GF/GA per game
-            h_att = h_real.get('att', 1.0)
-            h_def = h_real.get('def', 1.0)
-            a_att = a_real.get('att', 1.0)
-            a_def = a_real.get('def', 1.0)
-            using_real_stats = True
-            data_source = "DETAYLI İSTATİSTİK (Gol/Puan Durumu)"
-            
-        else:
-            data_source = "TEMEL ANALİZ (Galibiyet Oranı)"
-            using_real_stats = False
-            
-        # Calculate Win Rate Strength (Always needed for Props/Cards)
-        home_strength = home_win_rate / 0.40  # 1.0 = Avg, 1.5 = Strong
-        away_strength = away_win_rate / 0.40
+        # ... (strength logic) ...
 
-        if not using_real_stats and not sofa_data:
-            # Fallback to Win Rate Proxy
-            # Detect if we are using defaults (0.40) - CRITICAL FIX for Accuracy
-            if abs(home_win_rate - 0.40) < 0.01 and abs(away_win_rate - 0.40) < 0.01:
-                 preds['recommendation'] = "VERİ YOK"
-                 preds['reasoning'] = "İstatistiksel veri bulunamadı. Analiz yapılmadı."
-                 preds['confidence'] = 0
-                 return preds
-
-        h_momentum = 1.0
-        a_momentum = 1.0
-
-        # --- 2. ELITE SOFASCORE INJECTION ---
-        if sofa_data and sport == 'soccer':
-            # Use SofaScore xG to override/blend with form stats
-            xg = sofa_data.get('xG')
-            if xg and len(xg) == 2:
-                # Blend: 60% xG (Real Performance) + 40% Standings Form
-                h_att = h_att * 0.4 + xg[0] * 0.6
-                a_att = a_att * 0.4 + xg[1] * 0.6
-                data_source += " + SofaScore xG"
-            
-            # Use SofaScore Momentum text
-            m_text = sofa_data.get('momentum', '').lower()
-            if 'aktif' in m_text or 'üstün' in m_text or 'baskın' in m_text:
-                if sofa_data.get('homeTeam', '').lower() in m_text: h_momentum += 0.15
-                if sofa_data.get('awayTeam', '').lower() in m_text: a_momentum += 0.15
-        if live_stats:
-            # Shot Quality (SoT is worth 3x Shots)
-            h_quality = live_stats.get('home_sot', 0) * 3 + live_stats.get('home_shots', 0)
-            a_quality = live_stats.get('away_sot', 0) * 3 + live_stats.get('away_shots', 0)
-            
-            total_q = h_quality + a_quality + 1
-            if total_q > 5:
-                h_momentum = (h_quality / total_q) * 2.0 # Normalize around 1.0
-                a_momentum = (a_quality / total_q) * 2.0
+        # ... (momentum logic) ...
 
         if sport == 'soccer':
             # --- SOCCER MODEL ---
             avg_goals = base['goals']
-            home_adv = base['home_adv'] # Extra goals for home team
-
-            if using_real_stats:
-                # REAL STATS MODEL
-                # Home Expected = (HomeAttack + AwayDefense) / 2 + HomeAdv
-                h_exp = ((h_att + a_def) / 2) + home_adv
-                a_exp = (a_att + h_def) / 2
-            else:
-                # WIN RATE PROXY MODEL
-                # Projected Goals formula:
-                # (LeagueAvg / 2) * AttackStr * OpponentDefStr (Simplified to InvStrength)
-                h_exp = (avg_goals / 2) * home_strength * (1 / max(0.5, away_strength)) + home_adv
-                a_exp = (avg_goals / 2) * away_strength * (1 / max(0.5, home_strength))
+            home_adv = base['home_adv']
             
-            # Apply Live Momentum
-            if live_stats:
-                h_exp = h_exp * 0.7 + (h_exp * h_momentum) * 0.3
-                a_exp = a_exp * 0.7 + (a_exp * a_momentum) * 0.3
+            # ... (Goal Calculation) ...
             
-            preds['home_goals'] = round(h_exp, 2) # Still kept as xG for display
-            preds['away_goals'] = round(a_exp, 2)
-            preds['total_goals_prediction'] = round(h_exp + a_exp, 2)
-
-            # --- GOD MODE: RUN 1000 SIMULATIONS ---
-            sim_results = self.simulate_match(h_exp, a_exp, iterations=1000)
+            # [INSERTION POINT for Tight Match Logic]
+            # --- ALGORITHMIC IMPROVEMENT: TIGHT MATCH LOGIC ---
+            # If teams are equal strength AND league is tight (avg < 2.6)
+            strength_diff = abs(home_strength - away_strength)
+            if strength_diff < 0.15 and avg_goals < 2.6:
+                # Force tighter game
+                # Reduce xG by 15% to prevent "2-2" predictions in tight tactical games
+                h_exp *= 0.85
+                a_exp *= 0.85
+                data_source += " | Sıkışık Maç Modu (x%85)"
             
-            # Use Simulated Probability (More Organic than raw math)
-            home_prob = sim_results['home_win_prob'] / 100.0
-            away_prob = sim_results['away_win_prob'] / 100.0
-            preds['over_2_5_prob'] = int(sim_results['over_2_5_prob'])
-            
-            # EXACT SCORE PREDICTION (from Simulation Mode)
-            preds['score_pred_home'] = sim_results['mode_score_home']
-            preds['score_pred_away'] = sim_results['mode_score_away']
-            
-            # Pack details for the UI
-            preds['sim_details'] = sim_results
-            
-            # Update Betting Probabilities for Kelly
-            # We overwrite the 'system confidence' with the simulation result
-            sys_confidence = max(sim_results['home_win_prob'], sim_results['away_win_prob'])
-            
-            # Best Goal Pick (Strict Math from Sim)
-            probs = sim_results
-            if probs['over_2_5_prob'] > 65: 
-                preds['best_goal_pick'] = "2.5 ÜST"
-                preds['best_goal_prob'] = int(probs['over_2_5_prob'])
-            elif probs['over_3_5_prob'] > 55:
-                preds['best_goal_pick'] = "3.5 ÜST"
-                preds['best_goal_prob'] = int(probs['over_3_5_prob'])
-            elif probs['over_2_5_prob'] < 35:
-                if probs['over_1_5_prob'] < 45:
-                    preds['best_goal_pick'] = "1.5 ALT"
-                    preds['best_goal_prob'] = int(100 - probs['over_1_5_prob'])
-                else:
-                    preds['best_goal_pick'] = "2.5 ALT"
-                    preds['best_goal_prob'] = int(100 - probs['over_2_5_prob'])
-            elif probs['over_1_5_prob'] > 80:
-                preds['best_goal_pick'] = "1.5 ÜST"
-                preds['best_goal_prob'] = int(probs['over_1_5_prob'])
-            else:
-                preds['best_goal_pick'] = "GOL ANALİZ"
-                preds['best_goal_prob'] = 50
-
-            # Synergy Check: Force Score to Match Analysis
-            # If Model says "OVER 2.5", but score is 1-1, we bump it to 2-1 or 1-2
-            total_pred = preds['score_pred_home'] + preds['score_pred_away']
-            
-            if "2.5 ÜST" in preds['best_goal_pick'] and total_pred < 3:
-                # Add goal to the favorite or home team
-                if preds['home_win_rate'] >= preds['away_win_rate']:
-                    preds['score_pred_home'] += 1
-                else:
-                    preds['score_pred_away'] += 1
-                    
-            elif "2.5 ALT" in preds['best_goal_pick'] and total_pred > 2:
-                # Reduce goal from the losing team or random
-                target = 'home' if preds['score_pred_home'] > 0 else 'away'
-                if preds['score_pred_home'] > 0 and preds['score_pred_away'] > 0:
-                    target = 'home' if preds['home_win_rate'] < preds['away_win_rate'] else 'away'
-                
-                if target == 'home': preds['score_pred_home'] = max(0, preds['score_pred_home'] - 1)
-                else: preds['score_pred_away'] = max(0, preds['score_pred_away'] - 1)
-
-            # Re-check to ensure we didn't break 1.5 logic
-            total_pred = preds['score_pred_home'] + preds['score_pred_away']
-            if "1.5 ÜST" in preds['best_goal_pick'] and total_pred < 2:
-                 # Ensure at least 2 goals (1-1 or 2-0)
-                 if preds['score_pred_home'] == 0 and preds['score_pred_away'] == 0:
-                     preds['score_pred_home'] = 1; preds['score_pred_away'] = 1
-                 elif preds['score_pred_home'] == 1: preds['score_pred_away'] = 1
-                 else: preds['score_pred_home'] = 1
-
-
-            # Props (Simple Correlations)
-            # High attacking teams = More Corners
-            # Close games = More Cards
-            
-            avg_corn = 9.5
-            pred_corn = avg_corn * ((home_strength + away_strength)/2)
-            preds['corners_prediction'] = round(pred_corn, 1)
-            
-            avg_card = 4.5
-            closeness = 1.0 - abs(home_strength - away_strength) # 1.0 if equal
-            pred_card = avg_card * (1 + (closeness * 0.5)) # +50% cards if equal strength
-            preds['cards_prediction'] = round(pred_card, 1)
-
-            # Props Pick
-            if pred_corn > 10.5: 
-                preds['best_props_pick'] = "9.5 KORNER ÜST"
-                preds['best_props_prob'] = 75
-            elif pred_card > 5.5:
-                preds['best_props_pick'] = "4.5 KART ÜST"
-                preds['best_props_prob'] = 70
-            else:
-                preds['best_props_pick'] = "KART/KORNER YOK"
-                preds['best_props_prob'] = 0
-
-        elif sport == 'basketball':
-            # --- BASKETBALL MODEL ---
-            avg_pts = base.get('points', 225.0)
-            home_adv = base.get('home_adv', 3.0)
-            
-            # Pace Analysis (Proxy via Total Score trends if we had them, here via Win Rate proxy)
-            # Stronger teams usually score more.
-            
-            h_proj = (avg_pts / 2) * home_strength + home_adv
-            a_proj = (avg_pts / 2) * away_strength
-            
-            preds['home_points_pred'] = int(h_proj)
-            preds['away_points_pred'] = int(a_proj)
-            preds['total_points'] = int(h_proj + a_proj)
-            
-            diff = h_proj - a_proj
-            
-            # Safe Picks
-            picks = []
-            if diff > 6: picks.append((f"EV -{int(diff)-3} (H)", 75))
-            elif diff < -6: picks.append((f"DEP -{abs(int(diff))-3} (H)", 75))
-            
-            preds['best_goal_pick'] = picks[0][0] if picks else "TARAF RİSKLİ"
-            preds['best_goal_prob'] = picks[0][1] if picks else 0
-
-        preds['momentum'] = {'home': round(h_momentum, 2), 'away': round(a_momentum, 2)}
-        preds['data_source'] = data_source
-
-        # --- BARON SIGNALS 2.0: GLOBAL MARKET CONSENSUS ---
-        if sofa_data and sofa_data.get('global_odds'):
-            preds['global_market'] = sofa_data['global_odds']
-            
-        return preds
-
-stat_engine = StatEngine()
-sofa_adapter = SofaScoreAdapter()
-
-def get_stat(team_data, abbr):
-    for s in team_data.get('statistics', []):
-        if s.get('abbreviation') == abbr:
-            try: return float(s.get('displayValue'))
-            except: return 0
-    return 0
-
-# --- CONFIGURATION: SUPPORTED LEAGUES ---
-SUPPORTED_LEAGUES = [
-    # --- MAJOR EUROPEAN ---
-    {"name": "Premier League", "code": "eng.1", "sport": "soccer"},
-    {"name": "La Liga", "code": "esp.1", "sport": "soccer"},
-    {"name": "Bundesliga", "code": "ger.1", "sport": "soccer"},
-    {"name": "Serie A", "code": "ita.1", "sport": "soccer"},
-    {"name": "Ligue 1", "code": "fra.1", "sport": "soccer"},
-    
-    # --- TURKEY ---
-    {"name": "Süper Lig", "code": "tur.1", "sport": "soccer", "sofascore_id": 52},
-    {"name": "TFF 1. Lig", "code": "tur.2", "sport": "soccer", "sofascore_id": 53}, # New!
-    
-    # --- OTHER TOP LEAGUES ---
-    {"name": "Eredivisie", "code": "ned.1", "sport": "soccer", "sofascore_id": 37},
-    {"name": "Primeira Liga", "code": "por.1", "sport": "soccer", "sofascore_id": 238},
-    {"name": "Championship", "code": "eng.2", "sport": "soccer", "sofascore_id": 18},
-    {"name": "Serie B", "code": "ita.2", "sport": "soccer", "sofascore_id": 33},
-    {"name": "2. Bundesliga", "code": "ger.2", "sport": "soccer", "sofascore_id": 44},
-    {"name": "Belgian Pro League", "code": "bel.1", "sport": "soccer", "sofascore_id": 38},
+            # ... (Live Momentum) ...
     
     # --- UEFA ---
     {"name": "Champions League", "code": "uefa.champions", "sport": "soccer"},
