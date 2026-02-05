@@ -169,6 +169,18 @@
         </div>
     </div>
 
+    <!-- Filters -->
+    <div class="bg-panel border-b border-border p-2 flex justify-center gap-4">
+        <select id="filter-date" onchange="setFilter('date', this.value)"
+            class="bg-black text-xs text-gray-300 border border-gray-700 rounded px-2 py-1 outline-none focus:border-accent">
+            <option value="all">TÜM TARİHLER</option>
+        </select>
+        <select id="filter-league" onchange="setFilter('league', this.value)"
+            class="bg-black text-xs text-gray-300 border border-gray-700 rounded px-2 py-1 outline-none focus:border-accent">
+            <option value="all">TÜM LİGLER</option>
+        </select>
+    </div>
+
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-auto">
         <div class="max-w-[1400px] mx-auto">
@@ -204,6 +216,53 @@
         let currentSport = 'soccer';
         let currentView = 'main'; // main, goals, props
         let lastData = [];
+        let filterDate = 'all';
+        let filterLeague = 'all';
+
+        function setFilter(type, val) {
+            if (type === 'date') filterDate = val;
+            if (type === 'league') filterLeague = val;
+            renderTable();
+        }
+
+        function populateFilters() {
+            const dateSet = new Set();
+            const leagueSet = new Set();
+
+            lastData.forEach(m => {
+                // Extract simple date (DD.MM) from string like "06.02 23:00"
+                const simpleDate = m.time.split(' ')[0];
+                dateSet.add(simpleDate);
+                leagueSet.add(m.league);
+            });
+
+            const dateSel = document.getElementById('filter-date');
+            const leagueSel = document.getElementById('filter-league');
+
+            // Save current selection to restore if possible
+            const oldDate = dateSel.value;
+            const oldLeague = leagueSel.value;
+
+            // Clear (keep first option)
+            dateSel.innerHTML = '<option value="all">TÜM TARİHLER</option>';
+            leagueSel.innerHTML = '<option value="all">TÜM LİGLER</option>';
+
+            // Sort and populate
+            Array.from(dateSet).sort().forEach(d => {
+                dateSel.innerHTML += `<option value="${d}">${d}</option>`;
+            });
+            Array.from(leagueSet).sort().forEach(l => {
+                leagueSel.innerHTML += `<option value="${l}">${l}</option>`;
+            });
+
+            // Restore if valid
+            if (Array.from(dateSet).includes(oldDate)) dateSel.value = oldDate;
+            if (Array.from(leagueSet).includes(oldLeague)) leagueSel.value = oldLeague;
+
+            // Update internal state just in case
+            filterDate = dateSel.value;
+            filterLeague = leagueSel.value;
+        }
 
         function openModal(index) {
             const m = lastData[index];
@@ -448,7 +507,11 @@
             const tbody = document.getElementById('table-body');
 
             // Filter Data based on View
-            let displayData = lastData;
+            let displayData = lastData.filter(m => {
+                if (filterDate !== 'all' && !m.time.startsWith(filterDate)) return false;
+                if (filterLeague !== 'all' && m.league !== filterLeague) return false;
+                return true;
+            });
             if (currentView === 'baron') {
                 displayData = lastData.filter(m => m.recommendation && m.recommendation.includes("DÜŞÜYOR"));
                 if (displayData.length === 0) {
@@ -589,7 +652,7 @@
                                     ${p.sofa_elite && p.sofa_elite.xG ? `<span class="xg-badge mt-1">xG ${p.sofa_elite.xG[0]} - ${p.sofa_elite.xG[1]}</span>` : ''}
                                 </div>
                             </td>
-                            <td class="text-center font-mono ${p.sim_details && p.sim_details.btts_prob > 55 ? 'text-green-400' : 'text-muted'} font-bold">%${p.sim_details ? parseInt(p.sim_details.btts_prob) : '-'}</td>
+                            <td class="text-center font-mono ${p.sim_details && p.sim_details.btts_prob > 55 ? 'text-green-400' : 'text-muted'} font-bold">%${p.sim_details ? parseInt(p.sim_details.btts_prob || 0) : '-'}</td>
                             <td class="text-center font-mono ${isOver ? 'text-accent' : 'text-muted'} font-bold">%${p.over_2_5_prob}</td>
                             <td class="text-center relative group">
                                 <div class="flex flex-col items-center cursor-help">
@@ -658,6 +721,9 @@
                 const matches = await res.json();
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
+                lastData = matches;
+                document.getElementById('match-counter').innerText = `${matches.length} Maç`;
+                populateFilters();
                 renderTable();
             } catch (e) {
                 console.error(e);
