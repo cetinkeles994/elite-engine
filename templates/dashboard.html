@@ -192,37 +192,74 @@
         <div class="max-w-[1400px] mx-auto">
 
             <!-- ORACLE'S CHOICE (HERO CARD) -->
-            <div id="oracle-box"
-                class="hidden mb-6 bg-gradient-to-r from-yellow-900/40 to-black border border-yellow-600/50 rounded-lg p-6 relative overflow-hidden shadow-[0_0_30px_rgba(234,179,8,0.2)]">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <svg class="w-32 h-32 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                    </svg>
-                </div>
-                <div class="relative z-10 flex items-center justify-between">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-yellow-500 animate-pulse text-xl">🔮</span>
-                            <h2 class="text-yellow-500 font-bold tracking-widest text-sm uppercase">ORACLE'IN GÜNLÜK
-                                SEÇİMİ</h2>
+            <!-- ORACLE & SAFETY SPLIT -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- 1. ORACLE'S CHOICE (VALUE WARRIOR) -->
+                <div id="oracle-box"
+                    class="hidden bg-gradient-to-br from-yellow-900/40 to-black border border-yellow-600/50 rounded-lg p-6 relative overflow-hidden shadow-[0_0_30px_rgba(234,179,8,0.2)]">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <svg class="w-32 h-32 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-yellow-500 animate-pulse text-2xl">🔮</span>
+                            <div>
+                                <h2 class="text-yellow-500 font-bold tracking-widest text-xs uppercase">ORACLE'IN SEÇİMİ
+                                    (VALUE)</h2>
+                                <h3 class="text-gray-400 text-[10px] uppercase tracking-wide">Yüksek Kazanç / Akıllı
+                                    Risk</h3>
+                            </div>
                         </div>
-                        <h1 id="oracle-match" class="text-3xl font-black text-white mb-1">Yükleniyor...</h1>
-                        <div class="flex items-center gap-4 text-sm text-gray-400">
-                            <span id="oracle-league">...</span>
-                            <span>•</span>
-                            <span id="oracle-time">...</span>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h1 id="oracle-match" class="text-2xl font-black text-white leading-tight mb-1">...</h1>
+                                <div class="text-xs text-gray-500 font-mono" id="oracle-league">...</div>
+                            </div>
+                            <div class="text-right">
+                                <div id="oracle-pick"
+                                    class="text-3xl font-black text-white bg-yellow-600/20 px-3 py-1 rounded border border-yellow-600/50 inline-block">
+                                    ...</div>
+                                <div id="oracle-confidence" class="text-green-400 font-mono text-[10px] mt-1 font-bold">
+                                    ...</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <div class="text-yellow-400 text-xs font-bold mb-1 uppercase tracking-wider">ÖNERİLEN BAHİS
+                </div>
+
+                <!-- 2. SAFETY LOCK (GUARANTEED BET) -->
+                <div id="safe-box"
+                    class="hidden bg-gradient-to-br from-blue-900/40 to-black border border-blue-600/50 rounded-lg p-6 relative overflow-hidden shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <svg class="w-32 h-32 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                        </svg>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-blue-500 animate-pulse text-2xl">🛡️</span>
+                            <div>
+                                <h2 class="text-blue-500 font-bold tracking-widest text-xs uppercase">GÜVENLİK KİLİDİ
+                                    (BANKO)</h2>
+                                <h3 class="text-gray-400 text-[10px] uppercase tracking-wide">En Düşük Risk / Garanti
+                                    Kazanç</h3>
+                            </div>
                         </div>
-                        <div id="oracle-pick"
-                            class="text-4xl font-black text-white bg-yellow-600/20 px-4 py-2 rounded border border-yellow-600/50 inline-block drop-shadow-lg">
-                            ...
-                        </div>
-                        <div id="oracle-confidence" class="text-green-400 font-mono text-sm mt-2 font-bold">
-                            GÜVEN: %...
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h1 id="safe-match" class="text-2xl font-black text-white leading-tight mb-1">...</h1>
+                                <div class="text-xs text-gray-500 font-mono" id="safe-league">...</div>
+                            </div>
+                            <div class="text-right">
+                                <div id="safe-pick"
+                                    class="text-3xl font-black text-white bg-blue-600/20 px-3 py-1 rounded border border-blue-600/50 inline-block">
+                                    ...</div>
+                                <div id="safe-prob" class="text-green-400 font-mono text-[10px] mt-1 font-bold">...
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -527,6 +564,46 @@
                 const stakeVal = match ? match[1] : 0;
 
                 confTitle.innerText = `GÜVEN SKORU: ${parseInt(stakeVal * 10)} / 1000`; // Dramatic score
+            }
+        }
+
+        function findSafePick(matches) {
+            if (!matches || matches.length === 0) return;
+
+            // Filter: Just Winning Picks (No Draws)
+            let candidates = matches.filter(m => m.recommendation && (m.recommendation.includes("MS 1") || m.recommendation.includes("MS 2")));
+            if (candidates.length === 0) return;
+
+            // Sort by lowest odds (Highest Probability)
+            candidates.sort((a, b) => {
+                const getOdds = (m) => {
+                    if (m.recommendation.includes("MS 1")) return parseFloat(m.home_odds);
+                    return parseFloat(m.away_odds);
+                };
+                return getOdds(a) - getOdds(b); // Ascending Odds (1.05 < 1.10)
+            });
+
+            const best = candidates[0];
+            if (best) {
+                const box = document.getElementById('safe-box');
+                const matchTitle = document.getElementById('safe-match');
+                const leagueTitle = document.getElementById('safe-league');
+                const pickTitle = document.getElementById('safe-pick');
+                const probTitle = document.getElementById('safe-prob');
+
+                box.classList.remove('hidden');
+
+                matchTitle.innerText = `${best.home} vs ${best.away}`;
+                leagueTitle.innerText = `${best.league} • ${best.time}`;
+
+                let cleanPick = best.recommendation.replace("💎 KASA:", "").replace(/\[.*?\]/, "").trim();
+                pickTitle.innerText = cleanPick;
+
+                // Calc Prob from odds
+                let targetOdds = best.recommendation.includes("MS 1") ? parseFloat(best.home_odds) : parseFloat(best.away_odds);
+                let prob = parseInt((1 / targetOdds) * 100);
+
+                probTitle.innerText = `KAZANMA İHTİMALİ: %${prob}`;
             }
         }
 
@@ -889,7 +966,8 @@
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
                 populateFilters();
-                findOraclePick(matches); // <-- NEW: Find the banker
+                findOraclePick(matches);
+                findSafePick(matches); // <-- NEW: FIND SAFETY LOCK
                 renderTable();
             } catch (e) {
                 console.error(e);
