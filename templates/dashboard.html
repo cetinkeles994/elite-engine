@@ -185,6 +185,43 @@
     <main class="flex-1 p-6 overflow-auto">
         <div class="max-w-[1400px] mx-auto">
 
+            <!-- ORACLE'S CHOICE (HERO CARD) -->
+            <div id="oracle-box"
+                class="hidden mb-6 bg-gradient-to-r from-yellow-900/40 to-black border border-yellow-600/50 rounded-lg p-6 relative overflow-hidden shadow-[0_0_30px_rgba(234,179,8,0.2)]">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="w-32 h-32 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                </div>
+                <div class="relative z-10 flex items-center justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-500 animate-pulse text-xl">🔮</span>
+                            <h2 class="text-yellow-500 font-bold tracking-widest text-sm uppercase">ORACLE'IN GÜNLÜK
+                                SEÇİMİ</h2>
+                        </div>
+                        <h1 id="oracle-match" class="text-3xl font-black text-white mb-1">Yükleniyor...</h1>
+                        <div class="flex items-center gap-4 text-sm text-gray-400">
+                            <span id="oracle-league">...</span>
+                            <span>•</span>
+                            <span id="oracle-time">...</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-yellow-400 text-xs font-bold mb-1 uppercase tracking-wider">ÖNERİLEN BAHİS
+                        </div>
+                        <div id="oracle-pick"
+                            class="text-4xl font-black text-white bg-yellow-600/20 px-4 py-2 rounded border border-yellow-600/50 inline-block drop-shadow-lg">
+                            ...
+                        </div>
+                        <div id="oracle-confidence" class="text-green-400 font-mono text-sm mt-2 font-bold">
+                            GÜVEN: %...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Data Table -->
             <div class="bg-panel border border-border rounded shadow-2xl">
                 <table class="w-full data-table">
@@ -416,6 +453,75 @@
             document.getElementById('btn-basketball').className = s === 'basketball' ? 'text-white hover:text-accent opacity-100' : 'text-muted hover:text-white opacity-50';
             renderTable();
             fetchData();
+        }
+
+        function setView(view) {
+            currentView = view;
+
+            // Tab Styles
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active', 'bg-gray-800', 'text-white');
+                b.classList.add('text-gray-400');
+            });
+            const activeBtn = document.getElementById(`tab-${view}`);
+            activeBtn.classList.add('active', 'bg-gray-800', 'text-white');
+            activeBtn.classList.remove('text-gray-400');
+
+            renderTable();
+        }
+
+        // --- ORACLE LOGIC ---
+        function findOraclePick(matches) {
+            if (!matches || matches.length === 0) return;
+
+            // Sort by "Stake" percentage if available (finding the "KASA" bets)
+            // Or fallback to highest Win Probability
+
+            let candidates = matches.filter(m => m.recommendation && !m.recommendation.includes("PAS"));
+
+            if (candidates.length === 0) candidates = matches;
+
+            // Score Logic: 
+            // 1. Prioritize "KASA" (Stake > 10%)
+            // 2. Then by raw Probability
+
+            candidates.sort((a, b) => {
+                const getStake = (str) => {
+                    const match = str.match(/STAKE %([\d\.]+)/);
+                    return match ? parseFloat(match[1]) : 0;
+                };
+                const stakeA = a.recommendation ? getStake(a.recommendation) : 0;
+                const stakeB = b.recommendation ? getStake(b.recommendation) : 0;
+                return stakeB - stakeA; // Descending
+            });
+
+            const best = candidates[0];
+            if (best) {
+                const box = document.getElementById('oracle-box');
+                const matchTitle = document.getElementById('oracle-match');
+                const leagueTitle = document.getElementById('oracle-league');
+                const timeTitle = document.getElementById('oracle-time');
+                const pickTitle = document.getElementById('oracle-pick');
+                const confTitle = document.getElementById('oracle-confidence');
+
+                box.classList.remove('hidden');
+
+                matchTitle.innerText = `${best.home} vs ${best.away}`;
+                leagueTitle.innerText = best.league;
+                timeTitle.innerText = best.time;
+
+                // Parse Pick clean
+                let cleanPick = best.recommendation.replace("💎 KASA:", "").replace(/\[.*?\]/, "").trim();
+                if (cleanPick.length > 15) cleanPick = cleanPick.substring(0, 15) + "..";
+
+                pickTitle.innerText = cleanPick;
+
+                // Extract stake for confidence display
+                const match = best.recommendation.match(/STAKE %([\d\.]+)/);
+                const stakeVal = match ? match[1] : 0;
+
+                confTitle.innerText = `GÜVEN SKORU: ${parseInt(stakeVal * 10)} / 1000`; // Dramatic score
+            }
         }
 
         function setView(v) {
@@ -724,6 +830,7 @@
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
                 populateFilters();
+                findOraclePick(matches); // <-- NEW: Find the banker
                 renderTable();
             } catch (e) {
                 console.error(e);
