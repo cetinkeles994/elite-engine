@@ -34,6 +34,7 @@ class MatchChatBot:
         num_match = re.search(r'(\d+)\s*(adet|tane|maç)?', q)
         if num_match:
             try:
+                # Avoid confusing "1.5" with limit 1 or 5
                 val = int(num_match.group(1))
                 if 0 < val < 20: filters['limit'] = val
             except: pass
@@ -42,16 +43,26 @@ class MatchChatBot:
 
         # 2. EXTRACT INTENT / TYPE
         # Over/Under
-        if "üst" in q or "over" in q:
-            if "1.5" in q: filters['type'] = "over_1_5"
-            elif "3.5" in q: filters['type'] = "over_3_5"
-            else: filters['type'] = "over_2_5" # Default "üst" = 2.5
-        elif "alt" in q or "under" in q:
-            filters['type'] = "under_2_5"
+        # "1.5 bitmeye" -> Implies Goal expectation (Over)
+        
+        is_under = "alt" in q or "under" in q
+        is_over = "üst" in q or "over" in q or "yüksek" in q or "gol" in q or "bitmeye" in q
+        
+        if "1.5" in q:
+            filters['type'] = "under_1_5" if is_under else "over_1_5"
+        elif "2.5" in q:
+             filters['type'] = "under_2_5" if is_under else "over_2_5"
+        elif "3.5" in q:
+             filters['type'] = "under_3_5" if is_under else "over_3_5"
+        elif is_over:
+             # Generic "üst" or "gol" without number -> Default 2.5
+             filters['type'] = "over_2_5"
+        elif is_under:
+             filters['type'] = "under_2_5"
         
         # BTTS (KG)
         elif "kg var" in q or "karşılıklı gol" in q: filters['type'] = "btts_yes"
-        elif "kg yok" in q: filters['type'] = "btts_no"
+        elif "kg yok" in q or "karşılıklı" in q: filters['type'] = "btts_no" # Catch 'karşılıklı yok'
 
         # Side (Home/Away/Banko)
         elif "banko" in q or "güvenilir" in q or "en iyi" in q:
@@ -65,10 +76,6 @@ class MatchChatBot:
         elif "ev sahibi" in q or "ms 1" in q: filters['type'] = "home_win"
         elif "deplasman" in q or "ms 2" in q: filters['type'] = "away_win"
         
-        # Specific Teams
-        # (Basic implementation: check if query contains known team names?)
-        # For now, we focus on filtering types.
-
         return filters
 
     def execute(self, query):
@@ -106,7 +113,9 @@ class MatchChatBot:
             # 3. BTTS
             elif filters['type'] == 'btts_yes':
                 if "KG VAR" not in ps.get('best_goal_pick', ''): continue
-            
+            elif filters['type'] == 'btts_no':
+                if "KG YOK" not in ps.get('best_goal_pick', ''): continue
+
             # 4. Surprise
             elif filters['type'] == 'surprise':
                 # Look for odds > 2.00
@@ -156,6 +165,13 @@ class MatchChatBot:
             m = item['match']
             ps = m.get('pro_stats', {})
             
+            # Decide what to show in the badge
+            # If user asked for GOALS, show the GOAL PICK
+            display_pick = m['recommendation'].replace('💎 KASA:', '').replace('🔥 BANKO:', '')
+            
+            if 'over' in filters['type'] or 'under' in filters['type'] or 'btts' in filters['type']:
+                display_pick = ps.get('best_goal_pick', display_pick)
+
             # Mini Card Design
             card = f"""
             <div class="chat-card bg-gray-800 p-2 rounded mb-2 border border-gray-700 hover:border-blue-500 cursor-pointer transition-colors" onclick="openModalMatch('{m['id']}')">
@@ -165,7 +181,7 @@ class MatchChatBot:
                 </div>
                 <div class="font-bold text-sm text-white">{m['home']} vs {m['away']}</div>
                 <div class="mt-1 flex gap-2 text-xs">
-                    <span class="px-1 bg-blue-900 rounded text-blue-200">Tahmin: {m['recommendation'].replace('💎 KASA:', '').replace('🔥 BANKO:', '')}</span>
+                    <span class="px-1 bg-blue-900 rounded text-blue-200">Tahmin: {display_pick}</span>
                     <span class="px-1 bg-gray-700 rounded text-gray-300">Oran: {m['odds']['home']} - {m['odds']['away']}</span>
                 </div>
             </div>
