@@ -42,6 +42,12 @@ class MatchChatBot:
         if "tek maç" in q: filters['limit'] = 1
 
         # 2. EXTRACT INTENT / TYPE
+        # "en gollü" -> high goal expectation (Sort by goals)
+        if "en gollü" in q or "bol gollü" in q:
+            filters['type'] = 'high_goals'
+            filters['sort'] = 'goals_desc'
+            return filters
+
         # Over/Under
         # "1.5 bitmeye" -> Implies Goal expectation (Over)
         
@@ -102,21 +108,26 @@ class MatchChatBot:
             # 2. Over/Under
             elif filters['type'].startswith('over_'):
                 pick = ps.get('best_goal_pick', '')
-                if filters['type'] == 'over_2_5' and "2.5 ÜST" not in pick: continue
-                if filters['type'] == 'over_1_5' and "1.5 ÜST" not in pick: continue
-                if filters['type'] == 'over_3_5' and "3.5 ÜST" not in pick: continue
+                if filters['type'] == 'over_1_5' and ("1.5 ÜST" in pick or "2.5 ÜST" in pick or "3.5 ÜST" in pick): pass
+                elif filters['type'] == 'over_2_5' and ("2.5 ÜST" in pick or "3.5 ÜST" in pick): pass
+                elif filters['type'] == 'over_3_5' and "3.5 ÜST" in pick: pass
+                else: continue
             
             elif filters['type'].startswith('under_'):
                  pick = ps.get('best_goal_pick', '')
                  if "ALT" not in pick: continue
+            
+            # 3. High Goals (Sort only, weak filter)
+            elif filters['type'] == 'high_goals':
+                if ps.get('total_goals_prediction', 0) < 2.0: continue
 
-            # 3. BTTS
+            # 4. BTTS
             elif filters['type'] == 'btts_yes':
                 if "KG VAR" not in ps.get('best_goal_pick', ''): continue
             elif filters['type'] == 'btts_no':
                 if "KG YOK" not in ps.get('best_goal_pick', ''): continue
 
-            # 4. Surprise
+            # 5. Surprise
             elif filters['type'] == 'surprise':
                 # Look for odds > 2.00
                 try:
@@ -125,7 +136,7 @@ class MatchChatBot:
                     if h_o < 2.0 and a_o < 2.0: continue
                 except: continue
 
-            # 5. Side
+            # 6. Side
             elif filters['type'] == 'home_win':
                 if "MS 1" not in rec: continue
             elif filters['type'] == 'away_win':
@@ -135,12 +146,13 @@ class MatchChatBot:
             # Calculate a "Score" for sorting
             score = 0
             
-            # Use Reliability/Confidence
-            if "KASA" in rec: score += 100
-            elif "BANKO" in rec: score += 80
-            
-            # Goal Prob
-            score += ps.get('best_goal_prob', 50)
+            if filters.get('sort') == 'goals_desc':
+                score = ps.get('total_goals_prediction', 0)
+            else:
+                # Use Reliability/Confidence
+                if "KASA" in rec: score += 100
+                elif "BANKO" in rec: score += 80
+                score += ps.get('best_goal_prob', 50)
             
             results.append({
                 'match': m,
@@ -166,6 +178,8 @@ class MatchChatBot:
 
         if ft == 'banko':
             prefix = f"Analizlerime göre, risk oranı en düşük ve kazanma ihtimali en yüksek {count} banko maç:"
+        elif ft == 'high_goals':
+            prefix = f"İstatistiklere göre gol yağmuru beklediğim (En Yüksek Gol Beklentisi) {count} maç:"
         elif ft == 'over_1_5':
             prefix = f"İstatistiklere baktığımda, en az 2 gol (1.5 Üst) beklediğim {count} karşılaşma şöyle:"
         elif ft == 'over_2_5':
