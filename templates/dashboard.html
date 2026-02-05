@@ -447,6 +447,7 @@
         let lastData = [];
         let filterDate = 'all';
         let filterLeague = 'all';
+        let chatSessionId = Date.now() + "_" + Math.floor(Math.random() * 1000);
 
         // --- CHAT LOGIC ---
         function toggleChat() {
@@ -480,7 +481,10 @@
                 const res = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: msg })
+                    body: JSON.stringify({
+                        message: msg,
+                        sessionId: chatSessionId
+                    })
                 });
                 const data = await res.json();
 

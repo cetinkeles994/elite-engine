@@ -5,6 +5,7 @@ class MatchChatBot:
     def __init__(self, cache_file="matches_cache.json"):
         self.cache_file = cache_file
         self.matches = []
+        self.sessions = {} # Memory: sessionId -> last_filters
         self.load_data()
 
     def load_data(self):
@@ -16,18 +17,43 @@ class MatchChatBot:
             print(f"ChatBot Load Error: {e}")
             self.matches = []
 
-    def parse_query(self, query):
+    def parse_query(self, query, last_filters=None):
         """
         Parses Turkish natural language query.
-        Returns filters dict: { 'limit': 5, 'type': 'over_2_5', 'sort': 'confidence' }
+        Returns filters dict: { 'limit': 3, 'type': 'any', 'sort': 'confidence', 'league': 'all' }
         """
         q = query.lower()
+        
+        # Determine if this is a follow-up / context query
+        is_follow_up = False
+        follow_up_keywords = ["peki", "peki ya", "sadece", "bunlardan", "bunların içinden", "hangileri", "başka"]
+        if any(w in q for w in follow_up_keywords) and last_filters:
+            is_follow_up = True
+
         filters = {
-            'limit': 3, # Default
+            'limit': 3,
             'type': 'any',
-            'sort': 'confidence', # Default sort by AI confidence
-            'min_prob': 0
+            'sort': 'confidence',
+            'min_prob': 0,
+            'league': 'all'
         }
+
+        # If follow-up, inherit previous filters
+        if is_follow_up:
+            filters.update(last_filters)
+            # If "sadece" is used, we are likely refining by league
+            if "sadece" in q:
+                # Basic league detection (extendable)
+                leagues = {
+                    "ingiltere": "Premier League",
+                    "türkiye": "Trendyol Süper Lig",
+                    "ispanya": "LaLiga",
+                    "almanya": "Bundesliga",
+                    "italya": "Serie A",
+                    "fransa": "Ligue 1"
+                }
+                for k, v in leagues.items():
+                    if k in q: filters['league'] = v
 
         # 1. EXTRACT LIMIT (e.g. "5 tane", "top 10", "tek maç")
         # Look for numbers
@@ -84,9 +110,18 @@ class MatchChatBot:
         
         return filters
 
-    def execute(self, query):
+    def execute(self, query, session_id=None):
         self.load_data() # Refresh cache
-        filters = self.parse_query(query)
+        
+        last_filters = None
+        if session_id and session_id in self.sessions:
+            last_filters = self.sessions[session_id].get('last_filters')
+            
+        filters = self.parse_query(query, last_filters)
+        
+        # Save context
+        if session_id:
+            self.sessions[session_id] = {'last_filters': filters}
         
         results = []
 
@@ -141,6 +176,10 @@ class MatchChatBot:
                 if "MS 1" not in rec: continue
             elif filters['type'] == 'away_win':
                 if "MS 2" not in rec: continue
+
+            # 7. League Filter
+            if filters.get('league') != 'all':
+                if filters['league'].lower() not in m.get('league', '').lower(): continue
 
             # ADD TO RESULTS
             # Calculate a "Score" for sorting

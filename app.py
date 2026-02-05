@@ -55,10 +55,12 @@ chatbot = MatchChatBot()
 def api_chat():
     data = request.json
     message = data.get('message', '')
+    session_id = data.get('sessionId', 'default') # Support session tracking
+    
     if not message:
         return jsonify({'response': "Lütfen bir şeyler yazın."})
     
-    response_html = chatbot.execute(message)
+    response_html = chatbot.execute(message, session_id=session_id)
     return jsonify({'response': response_html})
 
 if __name__ == '__main__':
