@@ -1202,7 +1202,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             f"• Deplasman: %{int(sim_data['away_win_prob'])}\n"
                             f"• Beraberlik: %{int(sim_data['draw_prob'])}\n"
                             f"• 1.5 Üst: %{int(sim_data.get('over_1_5_prob', 0))}\n"
-                            f"• 2.5 Üst: %{int(sim_data['over_2_5_prob'])}"
+                            f"• 2.5 Üst: %{int(sim_data['over_2_5_prob'])}\n"
+                            f"• KG Var: %{int(sim_data.get('btts_prob', 0))}"
                         )
                         
                         if 'reasoning' not in match: match['reasoning'] = ""
