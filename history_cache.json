@@ -15,14 +15,14 @@
         },
         "fair_odds_home": 2.61,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.71'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%20.8\n🎯 Hedef Oran: 1.64 | Alınan: 2.49 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %26\n• Deplasman: %55\n• Beraberlik: %18\n• 1.5 Üst: %91\n• 2.5 Üst: %79",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.71'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%20.8\n🎯 Hedef Oran: 1.64 | Alınan: 2.49 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %25\n• Deplasman: %57\n• Beraberlik: %16\n• 1.5 Üst: %92\n• 2.5 Üst: %80\n• KG Var: %74",
         "recommendation": "💎 KASA: MS 2 [STAKE %8.7]",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.7,
-            "away_goals": 2.53,
-            "total_goals_prediction": 4.24,
-            "over_2_5_prob": 79,
+            "home_goals": 1.72,
+            "away_goals": 2.56,
+            "total_goals_prediction": 4.28,
+            "over_2_5_prob": 80,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -31,25 +31,25 @@
             "home_win_rate": 0.34782608695652173,
             "away_win_rate": 0.6086956521739131,
             "best_goal_pick": "1.5 ÜST",
-            "best_goal_prob": 91,
+            "best_goal_prob": 92,
             "score_pred_home": 1,
             "score_pred_away": 2,
             "sim_details": {
-                "home_win_prob": 26.900000000000002,
-                "away_win_prob": 55.1,
-                "draw_prob": 18.0,
-                "btts_prob": 74.6,
-                "over_2_5_prob": 79.80000000000001,
-                "over_1_5_prob": 91.60000000000001,
-                "over_3_5_prob": 61.9,
-                "over_0_5_prob": 98.0,
+                "home_win_prob": 25.7,
+                "away_win_prob": 57.8,
+                "draw_prob": 16.5,
+                "btts_prob": 74.8,
+                "over_2_5_prob": 80.80000000000001,
+                "over_1_5_prob": 92.5,
+                "over_3_5_prob": 60.4,
+                "over_0_5_prob": 98.7,
                 "mode_score_home": 1,
                 "mode_score_away": 2,
-                "mode_score_prob": 7.3,
+                "mode_score_prob": 8.0,
                 "top_scores": [
                     {
                         "score": "1-2",
-                        "prob": 7
+                        "prob": 8
                     },
                     {
                         "score": "1-3",
@@ -103,14 +103,14 @@
         },
         "fair_odds_home": 3.41,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.17'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%39.2\n🎯 Hedef Oran: 1.43 | Alınan: 3.25 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %49\n• Deplasman: %24\n• Beraberlik: %26\n• 1.5 Üst: %80\n• 2.5 Üst: %59",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.17'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%39.2\n🎯 Hedef Oran: 1.43 | Alınan: 3.25 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %51\n• Deplasman: %25\n• Beraberlik: %23\n• 1.5 Üst: %81\n• 2.5 Üst: %57\n• KG Var: %60",
         "recommendation": "💎 KASA: MS 2 [STAKE %14.2]",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.83,
-            "away_goals": 1.29,
-            "total_goals_prediction": 3.13,
-            "over_2_5_prob": 59,
+            "home_goals": 1.81,
+            "away_goals": 1.3,
+            "total_goals_prediction": 3.1,
+            "over_2_5_prob": 57,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -119,33 +119,33 @@
             "home_win_rate": 0.26666666666666666,
             "away_win_rate": 0.03333333333333333,
             "best_goal_pick": "1.5 ÜST",
-            "best_goal_prob": 80,
+            "best_goal_prob": 81,
             "score_pred_home": 1,
             "score_pred_away": 1,
             "sim_details": {
-                "home_win_prob": 49.7,
-                "away_win_prob": 24.2,
-                "draw_prob": 26.1,
-                "btts_prob": 62.6,
-                "over_2_5_prob": 59.4,
-                "over_1_5_prob": 80.80000000000001,
-                "over_3_5_prob": 37.0,
-                "over_0_5_prob": 93.30000000000001,
+                "home_win_prob": 51.1,
+                "away_win_prob": 25.900000000000002,
+                "draw_prob": 23.0,
+                "btts_prob": 60.699999999999996,
+                "over_2_5_prob": 57.3,
+                "over_1_5_prob": 81.3,
+                "over_3_5_prob": 37.8,
+                "over_0_5_prob": 96.8,
                 "mode_score_home": 1,
                 "mode_score_away": 1,
-                "mode_score_prob": 11.4,
+                "mode_score_prob": 11.899999999999999,
                 "top_scores": [
                     {
                         "score": "1-1",
                         "prob": 11
                     },
                     {
-                        "score": "2-1",
-                        "prob": 10
+                        "score": "1-0",
+                        "prob": 9
                     },
                     {
-                        "score": "1-0",
-                        "prob": 7
+                        "score": "2-1",
+                        "prob": 8
                     }
                 ]
             },
@@ -191,14 +191,14 @@
         },
         "fair_odds_home": 1.7,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %49\n• Deplasman: %23\n• Beraberlik: %26\n• 1.5 Üst: %78\n• 2.5 Üst: %56",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %47\n• Deplasman: %29\n• Beraberlik: %22\n• 1.5 Üst: %82\n• 2.5 Üst: %61\n• KG Var: %61",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.79,
-            "away_goals": 1.27,
-            "total_goals_prediction": 3.06,
-            "over_2_5_prob": 56,
+            "home_goals": 1.78,
+            "away_goals": 1.29,
+            "total_goals_prediction": 3.07,
+            "over_2_5_prob": 61,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -206,33 +206,33 @@
             "away_points_pred": 0,
             "home_win_rate": 0.5333333333333333,
             "away_win_rate": 0.36666666666666664,
-            "best_goal_pick": "GOL ANALİZ",
-            "best_goal_prob": 50,
+            "best_goal_pick": "1.5 ÜST",
+            "best_goal_prob": 82,
             "score_pred_home": 1,
             "score_pred_away": 1,
             "sim_details": {
-                "home_win_prob": 49.7,
-                "away_win_prob": 23.799999999999997,
-                "draw_prob": 26.5,
-                "btts_prob": 58.3,
-                "over_2_5_prob": 56.8,
-                "over_1_5_prob": 78.8,
-                "over_3_5_prob": 37.2,
-                "over_0_5_prob": 94.0,
+                "home_win_prob": 47.9,
+                "away_win_prob": 29.4,
+                "draw_prob": 22.7,
+                "btts_prob": 61.0,
+                "over_2_5_prob": 61.4,
+                "over_1_5_prob": 82.39999999999999,
+                "over_3_5_prob": 38.4,
+                "over_0_5_prob": 96.39999999999999,
                 "mode_score_home": 1,
                 "mode_score_away": 1,
-                "mode_score_prob": 11.1,
+                "mode_score_prob": 9.8,
                 "top_scores": [
                     {
                         "score": "1-1",
-                        "prob": 11
-                    },
-                    {
-                        "score": "1-0",
-                        "prob": 8
+                        "prob": 9
                     },
                     {
                         "score": "2-1",
+                        "prob": 8
+                    },
+                    {
+                        "score": "1-0",
                         "prob": 8
                     }
                 ]
@@ -279,14 +279,14 @@
         },
         "fair_odds_home": 3.51,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.65'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%41.1\n🎯 Hedef Oran: 1.41 | Alınan: 3.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %48\n• Deplasman: %28\n• Beraberlik: %22\n• 1.5 Üst: %80\n• 2.5 Üst: %58",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.65'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%41.1\n🎯 Hedef Oran: 1.41 | Alınan: 3.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %48\n• Deplasman: %26\n• Beraberlik: %25\n• 1.5 Üst: %80\n• 2.5 Üst: %56\n• KG Var: %57",
         "recommendation": "💎 KASA: MS 2 [STAKE %14.7]",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.82,
-            "away_goals": 1.29,
-            "total_goals_prediction": 3.11,
-            "over_2_5_prob": 58,
+            "home_goals": 1.75,
+            "away_goals": 1.25,
+            "total_goals_prediction": 3.01,
+            "over_2_5_prob": 56,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -296,31 +296,31 @@
             "away_win_rate": 0.5,
             "best_goal_pick": "1.5 ÜST",
             "best_goal_prob": 80,
-            "score_pred_home": 2,
+            "score_pred_home": 1,
             "score_pred_away": 1,
             "sim_details": {
-                "home_win_prob": 48.9,
-                "away_win_prob": 28.4,
-                "draw_prob": 22.7,
-                "btts_prob": 60.5,
-                "over_2_5_prob": 58.599999999999994,
-                "over_1_5_prob": 80.5,
-                "over_3_5_prob": 37.9,
-                "over_0_5_prob": 94.69999999999999,
-                "mode_score_home": 2,
+                "home_win_prob": 48.199999999999996,
+                "away_win_prob": 26.8,
+                "draw_prob": 25.0,
+                "btts_prob": 57.3,
+                "over_2_5_prob": 56.3,
+                "over_1_5_prob": 80.10000000000001,
+                "over_3_5_prob": 34.300000000000004,
+                "over_0_5_prob": 95.6,
+                "mode_score_home": 1,
                 "mode_score_away": 1,
-                "mode_score_prob": 9.700000000000001,
+                "mode_score_prob": 12.7,
                 "top_scores": [
                     {
                         "score": "1-1",
-                        "prob": 10
-                    },
-                    {
-                        "score": "2-1",
-                        "prob": 9
+                        "prob": 12
                     },
                     {
                         "score": "1-0",
+                        "prob": 8
+                    },
+                    {
+                        "score": "2-0",
                         "prob": 8
                     }
                 ]
@@ -365,13 +365,13 @@
         },
         "fair_odds_home": 2.27,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n\n🤖 YAPAY ZEKA UYARISI (%17). Model bu maça güvenmiyor.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %48\n• Deplasman: %26\n• Beraberlik: %24\n• 1.5 Üst: %80\n• 2.5 Üst: %57",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n\n🤖 YAPAY ZEKA UYARISI (%17). Model bu maça güvenmiyor.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %49\n• Deplasman: %27\n• Beraberlik: %23\n• 1.5 Üst: %79\n• 2.5 Üst: %57\n• KG Var: %57",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.81,
-            "away_goals": 1.24,
-            "total_goals_prediction": 3.05,
+            "home_goals": 1.8,
+            "away_goals": 1.2,
+            "total_goals_prediction": 3.0,
             "over_2_5_prob": 57,
             "cards_prediction": 0,
             "corners_prediction": 0,
@@ -380,33 +380,33 @@
             "away_points_pred": 0,
             "home_win_rate": 0.4,
             "away_win_rate": 0.2,
-            "best_goal_pick": "1.5 ÜST",
-            "best_goal_prob": 80,
+            "best_goal_pick": "GOL ANALİZ",
+            "best_goal_prob": 50,
             "score_pred_home": 1,
-            "score_pred_away": 1,
+            "score_pred_away": 0,
             "sim_details": {
-                "home_win_prob": 48.699999999999996,
-                "away_win_prob": 26.700000000000003,
-                "draw_prob": 24.6,
-                "btts_prob": 57.699999999999996,
-                "over_2_5_prob": 57.8,
-                "over_1_5_prob": 80.30000000000001,
-                "over_3_5_prob": 36.199999999999996,
-                "over_0_5_prob": 94.8,
+                "home_win_prob": 49.4,
+                "away_win_prob": 27.6,
+                "draw_prob": 23.0,
+                "btts_prob": 57.99999999999999,
+                "over_2_5_prob": 57.099999999999994,
+                "over_1_5_prob": 79.60000000000001,
+                "over_3_5_prob": 35.6,
+                "over_0_5_prob": 94.3,
                 "mode_score_home": 1,
-                "mode_score_away": 1,
-                "mode_score_prob": 11.1,
+                "mode_score_away": 0,
+                "mode_score_prob": 9.8,
                 "top_scores": [
                     {
                         "score": "1-1",
-                        "prob": 11
+                        "prob": 10
                     },
                     {
                         "score": "1-0",
-                        "prob": 8
+                        "prob": 9
                     },
                     {
-                        "score": "2-1",
+                        "score": "2-0",
                         "prob": 8
                     }
                 ]
@@ -418,7 +418,7 @@
             "data_source": "SofaScore + Elite Eng v2"
         },
         "result": "skipped",
-        "goal_pick_result": "won",
+        "goal_pick_result": "lost",
         "props_pick_result": "lost",
         "live_details": {
             "goals": 4,
@@ -453,7 +453,7 @@
         },
         "fair_odds_home": 1.2,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %11.58'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.0\n🎯 Hedef Oran: 1.08 | Alınan: 1.15 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %11.58'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.0\n🎯 Hedef Oran: 1.08 | Alınan: 1.15 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 1 [STAKE %11.6]",
         "dropping_odds": null,
         "pro_stats": {
@@ -510,7 +510,7 @@
         },
         "fair_odds_home": 1.78,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -567,7 +567,7 @@
         },
         "fair_odds_home": 1.89,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -624,7 +624,7 @@
         },
         "fair_odds_home": 1.58,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -681,7 +681,7 @@
         },
         "fair_odds_home": 1.44,
         "value_found": false,
-        "reasoning": "Analiz: MS 1 (Güven: %69)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Analiz: MS 1 (Güven: %69)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -738,7 +738,7 @@
         },
         "fair_odds_home": 2.39,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -795,7 +795,7 @@
         },
         "fair_odds_home": 1.5,
         "value_found": false,
-        "reasoning": "Analiz: MS 1 (Güven: %66)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Analiz: MS 1 (Güven: %66)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -852,7 +852,7 @@
         },
         "fair_odds_home": 1.48,
         "value_found": false,
-        "reasoning": "Analiz: MS 1 (Güven: %67)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Analiz: MS 1 (Güven: %67)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -909,7 +909,7 @@
         },
         "fair_odds_home": 1.4,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %6.28'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.4\n🎯 Hedef Oran: 1.23 | Alınan: 1.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %6.28'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.4\n🎯 Hedef Oran: 1.23 | Alınan: 1.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 1 [STAKE %6.3]",
         "dropping_odds": null,
         "pro_stats": {
@@ -968,7 +968,7 @@
         },
         "fair_odds_home": 1.58,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1027,7 +1027,7 @@
         },
         "fair_odds_home": 1.44,
         "value_found": false,
-        "reasoning": "Analiz: MS 1 (Güven: %69)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Analiz: MS 1 (Güven: %69)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -1086,7 +1086,7 @@
         },
         "fair_odds_home": 2.23,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1145,7 +1145,7 @@
         },
         "fair_odds_home": 1.34,
         "value_found": false,
-        "reasoning": "Analiz: MS 1 (Güven: %74)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Analiz: MS 1 (Güven: %74)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -1204,7 +1204,7 @@
         },
         "fair_odds_home": 3.94,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %16.14'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%47.3\n🎯 Hedef Oran: 1.35 | Alınan: 3.75 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %16.14'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%47.3\n🎯 Hedef Oran: 1.35 | Alınan: 3.75 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 2 [STAKE %16.1]",
         "dropping_odds": null,
         "pro_stats": {
@@ -1263,7 +1263,7 @@
         },
         "fair_odds_home": 1.98,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1322,7 +1322,7 @@
         },
         "fair_odds_home": 1.2,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %11.58'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.0\n🎯 Hedef Oran: 1.08 | Alınan: 1.15 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %11.58'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%6.0\n🎯 Hedef Oran: 1.08 | Alınan: 1.15 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 1 [STAKE %11.6]",
         "dropping_odds": null,
         "pro_stats": {
@@ -1381,7 +1381,7 @@
         },
         "fair_odds_home": 3.57,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %9.42'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%26.6\n🎯 Hedef Oran: 1.79 | Alınan: 3.4 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %9.42'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%26.6\n🎯 Hedef Oran: 1.79 | Alınan: 3.4 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 2 [STAKE %9.4]",
         "dropping_odds": null,
         "pro_stats": {
@@ -1440,7 +1440,7 @@
         },
         "fair_odds_home": 3.43,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.77'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%24.3\n🎯 Hedef Oran: 1.82 | Alınan: 3.26 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.77'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%24.3\n🎯 Hedef Oran: 1.82 | Alınan: 3.26 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 2 [STAKE %8.8]",
         "dropping_odds": null,
         "pro_stats": {
@@ -1499,7 +1499,7 @@
         },
         "fair_odds_home": 3.43,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.77'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%24.3\n🎯 Hedef Oran: 1.82 | Alınan: 3.26 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.77'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%24.3\n🎯 Hedef Oran: 1.82 | Alınan: 3.26 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 2 [STAKE %8.8]",
         "dropping_odds": null,
         "pro_stats": {
@@ -1558,7 +1558,7 @@
         },
         "fair_odds_home": 1.75,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1617,7 +1617,7 @@
         },
         "fair_odds_home": 2.39,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1676,7 +1676,7 @@
         },
         "fair_odds_home": 2.3,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1735,7 +1735,7 @@
         },
         "fair_odds_home": 1.16,
         "value_found": true,
-        "reasoning": "SİSTEM MAX GÜVEN: %86 | İstatistiksel Hakimiyet\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "SİSTEM MAX GÜVEN: %86 | İstatistiksel Hakimiyet\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "💎 KASA: MS 1",
         "dropping_odds": null,
         "pro_stats": {
@@ -1794,7 +1794,7 @@
         },
         "fair_odds_home": 1.72,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
@@ -1853,7 +1853,7 @@
         },
         "fair_odds_home": 2.02,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı). | 📉 NEGATİF DEĞER: Bu orandan oynanmaz. Matematiksel kayıp.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %0\n• Deplasman: %0\n• Beraberlik: %0\n• 1.5 Üst: %0\n• 2.5 Üst: %0\n• KG Var: %0",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {

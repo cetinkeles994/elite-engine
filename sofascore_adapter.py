@@ -45,9 +45,15 @@ class SofaScoreAdapter:
             if not isinstance(data, dict): continue
             
             # Check the "name" field or homeTeam/awayTeam fields
-            match_name = data.get('name', '').lower()
-            h_data = data.get('homeTeam', '').lower()
-            a_data = data.get('awayTeam', '').lower()
+            match_name = str(data.get('name', '')).lower()
+            
+            h_data = data.get('homeTeam', '')
+            if isinstance(h_data, dict): h_data = h_data.get('name', '')
+            h_data = str(h_data).lower()
+            
+            a_data = data.get('awayTeam', '')
+            if isinstance(a_data, dict): a_data = a_data.get('name', '')
+            a_data = str(a_data).lower()
             
             # If both teams are in the cached match name or specific fields
             if (home_team in match_name and away_team in match_name) or \

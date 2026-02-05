@@ -19,6 +19,17 @@ if sys.platform == "win32":
 
 # --- PRO STAT ENGINE (The "Math" Brain) ---
 
+def normalize_name(name):
+    if not name: return ""
+    name = name.lower()
+    replacements = {
+        'ı': 'i', 'ü': 'u', 'ö': 'o', 'ş': 's', 'ç': 'c', 'ğ': 'g',
+        'İ': 'i', 'Ü': 'u', 'Ö': 'o', 'Ş': 's', 'Ç': 'c', 'Ğ': 'g'
+    }
+    for k, v in replacements.items():
+        name = name.replace(k, v)
+    return name.strip()
+
 
 class StatEngine:
     def __init__(self):
@@ -407,6 +418,7 @@ def scrape_history():
 
 # --- STANDINGS API UPGRADE (Tier 1 Data) ---
 STANDINGS_CACHE = {}
+TEAM_ID_MAP = {} # Map team names to (id, league_code)
 
 
 def fetch_standings(league_code, sport='soccer'):
@@ -440,6 +452,11 @@ def fetch_standings(league_code, sport='soccer'):
                         if s['name'] == 'points': stats['pts'] = int(s['value'])
                     
                     team_stats.append(stats)
+                    # Cache Team ID for H2H fallback
+                    TEAM_ID_MAP[normalize_name(entry['team']['displayName'])] = (entry['team']['id'], league_code)
+                    # Also cache by shorter name if available
+                    if 'shortDisplayName' in entry['team']:
+                        TEAM_ID_MAP[normalize_name(entry['team']['shortDisplayName'])] = (entry['team']['id'], league_code)
 
             print(f"Loaded Standings for {league_code}: {len(team_stats)} teams")
             STANDINGS_CACHE[league_code] = team_stats
@@ -451,20 +468,16 @@ def fetch_standings(league_code, sport='soccer'):
     return None
 
 def fetch_h2h_data(event_id, home=None, away=None):
-    """
-    Fetches the last 5 H2H matches between home and away teams using SofaScore eventId.
-    If event_id looks like an ESPN ID, attempt to resolve via names.
-    """
     if not event_id: return None
     
-    # Check if this is an ESPN ID (numeric and not in our sofa cache usually > 8 digits or different range)
-    # Actually, SofaScore IDs are also numeric. Better check cache.
     if home and away:
-        adapter = sofa_adapter
-        resolved_id = adapter.get_event_id(home, away)
-        if resolved_id:
-            event_id = resolved_id
-            print(f"H2H Resolution: Resolved {home} vs {away} -> {event_id}")
+        try:
+            adapter = sofa_adapter
+            resolved_id = adapter.get_event_id(home, away)
+            if resolved_id:
+                event_id = resolved_id
+        except Exception:
+            pass
     
     url = f"https://api.sofascore.com/api/v1/event/{event_id}/h2h"
     headers = {
@@ -481,7 +494,6 @@ def fetch_h2h_data(event_id, home=None, away=None):
             matches_raw = data.get('events', [])
             h2h_list = []
             
-            # Get up to 5 most recent
             for m in matches_raw[:5]:
                 dt = datetime.fromtimestamp(m.get('startTimestamp', 0)).strftime("%d.%m.%Y")
                 h_name = m.get('homeTeam', {}).get('name', '???')
@@ -496,8 +508,64 @@ def fetch_h2h_data(event_id, home=None, away=None):
                     'score': f"{h_score}-{a_score}"
                 })
             return h2h_list
+    except Exception:
+        pass
+    
+    # --- ESPN FALLBACK ---
+    try:
+        h_norm = normalize_name(home)
+        a_norm = normalize_name(away)
+        h_info = None
+        
+        for name, info in TEAM_ID_MAP.items():
+            if h_norm == name or h_norm in name or name in h_norm:
+                h_info = info; break
+        
+        if h_info:
+            t_id, l_code = h_info
+            sport = 'soccer' 
+            url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{l_code}/teams/{t_id}/schedule"
+            res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
+            if res.status_code == 200:
+                data = res.json()
+                events = data.get('events', [])
+                h2h_list = []
+                for e in events:
+                    comps = e.get('competitions', [{}])
+                    competitors = comps[0].get('competitors', [])
+                    if len(competitors) < 2: continue
+                    
+                    # Check if score exists (means it's a past match)
+                    h_team = next((c for c in competitors if c['homeAway'] == 'home'), {})
+                    a_team = next((c for c in competitors if c['homeAway'] == 'away'), {})
+                    
+                    h_score = h_team.get('score', {}).get('displayValue')
+                    a_score = a_team.get('score', {}).get('displayValue')
+                    
+                    if h_score is None or a_score is None: continue
+
+                    # Look for opponent
+                    opp = next((c for c in competitors if c['id'] != t_id), None)
+                    if not opp: continue
+                    
+                    opp_norm = normalize_name(opp.get('team', {}).get('displayName', ''))
+                    if a_norm in opp_norm or opp_norm in a_norm:
+                        dt_raw = e.get('date', '')[:10]
+                        dt = datetime.strptime(dt_raw, "%Y-%m-%d").strftime("%d.%m.%Y") if dt_raw else "???"
+                        
+                        h2h_list.append({
+                            'date': dt,
+                            'home': h_team.get('team', {}).get('displayName', '???'),
+                            'away': a_team.get('team', {}).get('displayName', '???'),
+                            'score': f"{h_score}-{a_score}"
+                        })
+                
+                if h2h_list:
+                    h2h_list.sort(key=lambda x: datetime.strptime(x['date'], "%d.%m.%Y"), reverse=True)
+                    return h2h_list[:5]
     except Exception as e:
-        print(f"H2H Error for {event_id}: {e}")
+        print(f"H2H ESPN Fallback Error: {e}")
+
     return None
 
 

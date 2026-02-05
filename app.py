@@ -71,7 +71,9 @@ def api_standings(league_code):
 
 @app.route('/api/h2h/<event_id>')
 def api_h2h(event_id):
-    data = scraper_engine.fetch_h2h_data(event_id)
+    home = request.args.get('home')
+    away = request.args.get('away')
+    data = scraper_engine.fetch_h2h_data(event_id, home=home, away=away)
     return jsonify(data)
 
 if __name__ == '__main__':
