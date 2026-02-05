@@ -119,6 +119,128 @@
             font-size: 10px;
             font-family: monospace;
         }
+
+        /* CHAT WIDGET STYLES */
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #00ff41;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #000;
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: #101010;
+            border: 1px solid #333;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .chat-window.open {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .chat-header {
+            background: #1a1a1a;
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .chat-input-area {
+            padding: 10px;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            line-height: 1.4;
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: #333;
+            color: #fff;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: #112;
+            border: 1px solid #224;
+            color: #e0e0e0;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .chat-card:hover {
+            border-color: #00ff41;
+        }
+
+        .chat-response-header {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 6px;
+            padding-left: 2px;
+        }
     </style>
 </head>
 
@@ -292,12 +414,97 @@
         </div>
     </div>
 
+    <!-- CHAT WIDGET -->
+    <div id="chat-btn" class="chat-widget-btn" onclick="toggleChat()">
+        💬
+    </div>
+
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <div class="font-bold text-accent text-sm">🤖 FUTBOL GPT</div>
+            <button onclick="toggleChat()" class="text-gray-500 hover:text-white">✕</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="chat-msg bot">
+                Merhaba! Ben Yapay Zeka Analistiyim.<br>
+                Bana istediğini sorabilirsin. Örnek:<br>
+                <span class="text-accent text-xs">"En banko 3 maç hangisi?"</span><br>
+                <span class="text-accent text-xs">"2.5 Üst bitecek maçlar"</span>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input"
+                class="flex-1 bg-black border border-gray-700 rounded px-3 py-2 text-sm text-white focus:border-accent outline-none"
+                placeholder="Bir soru sor..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendChat()"
+                class="bg-accent text-black font-bold px-3 py-2 rounded text-sm hover:bg-green-400">➤</button>
+        </div>
+    </div>
+
     <script>
         let currentSport = 'soccer';
         let currentView = 'main'; // main, goals, props
         let lastData = [];
         let filterDate = 'all';
         let filterLeague = 'all';
+
+        // --- CHAT LOGIC ---
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            win.classList.toggle('open');
+            if (win.classList.contains('open')) {
+                document.getElementById('chat-input').focus();
+            }
+        }
+
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChat();
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            // Add User Message
+            const body = document.getElementById('chat-body');
+            body.innerHTML += `<div class="chat-msg user">${msg}</div>`;
+            input.value = '';
+            body.scrollTop = body.scrollHeight; // Auto scroll
+
+            // Show Thinking...
+            const loadingId = 'loading-' + Date.now();
+            body.innerHTML += `<div id="${loadingId}" class="chat-msg bot text-gray-500 animate-pulse">...</div>`;
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const data = await res.json();
+
+                // Remove Loading
+                document.getElementById(loadingId).remove();
+
+                // Add Bot Response
+                body.innerHTML += `<div class="chat-msg bot">${data.response}</div>`;
+                body.scrollTop = body.scrollHeight;
+
+            } catch (e) {
+                console.error(e);
+                document.getElementById(loadingId).remove();
+                body.innerHTML += `<div class="chat-msg bot text-red-500">Hata oluştu. Tekrar deneyin.</div>`;
+            }
+        }
+
+        // Bridge function for opening modal from chat (needs to handle find match index)
+        function openModalMatch(matchId) {
+            // Find index in lastData
+            const idx = lastData.findIndex(m => m.id === matchId);
+            if (idx >= 0) openModal(idx);
+            else alert("Bu maç şu anki görünümde yüklü değil, Ana Tablo'ya geçin.");
+        }
 
         function setFilter(type, val) {
             if (type === 'date') filterDate = val;

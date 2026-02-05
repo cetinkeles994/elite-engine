@@ -48,5 +48,18 @@ def api_history():
         matches = [m for m in matches if m.get('sport') == sport_filter]
     return jsonify(matches)
 
+from ai_chat import MatchChatBot
+chatbot = MatchChatBot()
+
+@app.route('/api/chat', methods=['POST'])
+def api_chat():
+    data = request.json
+    message = data.get('message', '')
+    if not message:
+        return jsonify({'response': "Lütfen bir şeyler yazın."})
+    
+    response_html = chatbot.execute(message)
+    return jsonify({'response': response_html})
+
 if __name__ == '__main__':
     app.run(debug=True)
