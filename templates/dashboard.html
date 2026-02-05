@@ -543,7 +543,6 @@
                 const box = document.getElementById('oracle-box');
                 const matchTitle = document.getElementById('oracle-match');
                 const leagueTitle = document.getElementById('oracle-league');
-                const timeTitle = document.getElementById('oracle-time');
                 const pickTitle = document.getElementById('oracle-pick');
                 const confTitle = document.getElementById('oracle-confidence');
 
@@ -551,17 +550,20 @@
 
                 matchTitle.innerText = `${best.home} vs ${best.away}`;
                 leagueTitle.innerText = best.league;
-                timeTitle.innerText = best.time;
 
                 // Parse Pick clean
-                let cleanPick = best.recommendation.replace("💎 KASA:", "").replace(/\[.*?\]/, "").trim();
-                if (cleanPick.length > 15) cleanPick = cleanPick.substring(0, 15) + "..";
+                let cleanPick = best.recommendation.replace("💎 KASA:", "").replace("🔥 BANKO:", "").replace(/\[.*?\]/, "").trim();
+
+                // FALLBACK: If regex kills the string (e.g. just "MS 1"), keep it raw
+                if (!cleanPick || cleanPick === "" || cleanPick === "...") cleanPick = best.recommendation;
+
+                if (cleanPick.length > 20) cleanPick = cleanPick.substring(0, 20) + "..";
 
                 pickTitle.innerText = cleanPick;
 
                 // Extract stake for confidence display
-                const match = best.recommendation.match(/STAKE %([\d\.]+)/);
-                const stakeVal = match ? match[1] : 0;
+                const matchVal = best.recommendation.match(/STAKE %([\d\.]+)/);
+                const stakeVal = matchVal ? matchVal[1] : 0;
 
                 confTitle.innerText = `GÜVEN SKORU: ${parseInt(stakeVal * 10)} / 1000`; // Dramatic score
             }
@@ -577,15 +579,15 @@
             // Sort by lowest odds (Highest Probability)
             candidates.sort((a, b) => {
                 const getOdds = (m) => {
-                    if (m.recommendation.includes("MS 1")) return parseFloat(m.home_odds);
-                    return parseFloat(m.away_odds);
+                    if (m.recommendation.includes("MS 1")) return parseFloat(m.odds.home);
+                    return parseFloat(m.odds.away);
                 };
                 return getOdds(a) - getOdds(b); // Ascending Odds (1.05 < 1.10)
             });
 
-            const best = candidates[0];
+            const box = document.getElementById('safe-box');
+
             if (best) {
-                const box = document.getElementById('safe-box');
                 const matchTitle = document.getElementById('safe-match');
                 const leagueTitle = document.getElementById('safe-league');
                 const pickTitle = document.getElementById('safe-pick');
@@ -600,10 +602,17 @@
                 pickTitle.innerText = cleanPick;
 
                 // Calc Prob from odds
-                let targetOdds = best.recommendation.includes("MS 1") ? parseFloat(best.home_odds) : parseFloat(best.away_odds);
+                let targetOdds = best.recommendation.includes("MS 1") ? parseFloat(best.odds.home) : parseFloat(best.odds.away);
                 let prob = parseInt((1 / targetOdds) * 100);
 
                 probTitle.innerText = `KAZANMA İHTİMALİ: %${prob}`;
+            } else {
+                // FALLBACK: If no safe pick found
+                box.classList.remove('hidden');
+                document.getElementById('safe-match').innerText = "BU HAFTA BANKO YOK";
+                document.getElementById('safe-league').innerText = "Yüksek Güvenli Maç Bulunamadı";
+                document.getElementById('safe-pick').innerText = "PAS";
+                document.getElementById('safe-prob').innerHTML = `<span class="text-xs text-muted">Sistem bugün için %65 üstü güvenilir maç tespit edemedi.</span>`;
             }
         }
 
@@ -684,16 +693,14 @@
                     <th class="p-3 text-center">YAPAY ZEKA BEKLENTİSİ</th>
                     <th class="p-3 text-center">DEĞER PUANI</th>
                 `;
-            } else if (currentView === 'props') {
-            } else if (currentView === 'trend') {
+            } else if (currentView === 'money') {
                 cols += `
                     <th class="p-3 text-left">LİG & SAAT</th>
-                    <th class="p-3 text-left">TREND KIRAN ADAYI (SÜRPRİZ)</th>
-                    <th class="p-3 text-center">PİYASA ORANI</th>
-                    <th class="p-3 text-center">YAPAY ZEKA BEKLENTİSİ</th>
-                    <th class="p-3 text-center">DEĞER PUANI</th>
+                    <th class="p-3 text-left">DÜŞÜŞ YÖNÜ</th>
+                    <th class="p-3 text-center">BAŞLANGIÇ</th>
+                    <th class="p-3 text-center">GÜNCEL</th>
+                    <th class="p-3 text-center">DEĞİŞİM (%)</th>
                 `;
-            } else if (currentView === 'props') {
             } else if (currentView === 'props') {
                 if (currentSport === 'soccer') {
                     cols += `
@@ -719,6 +726,7 @@
                 if (filterLeague !== 'all' && m.league !== filterLeague) return false;
                 return true;
             });
+
             if (currentView === 'baron') {
                 displayData = lastData.filter(m => m.recommendation && m.recommendation.includes("DÜŞÜYOR"));
                 if (displayData.length === 0) {
@@ -735,24 +743,8 @@
                 // Logic: High Market Odds (>2.00) BUT Good Valid Suggestion (Not PAS)
                 displayData = lastData.filter(m => {
                     if (!m.recommendation || m.recommendation.includes("PAS")) return false;
-                    const homeOdds = parseFloat(m.home_odds);
-                    const awayOdds = parseFloat(m.away_odds);
-                    const pick = m.recommendation.includes("MS 1") ? 1 : (m.recommendation.includes("MS 2") ? 2 : 0);
-
-                    if (pick === 1 && homeOdds > 2.05) return true; // Home Underdog
-                    if (pick === 2 && awayOdds > 2.05) return true; // Away Underdog
-                    return false;
-                });
-                if (displayData.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-muted">Şu an "Trend Kıran" (Yüksek Oranlı Sürpriz) fırsat tespit edilmedi.</td></tr>`;
-                    return;
-                }
-            } else if (currentView === 'trend') {
-                // Logic: High Market Odds (>2.00) BUT Good Valid Suggestion (Not PAS)
-                displayData = lastData.filter(m => {
-                    if (!m.recommendation || m.recommendation.includes("PAS")) return false;
-                    const homeOdds = parseFloat(m.home_odds);
-                    const awayOdds = parseFloat(m.away_odds);
+                    const homeOdds = parseFloat(m.odds.home);
+                    const awayOdds = parseFloat(m.odds.away);
                     const pick = m.recommendation.includes("MS 1") ? 1 : (m.recommendation.includes("MS 2") ? 2 : 0);
 
                     if (pick === 1 && homeOdds > 2.05) return true; // Home Underdog
@@ -841,6 +833,7 @@
                         `;
                     }
 
+                    // RECOMMENDATION BADGE (FIXED SYNTAX)
                     row += `
                         <td class="text-center relative">
                             ${isValue ? `
@@ -872,9 +865,67 @@
                                 '<span class="text-lg text-green-400 opacity-100" title="Yapay Zeka Onaylı">🤖</span>')
                             : ''}
                                     </div>
+                                </div>
                             `}
                         </td>
                     `;
+                } else if (currentView === 'trend') {
+                    // TREND BREAKER ROW
+                    const pick = m.recommendation.includes("MS 1") ? "MS 1 (EV)" : "MS 2 (DEP)";
+                    const targetOdds = m.recommendation.includes("MS 1") ? m.odds.home : m.odds.away;
+                    const cleanRec = m.recommendation.replace("💎 KASA:", "").replace(/\[.*?\]/, "").trim();
+                    const valueScore = parseInt((parseFloat(targetOdds) - 2.0) * 100);
+
+                    row = `
+                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal(${index})">
+                         <td class="pl-4 py-3 text-xs text-muted font-mono">
+                            <div>${m.time}</div>
+                            <div class="text-[10px] text-gray-500 uppercase">${m.league}</div>
+                        </td>
+                        <td class="py-3">
+                            <div class="font-bold text-yellow-400 text-lg">${m.home} vs ${m.away}</div>
+                            <div class="text-[10px] text-gray-400 mt-1">Sistem "${cleanRec}" öneriyor ama oran çok yüksek (${targetOdds})</div>
+                        </td>
+                        <td class="py-3 text-center">
+                             <div class="text-xl font-black text-white bg-gray-800 rounded px-2 border border-gray-700 inline-block">${targetOdds}</div>
+                        </td>
+                        <td class="py-3 text-center">
+                            <div class="text-sm font-bold text-green-400 tracking-wider">YÜKSEK GÜVEN</div>
+                        </td>
+                        <td class="py-3 text-center">
+                             <div class="inline-block px-3 py-1 bg-yellow-900/30 border border-yellow-600 rounded text-yellow-500 font-bold animate-pulse text-xs">
+                                💎 SCORE: ${valueScore}
+                             </div>
+                        </td>
+                     `;
+                } else if (currentView === 'money') {
+                    // Money View Row
+                    const drp = m.dropping_odds || { side: 'home', pct: 0, start: 0, now: 0 };
+                    const direction = drp.side === 'home' ? 'EV SAHİBİ' : (drp.side === 'draw' ? 'BERABERLİK' : 'DEPLASMAN');
+                    const color = drp.side === 'home' ? 'text-green-400' : (drp.side === 'away' ? 'text-blue-400' : 'text-gray-400');
+
+                    row = `
+                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal(${index})">
+                         <td class="pl-4 py-3 text-xs text-muted font-mono">
+                            <div>${m.time}</div>
+                            <div class="text-[10px] text-gray-500 uppercase">${m.league}</div>
+                        </td>
+                        <td class="py-3">
+                             <div class="flex items-center gap-2">
+                                <span class="font-bold text-white">${m.home} vs ${m.away}</span>
+                                <span class="${color} text-[10px] border border-gray-700 px-1 rounded">${direction}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 text-center text-gray-400 font-mono text-sm line-through decoration-red-500 decoration-2">
+                             ${drp.start}
+                        </td>
+                        <td class="py-3 text-center text-green-400 font-bold font-mono text-lg animate-pulse">
+                            ${drp.now}
+                        </td>
+                        <td class="py-3 text-center text-red-500 font-bold text-xs">
+                             ▼ -%${drp.pct}
+                        </td>
+                     `;
                 } else if (currentView === 'goals') {
                     // Goals / Points View
                     const p = m.pro_stats;
@@ -919,7 +970,7 @@
                             <td class="text-center font-mono text-blue-300 font-bold text-lg">${p.away_points_pred}</td>
                             <td class="text-center font-mono text-accent font-bold text-xl">${p.total_points}</td>
                             <td class="text-center">
-                                <span class="text-xs border border-gray-600 text-white px-2 py-1 rounded shadow">${p.best_goal_pick || 'ANALİZ'} ${goalResult}</span>
+                                <span class="text-xs border border-gray-600 text-white px-2 py-1 rounded shadow">${p.best_goal_pick || 'ANALİZ'}</span>
                             </td>
                         `;
                     }
@@ -961,8 +1012,6 @@
             try {
                 const res = await fetch(`/api/fixtures?sport=${currentSport}`);
                 const matches = await res.json();
-                lastData = matches;
-                document.getElementById('match-counter').innerText = `${matches.length} Maç`;
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
                 populateFilters();
