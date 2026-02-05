@@ -159,7 +159,31 @@ class MatchChatBot:
         if not results:
             return "Maalesef kriterlerine uygun maç bulamadım. Daha genel bir şeyler sormayı dene (örn: 'Banko maçlar')."
         
-        html = f"<div class='chat-response-header'>İşte senin için bulduğum {len(results)} maç:</div>"
+        # Conversational Prefixes based on Filter Type
+        ft = filters['type']
+        count = len(results)
+        prefix = f"İşte senin için bulduğum {count} maç:"
+
+        if ft == 'banko':
+            prefix = f"Analizlerime göre, risk oranı en düşük ve kazanma ihtimali en yüksek {count} banko maç:"
+        elif ft == 'over_1_5':
+            prefix = f"İstatistiklere baktığımda, en az 2 gol (1.5 Üst) beklediğim {count} karşılaşma şöyle:"
+        elif ft == 'over_2_5':
+            prefix = f"Bol gollü geçmeye aday, 2.5 Üst bitme ihtimali en yüksek {count} maç:"
+        elif ft.startswith('over'):
+            prefix = f"Gol beklentisi yüksek olan ve {ft.replace('_', ' ').replace('over', 'ÜST')} kriterine uyan maçlar:"
+        elif ft.startswith('under'):
+            prefix = f"Daha kontrollü geçmesini ve {ft.replace('_', ' ').replace('under', 'ALT')} bitmesini beklediğim maçlar:"
+        elif ft == 'btts_yes':
+            prefix = f"Her iki takımın da gol atma potansiyeli yüksek (KG Var) olan maçlar:"
+        elif ft == 'surprise':
+            prefix = f"Yüksek oranlı ve sürpriz potansiyeli taşıyan (Value) fırsatlar:"
+        elif ft == 'home_win':
+            prefix = f"Ev sahibinin galibiyetine yakın durduğu maçlar:"
+        elif ft == 'away_win':
+            prefix = f"Deplasman takımının favori olduğu karşılaşmalar:"
+
+        html = f"<div class='chat-response-header mb-2 text-sm text-gray-300'>{prefix}</div>"
         
         for item in results:
             m = item['match']
