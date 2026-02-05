@@ -414,50 +414,78 @@ def fetch_standings(league_code, sport='soccer'):
     if league_code in STANDINGS_CACHE: return STANDINGS_CACHE[league_code]
 
     # ESPN API for Standings
-    # e.g. http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings
     url = f"http://site.api.espn.com/apis/v2/sports/{sport}/{league_code}/standings"
     try:
-        res = requests.get(
-            url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=5)
+        res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=5)
         if res.status_code == 200:
             data = res.json()
-            team_stats = {}
+            team_stats = []
 
             if 'children' in data:
-                # Structure: children[0] -> standings -> entries
-                entries = data['children'][0].get(
-                    'standings', {}).get('entries', [])
+                entries = data['children'][0].get('standings', {}).get('entries', [])
                 for entry in entries:
-                    name = entry['team']['displayName']
-                    stats = {'played': 1, 'gf': 0, 'ga': 0}
-
+                    stats = {
+                        'rank': entry.get('stats', [{}])[0].get('value', 0), # Usually first is rank
+                        'team': entry['team']['displayName'],
+                        'played': 0, 'w': 0, 'd': 0, 'l': 0, 'gf': 0, 'ga': 0, 'pts': 0
+                    }
                     for s in entry.get('stats', []):
-                        if s['name'] == 'gamesPlayed': stats['played'] = s['value']
-                        # Goals For
-                        if s['name'] == 'pointsFor': stats['gf'] = s['value']
-                        # Goals Against
-                        if s['name'] == 'pointsAgainst': stats['ga'] = s['value']
+                        if s['name'] == 'rank': stats['rank'] = int(s['value'])
+                        if s['name'] == 'gamesPlayed': stats['played'] = int(s['value'])
+                        if s['name'] == 'wins': stats['w'] = int(s['value'])
+                        if s['name'] == 'draws': stats['d'] = int(s['value'])
+                        if s['name'] == 'losses': stats['l'] = int(s['value'])
+                        if s['name'] == 'pointsFor': stats['gf'] = int(s['value'])
+                        if s['name'] == 'pointsAgainst': stats['ga'] = int(s['value'])
+                        if s['name'] == 'points': stats['pts'] = int(s['value'])
+                    
+                    team_stats.append(stats)
 
-                    # Calculate Power Ratings
-                    if stats['played'] > 0:
-                        stats['att'] = stats['gf'] / \
-                            stats['played']  # Avg Goals Scored
-                        stats['def'] = stats['ga'] / \
-                            stats['played']  # Avg Goals Conceded
-                    else:
-                        stats['att'] = 1.0; stats['def'] = 1.0
-
-                    team_stats[name] = stats
-
-            print(
-                f"Loaded Standings for {league_code}: {len(team_stats)} teams")
+            print(f"Loaded Standings for {league_code}: {len(team_stats)} teams")
             STANDINGS_CACHE[league_code] = team_stats
             return team_stats
-
     except Exception as e:
         print(f"Standings Error {league_code}: {e}")
 
-    STANDINGS_CACHE[league_code] = None  # Mark as failed to stop retrying
+    STANDINGS_CACHE[league_code] = None
+    return None
+
+def fetch_h2h_data(event_id):
+    """
+    Fetches the last 5 H2H matches between home and away teams using SofaScore eventId.
+    """
+    if not event_id: return None
+    
+    url = f"https://api.sofascore.com/api/v1/event/{event_id}/h2h"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": "https://www.sofascore.com/"
+    }
+    
+    try:
+        res = requests.get(url, headers=headers, timeout=5)
+        if res.status_code == 200:
+            data = res.json()
+            matches_raw = data.get('events', [])
+            h2h_list = []
+            
+            # Get up to 5 most recent
+            for m in matches_raw[:5]:
+                dt = datetime.fromtimestamp(m.get('startTimestamp', 0)).strftime("%d.%m.%Y")
+                h_name = m.get('homeTeam', {}).get('name', '???')
+                a_name = m.get('awayTeam', {}).get('name', '???')
+                h_score = m.get('homeScore', {}).get('current', 0)
+                a_score = m.get('awayScore', {}).get('current', 0)
+                
+                h2h_list.append({
+                    'date': dt,
+                    'home': h_name,
+                    'away': a_name,
+                    'score': f"{h_score}-{a_score}"
+                })
+            return h2h_list
+    except Exception as e:
+        print(f"H2H Error for {event_id}: {e}")
     return None
 
 

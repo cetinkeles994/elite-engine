@@ -1,5 +1,7 @@
 import json
 import re
+from datetime import datetime
+import scraper_engine
 
 class MatchChatBot:
     def __init__(self, cache_file="matches_cache.json"):
@@ -110,6 +112,23 @@ class MatchChatBot:
         elif "ev sahibi" in q or "ms 1" in q: filters['type'] = "home_win"
         elif "deplasman" in q or "ms 2" in q: filters['type'] = "away_win"
         
+        # 3. SPECIAL INTENTS (Standings / H2H)
+        if "puan durumu" in q or "sıralama" in q:
+            filters['type'] = 'standings'
+            # Detect league
+            leagues = {
+                "ingiltere": "eng.1", "türkiye": "tur.1", "ispanya": "esp.1",
+                "almanya": "ger.1", "italya": "ita.1", "fransa": "fra.1",
+                "süper lig": "tur.1", "premier lig": "eng.1"
+            }
+            for k, v in leagues.items():
+                if k in q: filters['target_league'] = v; break
+            if 'target_league' not in filters: filters['target_league'] = 'tur.1' # Default
+
+        elif "h2h" in q or "aralarındaki" in q or "son maçlar" in q:
+            filters['type'] = 'h2h'
+            # Target will be found in execute by matching names in the query
+
         return filters
 
     def execute(self, query, session_id=None):
@@ -125,6 +144,34 @@ class MatchChatBot:
         if session_id:
             self.sessions[session_id] = {'last_filters': filters}
         
+        # --- SPECIAL EXECUTION PATHS ---
+        if filters['type'] == 'standings':
+            data = scraper_engine.fetch_standings(filters['target_league'])
+            return self.format_standings(data, filters['target_league'])
+        
+        if filters['type'] == 'h2h':
+            # Find which match the user is talking about
+            target_match = None
+            for m in self.matches:
+                if m['home'].lower() in query.lower() or m['away'].lower() in query.lower():
+                    target_match = m; break
+            
+            if target_match:
+                # Try to get SofaScore eventId
+                event_id = target_match.get('pro_stats', {}).get('sofa_elite', {}).get('id')
+                if not event_id:
+                    # Try to find it via adapter
+                    from scraper_engine import sofa_adapter
+                    event_id = sofa_adapter.get_event_id(target_match['home'], target_match['away'])
+                
+                if event_id:
+                    h2h_data = scraper_engine.fetch_h2h_data(event_id)
+                    return self.format_h2h(h2h_data, target_match)
+                else:
+                    return f"<b>{target_match['home']} vs {target_match['away']}</b> maçı için SofaScore ID bulunamadı, H2H çekilemedi."
+            else:
+                return "Hangi maçın aralarındaki sonuçlarını merak ediyorsun? (Örn: 'Porto Sporting son maçları')"
+
         results = []
 
         for m in self.matches:
@@ -270,6 +317,43 @@ class MatchChatBot:
             </div>
             """
             html += card
+            
+        return html
+
+    def format_standings(self, data, league_code):
+        if not data:
+            return f"<b>{league_code}</b> ligi için puan durumu şu an alınamıyor."
+        
+        html = f"<div class='text-xs font-bold text-accent mb-2 uppercase'>{league_code} Puan Durumu</div>"
+        html += "<table class='w-full text-[10px] text-gray-300 border-collapse'>"
+        html += "<tr class='border-b border-gray-700 text-gray-500'><th class='text-left p-1'>#</th><th class='text-left p-1'>Takım</th><th class='p-1'>O</th><th class='p-1'>G</th><th class='p-1'>P</th></tr>"
+        
+        for row in data[:20]: # Top 20
+            is_top = row['rank'] <= 4
+            color = "text-white font-bold" if is_top else ""
+            html += f"<tr class='border-b border-gray-800/50 {color}'>"
+            html += f"<td class='p-1'>{row['rank']}</td>"
+            html += f"<td class='p-1'>{row['team']}</td>"
+            html += f"<td class='p-1 text-center'>{row['played']}</td>"
+            html += f"<td class='p-1 text-center'>{row['w']}</td>"
+            html += f"<td class='p-1 text-center text-accent'>{row['pts']}</td>"
+            html += "</tr>"
+        
+        html += "</table>"
+        return html
+
+    def format_h2h(self, data, match):
+        if not data:
+            return f"<b>{match['home']} ve {match['away']}</b> arasındaki son maçlara ulaşılamadı."
+        
+        html = f"<div class='text-xs font-bold text-accent mb-2'>ARALARINDAKİ SON 5 MAÇ</div>"
+        html += f"<div class='text-[10px] text-gray-400 mb-2'>{match['home']} vs {match['away']}</div>"
+        
+        for m in data:
+            html += f"<div class='flex justify-between items-center bg-gray-900/50 p-2 mb-1 rounded border border-gray-800'>"
+            html += f"<span class='text-[9px] text-gray-500'>{m['date']}</span>"
+            html += f"<span class='text-[10px] text-white flex-1 text-center mx-2'>{m['home']} {m['score']} {m['away']}</span>"
+            html += "</div>"
             
         return html
 
