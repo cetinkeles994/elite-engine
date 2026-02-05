@@ -92,6 +92,31 @@ class SofaScoreAdapter:
         self.data_map[str(event_id)] = stats
         self.save_cache()
 
+    def reset_cache(self):
+        """ Clears the in-memory data map. """
+        self.data_map = {}
+
+    def fetch_daily_fixtures(self, date_str):
+        """
+        Fetches all football events for a specific date from SofaScore.
+        Format: YYYY-MM-DD
+        """
+        url = f"https://api.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Referer": "https://www.sofascore.com/"
+        }
+        try:
+            res = requests.get(url, headers=headers, timeout=10)
+            if res.status_code == 200:
+                data = res.json()
+                events = data.get('events', [])
+                print(f"SofaScore: Fetched {len(events)} events for {date_str}")
+                return events
+        except Exception as e:
+            print(f"SofaScore Fetch Error ({date_str}): {e}")
+        return []
+
 # Usage Example
 if __name__ == "__main__":
     adapter = SofaScoreAdapter()

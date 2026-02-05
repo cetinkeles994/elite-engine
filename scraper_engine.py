@@ -496,7 +496,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
-    adapter = SofaScoreAdapter()
+    adapter = sofa_adapter # Use global instance for shared cache
 
     for league in LEAGUES:
         # Pre-fetch Standings for this league
@@ -535,7 +535,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                 # Fallback Discovery via SofaScore
                 if league.get('sofascore_id') and league['sport'] == 'soccer':
                     ss_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-                    ss_events = [] # adapter.fetch_daily_fixtures(ss_date)
+                    ss_events = adapter.fetch_daily_fixtures(ss_date)
                     target_id = league['sofascore_id']
 
                     added_count = 0
@@ -651,21 +651,13 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         a_stats_real = None
 
                         if league_standings:
-                            # Fuzzy matching or direct lookup
-                            # ESPN names usually match, but we check contains
-                            # or exact
-                            h_stats_real = league_standings.get(home_team)
-                            a_stats_real = league_standings.get(away_team)
-
-                            if not h_stats_real:
-                                # Try fuzzy match (simple contains)
-                                for t_name, t_stat in league_standings.items():
-                                    if home_team in t_name or t_name in home_team:
-                                        h_stats_real = t_stat; break
-                            if not a_stats_real:
-                                for t_name, t_stat in league_standings.items():
-                                    if away_team in t_name or t_name in away_team:
-                                        a_stats_real = t_stat; break
+                            # Search in list
+                            for stand in league_standings:
+                                s_team = stand['team'].lower()
+                                if home_team.lower() in s_team or s_team in home_team.lower():
+                                    h_stats_real = stand
+                                if away_team.lower() in s_team or s_team in away_team.lower():
+                                    a_stats_real = stand
 
                         # --- LIVE STATS ---
                         live_stats = {'goals': 0, 'minute': 0}
@@ -715,9 +707,28 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         except: pass
 
-                        # --- SOFASCORE LOOKUP ---
-                        sofa_data = sofa_adapter.get_deep_stats(
-                            home_team, away_team)
+                        # --- SOFASCORE LOOKUP & REFRESH ---
+                        sofa_data = sofa_adapter.get_deep_stats(home_team, away_team)
+                        
+                        # If NOT found in adapter, try to discover it from ss_events
+                        if not sofa_data and 'ss_events' in locals():
+                            for se in ss_events:
+                                if se.get('tournament', {}).get('id') == league.get('sofascore_id'):
+                                    h_ss = se['homeTeam']['name']
+                                    a_ss = se['awayTeam']['name']
+                                    if (home_team.lower() in h_ss.lower() or h_ss.lower() in home_team.lower()) and \
+                                       (away_team.lower() in a_ss.lower() or a_ss.lower() in away_team.lower()):
+                                        # FOUND! Map it
+                                        sofa_data = {
+                                            'id': se['id'],
+                                            'name': f"{h_ss} vs {a_ss}",
+                                            'homeTeam': h_ss,
+                                            'awayTeam': a_ss,
+                                            'momentum_score': se.get('status', {}).get('type', '') # Placeholder
+                                        }
+                                        # Save to adapter cache
+                                        sofa_adapter.update_match_data(se['id'], sofa_data)
+                                        break
 
                         # --- PRO PREDICTION GENERATION ---
                         # Pass real stats to engine

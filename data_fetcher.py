@@ -1,7 +1,7 @@
 import json
 import os
 from datetime import datetime
-from scraper_engine import scrape_todays_fixtures
+from scraper_engine import scrape_todays_fixtures, sofa_adapter
 
 def run_elite_update():
     """
@@ -10,6 +10,10 @@ def run_elite_update():
     print(f"--- 🚀 Elite Data Update Started: {datetime.now()} ---")
     
     try:
+        # 0. Reset SofaScore Cache (Ensure fresh IDs for H2H)
+        print("🧹 Clearing SofaScore cache for fresh data...")
+        sofa_adapter.reset_cache()
+
         # 1. Scrape all fixtures (This does the heavy lifting: ESPN + SofaScore blending)
         print("🔍 Scraping fixtures and deep stats...")
         matches = scrape_todays_fixtures()
