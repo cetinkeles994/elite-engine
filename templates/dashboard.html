@@ -445,9 +445,17 @@
         let currentSport = 'soccer';
         let currentView = 'main'; // main, goals, props
         let lastData = [];
-        let filterDate = 'all';
         let filterLeague = 'all';
         let chatSessionId = Date.now() + "_" + Math.floor(Math.random() * 1000);
+
+        const LEAGUE_MAP = {
+            "Premier League": "eng.1",
+            "Trendyol Süper Lig": "tur.1",
+            "LaLiga": "esp.1",
+            "Bundesliga": "ger.1",
+            "Serie A": "ita.1",
+            "Ligue 1": "fra.1"
+        };
 
         // --- CHAT LOGIC ---
         function toggleChat() {
@@ -686,14 +694,82 @@
                     </div>
                 </div>
 
-                 <div class="bg-gray-900 p-3 rounded text-xs text-gray-300 font-mono border-l-2 border-accent">
+                 <div class="bg-gray-900 p-3 rounded text-xs text-gray-300 font-mono border-l-2 border-accent mb-6">
                     ${m.reasoning || 'Detaylı analiz verisi mevcut değil.'}
+                </div>
+
+                <!-- STANDINGS & H2H ROW -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-black/30 p-3 rounded border border-gray-800">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase mb-2">Puan Durumu (Sıralama)</div>
+                        <div id="modal-standings" class="text-[10px] text-gray-400">Yükleniyor...</div>
+                    </div>
+                     <div class="bg-black/30 p-3 rounded border border-gray-800">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase mb-2">Aralarındaki Son Maçlar</div>
+                        <div id="modal-h2h" class="text-[10px] text-gray-400">Yükleniyor...</div>
+                    </div>
                 </div>
             `;
 
             document.getElementById('modal-content').innerHTML = html;
             document.getElementById('match-modal').classList.remove('hidden');
             document.getElementById('match-modal').classList.add('flex');
+
+            // --- ASYNC DATA FETCH ---
+            // 1. Standings
+            const espnCode = LEAGUE_MAP[m.league];
+            if (espnCode) {
+                fetch(`/api/standings/${espnCode}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data || data.length === 0) {
+                            document.getElementById('modal-standings').innerText = "Veri bulunamadı.";
+                            return;
+                        }
+                        let sHtml = `<table class="w-full text-left">
+                            <tr class="text-gray-600 border-b border-gray-800"><th>#</th><th>Takım</th><th>O</th><th>G</th><th>P</th></tr>`;
+
+                        // Find home/away team indexes or show top 5 + teams
+                        data.forEach(row => {
+                            const isMyMatch = row.team.includes(m.home) || row.team.includes(m.away);
+                            const style = isMyMatch ? 'text-accent font-bold bg-accent/5' : '';
+                            sHtml += `<tr class="${style}">
+                                <td class="py-1">${row.rank}</td>
+                                <td>${row.team}</td>
+                                <td>${row.played}</td>
+                                <td>${row.w}</td>
+                                <td class="text-white">${row.pts}</td>
+                            </tr>`;
+                        });
+                        sHtml += `</table>`;
+                        document.getElementById('modal-standings').innerHTML = sHtml;
+                    });
+            } else {
+                document.getElementById('modal-standings').innerText = "Bu lig için tablo desteklenmiyor.";
+            }
+
+            // 2. H2H
+            const sofaId = pro.sofa_elite ? pro.sofa_elite.id : null;
+            if (sofaId) {
+                fetch(`/api/h2h/${sofaId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data || data.length === 0) {
+                            document.getElementById('modal-h2h').innerText = "Geçmiş maç verisi yok.";
+                            return;
+                        }
+                        let hHtml = "";
+                        data.forEach(hm => {
+                            hHtml += `<div class="flex justify-between border-b border-gray-800/50 py-1">
+                                <span class="text-[9px] text-gray-600">${hm.date}</span>
+                                <span class="text-white">${hm.home} ${hm.score} ${hm.away}</span>
+                            </div>`;
+                        });
+                        document.getElementById('modal-h2h').innerHTML = hHtml;
+                    });
+            } else {
+                document.getElementById('modal-h2h').innerText = "H2H verisi bulunamadı.";
+            }
         }
 
         function closeModal() {

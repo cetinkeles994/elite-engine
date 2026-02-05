@@ -1,6 +1,7 @@
 import json
 import os
 from flask import Flask, render_template, request, jsonify
+import scraper_engine
 
 app = Flask(__name__)
 
@@ -62,6 +63,16 @@ def api_chat():
     
     response_html = chatbot.execute(message, session_id=session_id)
     return jsonify({'response': response_html})
+
+@app.route('/api/standings/<league_code>')
+def api_standings(league_code):
+    data = scraper_engine.fetch_standings(league_code)
+    return jsonify(data)
+
+@app.route('/api/h2h/<event_id>')
+def api_h2h(event_id):
+    data = scraper_engine.fetch_h2h_data(event_id)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
