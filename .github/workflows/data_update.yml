@@ -24,7 +24,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        pip install requests cloudscraper pandas beautifulsoup4 joblib
+        pip install requests cloudscraper pandas beautifulsoup4 joblib scikit-learn
 
     - name: Fetch Elite Data
       run: |
