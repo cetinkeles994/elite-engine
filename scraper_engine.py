@@ -250,6 +250,16 @@ class StatEngine:
             if home_win_rate > 50: h_exp *= 1.05
             if away_win_rate > 50: a_exp *= 1.05
 
+            # --- FAVORITE BOOST (UPDATED) ---
+            # Now using Blended Rates (History + Market)
+            # If a team is a dominant favorite (>60%), FORCE consistent xG gap
+            if home_win_rate > 0.60:
+                h_exp = max(h_exp, a_exp + 0.6) # Ensure at least 0.6 goal gap
+                h_exp *= 1.10 # Boost further
+            if away_win_rate > 0.60:
+                a_exp = max(a_exp, h_exp + 0.6)
+                a_exp *= 1.10
+
             preds['home_goals'] = round(h_exp, 2)
             preds['away_goals'] = round(a_exp, 2)
             preds['total_goals_prediction'] = round(h_exp + a_exp, 2)
@@ -713,7 +723,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         fair_odds_home = 1 / home_prob if home_prob > 0.01 else 99.00
 
-                        # --- ODDS PARSING ---
+                        # --- ODDS PARSING (MOVED UP FOR PREDICTION) ---
                         odds_data = competitions.get('odds', [])
                         bookie_home_odds = 0
                         bookie_away_odds = 0
@@ -727,7 +737,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                 if isinstance(provider, dict):
                                     ml = provider.get('moneyline', {})
                                 else:
-                                    pass  # Invalid provider format
+                                    pass 
 
                                 def am_to_dec(am_str):
                                        if not am_str: return 0
@@ -750,7 +760,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                        if open_home > 0 and bookie_home_odds > 0:
                                            drop_pct = (
                                                (open_home - bookie_home_odds) / open_home) * 100
-                                           if drop_pct > 1.1:  # Lowered to 2% to catch more moves
+                                           if drop_pct > 1.1: 
                                                 drop_info = {'side': 'home', 'pct': round(
                                                     drop_pct, 1), 'open': open_home, 'curr': bookie_home_odds}
 
@@ -764,11 +774,25 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                                     drop_pct, 1), 'open': open_away, 'curr': bookie_away_odds}
                                    except: pass
 
-                                if sport == 'basketball':
-                                    spr = provider.get('spread', {})
-                                    if spr: spread = spr.get('home', {}).get(
-                                        'current', {}).get('line')
                             except: pass
+
+                        # --- BLEND HISTORY WITH MARKET REALITY ---
+                        # If market odds exist, use them to correct history
+                        if bookie_home_odds > 1.0 and bookie_away_odds > 1.0:
+                            market_h_prob = (1.0 / bookie_home_odds)
+                            market_a_prob = (1.0 / bookie_away_odds)
+                            # Normalize
+                            total_m = market_h_prob + market_a_prob + (1.0 / 3.5) # rough draw
+                            market_h_prob /= total_m
+                            market_a_prob /= total_m
+                            
+                            # WEIGHTED BLEND: 40% History / 60% Market
+                            home_win_rate = (home_win_rate * 0.40) + (market_h_prob * 0.60)
+                            away_win_rate = (away_win_rate * 0.40) + (market_a_prob * 0.60)
+
+                        # --- SOFASCORE LOOKUP ---
+
+                        # (Cleaned up: Dropping odds logic moved up)
 
                         # --- BARON SIGNALS 2.0: CROSS-MARKET CROSSOVER ---
                         if sofa_data and isinstance(sofa_data, dict) and sofa_data.get(
