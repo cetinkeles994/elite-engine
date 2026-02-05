@@ -475,12 +475,25 @@
 
         const LEAGUE_MAP = {
             "Premier League": "eng.1",
-            "Trendyol Süper Lig": "tur.1",
-            "Süper Lig": "tur.1",
+            "La Liga": "esp.1",
             "LaLiga": "esp.1",
             "Bundesliga": "ger.1",
             "Serie A": "ita.1",
-            "Ligue 1": "fra.1"
+            "Ligue 1": "fra.1",
+            "Süper Lig": "tur.1",
+            "Trendyol Süper Lig": "tur.1",
+            "TFF 1. Lig": "tur.2",
+            "Eredivisie": "ned.1",
+            "Primeira Liga": "por.1",
+            "Championship": "eng.2",
+            "Serie B": "ita.2",
+            "2. Bundesliga": "ger.2",
+            "Belgian Pro League": "bel.1",
+            "Champions League": "uefa.champions",
+            "Europa League": "uefa.europa",
+            "Conference Lg": "uefa.europa.conf",
+            "NBA": "nba",
+            "EuroLeague": "eur.league"
         };
 
         // --- CHAT LOGIC ---
@@ -775,27 +788,23 @@
             }
 
             // 2. H2H
-            const sofaId = pro.sofa_elite ? pro.sofa_elite.id : null;
-            if (sofaId) {
-                fetch(`/api/h2h/${sofaId}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (!data || data.length === 0) {
-                            document.getElementById('modal-h2h').innerText = "Geçmiş maç verisi yok.";
-                            return;
-                        }
-                        let hHtml = "";
-                        data.forEach(hm => {
-                            hHtml += `<div class="flex justify-between border-b border-gray-800/50 py-1">
+            const sofaId = (pro.sofa_elite && pro.sofa_elite.id) ? pro.sofa_elite.id : m.id;
+            fetch(`/api/h2h/${sofaId}?home=${encodeURIComponent(m.home)}&away=${encodeURIComponent(m.away)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || data.length === 0) {
+                        document.getElementById('modal-h2h').innerText = "Geçmiş maç verisi yok.";
+                        return;
+                    }
+                    let hHtml = "";
+                    data.forEach(hm => {
+                        hHtml += `<div class="flex justify-between border-b border-gray-800/50 py-1">
                                 <span class="text-[9px] text-gray-600">${hm.date}</span>
                                 <span class="text-white">${hm.home} ${hm.score} ${hm.away}</span>
                             </div>`;
-                        });
-                        document.getElementById('modal-h2h').innerHTML = hHtml;
                     });
-            } else {
-                document.getElementById('modal-h2h').innerText = "H2H verisi bulunamadı.";
-            }
+                    document.getElementById('modal-h2h').innerHTML = hHtml;
+                });
         }
 
         function closeModal() {

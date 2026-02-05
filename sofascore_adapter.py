@@ -1,14 +1,21 @@
-
 import json
 import os
 import requests
 import re
+import cloudscraper
 from datetime import datetime
 
 class SofaScoreAdapter:
     def __init__(self, cache_file="sofascore_data.json"):
         self.cache_file = cache_file
         self.data_map = {}
+        self.scraper = cloudscraper.create_scraper(
+            browser={
+                'browser': 'chrome',
+                'platform': 'windows',
+                'desktop': True
+            }
+        )
         self.load_cache()
 
     def load_cache(self):
@@ -101,20 +108,28 @@ class SofaScoreAdapter:
         Fetches all football events for a specific date from SofaScore.
         Format: YYYY-MM-DD
         """
-        url = f"https://api.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}"
+        urls = [
+            f"https://www.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}",
+            f"https://api.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}"
+        ]
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "*/*",
+            "X-Requested-With": "4795b7",
+            "Origin": "https://www.sofascore.com",
             "Referer": "https://www.sofascore.com/"
         }
-        try:
-            res = requests.get(url, headers=headers, timeout=10)
-            if res.status_code == 200:
-                data = res.json()
-                events = data.get('events', [])
-                print(f"SofaScore: Fetched {len(events)} events for {date_str}")
-                return events
-        except Exception as e:
-            print(f"SofaScore Fetch Error ({date_str}): {e}")
+        for url in urls:
+            try:
+                res = self.scraper.get(url, headers=headers, timeout=10)
+                if res.status_code == 200:
+                    data = res.json()
+                    events = data.get('events', [])
+                    print(f"SofaScore: Fetched {len(events)} events for {date_str} from {url}")
+                    return events
+                else:
+                    print(f"SofaScore Fetch Failed ({url}): {res.status_code}")
+            except Exception as e:
+                print(f"SofaScore Fetch Error ({url}): {e}")
         return []
 
 # Usage Example

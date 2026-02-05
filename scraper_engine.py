@@ -450,20 +450,32 @@ def fetch_standings(league_code, sport='soccer'):
     STANDINGS_CACHE[league_code] = None
     return None
 
-def fetch_h2h_data(event_id):
+def fetch_h2h_data(event_id, home=None, away=None):
     """
     Fetches the last 5 H2H matches between home and away teams using SofaScore eventId.
+    If event_id looks like an ESPN ID, attempt to resolve via names.
     """
     if not event_id: return None
     
+    # Check if this is an ESPN ID (numeric and not in our sofa cache usually > 8 digits or different range)
+    # Actually, SofaScore IDs are also numeric. Better check cache.
+    if home and away:
+        adapter = sofa_adapter
+        resolved_id = adapter.get_event_id(home, away)
+        if resolved_id:
+            event_id = resolved_id
+            print(f"H2H Resolution: Resolved {home} vs {away} -> {event_id}")
+    
     url = f"https://api.sofascore.com/api/v1/event/{event_id}/h2h"
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "*/*",
+        "X-Requested-With": "4795b7",
+        "Origin": "https://www.sofascore.com",
         "Referer": "https://www.sofascore.com/"
     }
     
     try:
-        res = requests.get(url, headers=headers, timeout=5)
+        res = sofa_adapter.scraper.get(url, headers=headers, timeout=5)
         if res.status_code == 200:
             data = res.json()
             matches_raw = data.get('events', [])
