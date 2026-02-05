@@ -100,9 +100,11 @@ class MatchChatBot:
         elif "banko" in q or "güvenilir" in q or "en iyi" in q:
             filters['type'] = "banko"
             filters['min_prob'] = 65
-        elif "sürpriz" in q or "oranı yüksek" in q:
+        elif "sürpriz" in q or "süpriz" in q or "oranı yüksek" in q:
             filters['type'] = "surprise"
             filters['sort'] = 'odds_desc'
+            # Important: Clear min_prob if we are going for surprise
+            filters['min_prob'] = 0 
 
         # Home/Away specific
         elif "ev sahibi" in q or "ms 1" in q: filters['type'] = "home_win"
@@ -199,7 +201,11 @@ class MatchChatBot:
             })
 
         # --- SORTING ---
-        results.sort(key=lambda x: x['score'], reverse=True)
+        if filters.get('sort') == 'odds_desc':
+            # Sort by max of home/away odds
+            results.sort(key=lambda x: max(float(x['match']['odds']['home'] or 0), float(x['match']['odds']['away'] or 0)), reverse=True)
+        else:
+            results.sort(key=lambda x: x['score'], reverse=True)
         
         # --- LIMIT ---
         final_list = results[:filters['limit']]
