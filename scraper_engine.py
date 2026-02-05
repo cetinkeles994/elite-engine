@@ -220,16 +220,24 @@ class StatEngine:
             a_exp = max(0.1, a_exp)
 
             # [INSERTION POINT for Tight Match Logic]
-            # --- ALGORITHMIC IMPROVEMENT: TIGHT MATCH LOGIC ---
-            # If teams are equal strength AND league is tight (avg < 2.6)
+            # --- ALGORITHMIC IMPROVEMENT: TIGHT MATCH LOGIC (TUNED v2) ---
+            # If teams are equal strength AND league is tight (avg < 2.4)
             strength_diff = abs(home_strength - away_strength)
-            if strength_diff < 0.15 and avg_goals < 2.6:
-                # Force tighter game
-                # Reduce xG by 15% to prevent "2-2" predictions in tight
-                # tactical games
-                h_exp *= 0.85
-                a_exp *= 0.85
-                data_source += " | Sıkışık Maç Modu (x%85)"
+            if strength_diff < 0.15 and avg_goals < 2.4:
+                # Force tighter game (Relaxed to 5% reduction)
+                h_exp *= 0.95
+                a_exp *= 0.95
+                data_source += " | Sıkışık Maç Modu (x%95)"
+            
+            # --- VARIANCE INJECTION ---
+            # Add micro-randomness to prevent identical outputs for identical stats
+            h_exp += random.uniform(-0.05, 0.05)
+            a_exp += random.uniform(-0.05, 0.05)
+
+            # --- FAVORITE BOOST ---
+            # If a team is a clear favorite (>50%), give them a slight attack boost
+            if home_win_rate > 50: h_exp *= 1.05
+            if away_win_rate > 50: a_exp *= 1.05
 
             preds['home_goals'] = round(h_exp, 2)
             preds['away_goals'] = round(a_exp, 2)
