@@ -166,6 +166,9 @@
             <button onclick="setView('money')" id="tab-money"
                 class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-green-400 border border-green-400 hover:bg-green-400 hover:text-black">💸
                 AKILLI PARA</button>
+            <button onclick="setView('trend')" id="tab-trend"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-yellow-400 border border-yellow-400 hover:bg-yellow-400 hover:text-black animate-pulse">⚡
+                TREND AVCI</button>
             <button onclick="setView('history')" id="tab-history"
                 class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-accent border border-accent hover:bg-accent hover:text-black">GEÇMİŞ
                 SONUÇLAR</button>
@@ -596,6 +599,24 @@
                         <th class="w-40 text-center text-white">EN İYİ SEÇİM</th>
                     `;
                 }
+            } else if (currentView === 'trend') {
+                cols += `
+                    <th class="p-3 text-left">LİG & SAAT</th>
+                    <th class="p-3 text-left">TREND KIRAN ADAYI (SÜRPRİZ)</th>
+                    <th class="p-3 text-center">PİYASA ORANI</th>
+                    <th class="p-3 text-center">YAPAY ZEKA BEKLENTİSİ</th>
+                    <th class="p-3 text-center">DEĞER PUANI</th>
+                `;
+            } else if (currentView === 'props') {
+            } else if (currentView === 'trend') {
+                cols += `
+                    <th class="p-3 text-left">LİG & SAAT</th>
+                    <th class="p-3 text-left">TREND KIRAN ADAYI (SÜRPRİZ)</th>
+                    <th class="p-3 text-center">PİYASA ORANI</th>
+                    <th class="p-3 text-center">YAPAY ZEKA BEKLENTİSİ</th>
+                    <th class="p-3 text-center">DEĞER PUANI</th>
+                `;
+            } else if (currentView === 'props') {
             } else if (currentView === 'props') {
                 if (currentSport === 'soccer') {
                     cols += `
@@ -631,6 +652,38 @@
                 displayData = lastData.filter(m => m.dropping_odds);
                 if (displayData.length === 0) {
                     tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-muted">Şu an aktif bir "Akıllı Para" akışı (Sert Oran Düşüşü) yok.</td></tr>`;
+                    return;
+                }
+            } else if (currentView === 'trend') {
+                // Logic: High Market Odds (>2.00) BUT Good Valid Suggestion (Not PAS)
+                displayData = lastData.filter(m => {
+                    if (!m.recommendation || m.recommendation.includes("PAS")) return false;
+                    const homeOdds = parseFloat(m.home_odds);
+                    const awayOdds = parseFloat(m.away_odds);
+                    const pick = m.recommendation.includes("MS 1") ? 1 : (m.recommendation.includes("MS 2") ? 2 : 0);
+
+                    if (pick === 1 && homeOdds > 2.05) return true; // Home Underdog
+                    if (pick === 2 && awayOdds > 2.05) return true; // Away Underdog
+                    return false;
+                });
+                if (displayData.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-muted">Şu an "Trend Kıran" (Yüksek Oranlı Sürpriz) fırsat tespit edilmedi.</td></tr>`;
+                    return;
+                }
+            } else if (currentView === 'trend') {
+                // Logic: High Market Odds (>2.00) BUT Good Valid Suggestion (Not PAS)
+                displayData = lastData.filter(m => {
+                    if (!m.recommendation || m.recommendation.includes("PAS")) return false;
+                    const homeOdds = parseFloat(m.home_odds);
+                    const awayOdds = parseFloat(m.away_odds);
+                    const pick = m.recommendation.includes("MS 1") ? 1 : (m.recommendation.includes("MS 2") ? 2 : 0);
+
+                    if (pick === 1 && homeOdds > 2.05) return true; // Home Underdog
+                    if (pick === 2 && awayOdds > 2.05) return true; // Away Underdog
+                    return false;
+                });
+                if (displayData.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-muted">Şu an "Trend Kıran" (Yüksek Oranlı Sürpriz) fırsat tespit edilmedi.</td></tr>`;
                     return;
                 }
             }
