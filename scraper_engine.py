@@ -126,12 +126,23 @@ class StatEngine:
             
             # If runner-up is within 10% of the winner (Close Call)
             if runner_up_count > (best_count * 0.90):
-                # TIE BREAKER: Choose the "Safer" option (Fewer Goals)
                 bs_h, bs_a = map(int, best_score.split('-'))
                 ru_h, ru_a = map(int, runner_up.split('-'))
                 
-                if (ru_h + ru_a) < (bs_h + bs_a):
-                    best_score = runner_up # Swap to safer option
+                # --- CONTEXT-AWARE TIE-BREAKER ---
+                is_home_fav = (h_exp > a_exp + 0.4)
+                is_away_fav = (a_exp > h_exp + 0.4)
+                
+                # 1. If Favorite, prioritize the WINNING score over a draw/loss
+                if is_home_fav and (ru_h > ru_a) and (bs_h <= bs_a):
+                    best_score = runner_up # Swap to Home Win (e.g. 1-1 -> 2-1)
+                elif is_away_fav and (ru_a > ru_h) and (bs_a <= bs_h):
+                    best_score = runner_up # Swap to Away Win
+                
+                # 2. If Balanced, use "Safer Option" (Fewer Goals)
+                elif (not is_home_fav) and (not is_away_fav):
+                    if (ru_h + ru_a) < (bs_h + bs_a):
+                        best_score = runner_up # Swap to safer option
         
         ms_h = int(best_score.split('-')[0])
         ms_a = int(best_score.split('-')[1])
