@@ -1232,8 +1232,11 @@
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
 
                 populateFilters();
-                findOraclePick(matches);
-                findSafePick(matches);
+
+                // Safe calls to helpers
+                try { findOraclePick(matches); } catch (e) { console.error("Oracle Error:", e); }
+                try { findSafePick(matches); } catch (e) { console.error("SafePick Error:", e); }
+
                 renderTable();
             } catch (e) {
                 console.error(e);
