@@ -1216,17 +1216,37 @@
             // STOP AUTO REFRESH IF BROWSING HISTORY OR BARON SIGNALS
             if (currentView === 'history' || currentView === 'baron') return;
 
+            const tableBody = document.getElementById('table-body');
+
+            // Only show loading if we are stuck on the initial screen
+            if (lastData.length === 0 && tableBody.innerText.includes("Başlatılıyor")) {
+                tableBody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-blue-400 animate-pulse">Sunucuya Bağlanılıyor...</td></tr>`;
+            }
+
             try {
                 const res = await fetch(`/api/fixtures?sport=${currentSport}`);
+                if (!res.ok) throw new Error("API Hatası");
+
                 const matches = await res.json();
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Maç`;
+
                 populateFilters();
                 findOraclePick(matches);
-                findSafePick(matches); // <-- NEW: FIND SAFETY LOCK
+                findSafePick(matches);
                 renderTable();
             } catch (e) {
                 console.error(e);
+                // If it's the initial load and it failed, show error
+                if (lastData.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="10" class="text-center py-12 text-red-500">
+                                Veri Alınamadı. <br>
+                                <button onclick="fetchData()" class="mt-2 bg-red-900 border border-red-500 px-4 py-1 rounded text-white hover:bg-red-700">Tekrar Dene</button>
+                            </td>
+                        </tr>`;
+                }
             }
         }
 
