@@ -724,7 +724,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                             'name': f"{h_ss} vs {a_ss}",
                                             'homeTeam': h_ss,
                                             'awayTeam': a_ss,
-                                            'momentum_score': se.get('status', {}).get('type', '') # Placeholder
+                                            'momentum_score': se.get('status', {}).get('description', ''),
+                                            'league_id': se.get('tournament', {}).get('id')
                                         }
                                         # Save to adapter cache
                                         sofa_adapter.update_match_data(se['id'], sofa_data)
