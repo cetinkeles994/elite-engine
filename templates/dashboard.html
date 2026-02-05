@@ -34,6 +34,29 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
+        /* Webkit Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d936;
+        }
+
+        .custom-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #00ff41 rgba(255, 255, 255, 0.05);
+        }
+
         .data-table th {
             text-align: left;
             padding: 12px;
@@ -407,10 +430,12 @@
     </main>
 
     <!-- Match Details Modal -->
-    <div id="match-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 backdrop-blur-sm">
-        <div class="bg-panel border border-border w-[600px] rounded-lg shadow-2xl p-6 relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
-            <div id="modal-content"></div>
+    <div id="match-modal"
+        class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 backdrop-blur-sm p-4">
+        <div
+            class="bg-panel border border-border w-full max-w-2xl rounded-lg shadow-2xl relative flex flex-col max-h-[90vh]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white z-20">✕</button>
+            <div id="modal-content" class="p-6 overflow-y-auto custom-scroll"></div>
         </div>
     </div>
 
@@ -702,11 +727,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-black/30 p-3 rounded border border-gray-800">
                         <div class="text-[10px] text-gray-500 font-bold uppercase mb-2">Puan Durumu (Sıralama)</div>
-                        <div id="modal-standings" class="text-[10px] text-gray-400">Yükleniyor...</div>
+                        <div id="modal-standings" class="text-[10px] text-gray-400 max-h-[250px] overflow-y-auto custom-scroll">Yükleniyor...</div>
                     </div>
                      <div class="bg-black/30 p-3 rounded border border-gray-800">
                         <div class="text-[10px] text-gray-500 font-bold uppercase mb-2">Aralarındaki Son Maçlar</div>
-                        <div id="modal-h2h" class="text-[10px] text-gray-400">Yükleniyor...</div>
+                        <div id="modal-h2h" class="text-[10px] text-gray-400 max-h-[250px] overflow-y-auto custom-scroll">Yükleniyor...</div>
                     </div>
                 </div>
             `;
