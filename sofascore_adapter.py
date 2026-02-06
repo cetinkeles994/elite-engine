@@ -109,28 +109,31 @@ class SofaScoreAdapter:
         """ Clears the in-memory data map. """
         self.data_map = {}
 
-    def fetch_daily_fixtures(self, date_str):
+    def fetch_daily_fixtures(self, date_str, sport='football'):
         """
-        Fetches all football events for a specific date from SofaScore.
+        Fetches all events for a specific date from SofaScore for a given sport.
         Format: YYYY-MM-DD
         """
         urls = [
-            f"https://www.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}",
-            f"https://api.sofascore.com/api/v1/sport/football/scheduled-events/{date_str}"
+            f"https://www.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}",
+            f"https://api.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}"
         ]
         headers = {
-            "Accept": "*/*",
+            "Accept": "application/json, text/plain, */*",
             "X-Requested-With": "4795b7",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+            "Referer": "https://www.sofascore.com/",
             "Origin": "https://www.sofascore.com",
-            "Referer": "https://www.sofascore.com/"
+            "Accept-Language": "en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7"
         }
         for url in urls:
             try:
-                res = self.scraper.get(url, headers=headers, timeout=10)
+                # Use scraper.get which handles cloudflare
+                res = self.scraper.get(url, headers=headers, timeout=15)
                 if res.status_code == 200:
                     data = res.json()
                     events = data.get('events', [])
-                    print(f"SofaScore: Fetched {len(events)} events for {date_str} from {url}")
+                    print(f"SofaScore: Fetched {len(events)} {sport} events for {date_str}")
                     return events
                 else:
                     print(f"SofaScore Fetch Failed ({url}): {res.status_code}")

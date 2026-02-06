@@ -1,21 +1,21 @@
+
 import requests
 import json
 
-def probe_standings():
-    # Premier League Standings
-    url = "http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings"
-    try:
-        res = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
-        data = res.json()
-        
-        # Check first team's stats
-        if data.get('children'):
-            standings = data['children'][0]['standings']['entries']
-            print(f"Found {len(standings)} teams.")
-            # Print first team details (stats like GF, GA, Wins, etc.)
-            print(json.dumps(standings[0], indent=2))
-    except Exception as e:
-        print(f"Error: {e}")
+leagues = ["spa.1", "acb", "tur.1", "ita.1", "ger.1"]
+date = "20260206"
 
-if __name__ == "__main__":
-    probe_standings()
+for l in leagues:
+    url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/{l}/standings"
+    res = requests.get(url)
+    if res.status_code == 200:
+        print(f"Standings SUCCESS: {l}")
+    else:
+        print(f"Standings FAILED: {l} ({res.status_code})")
+        
+    url_score = f"https://site.api.espn.com/apis/site/v2/sports/basketball/{l}/scoreboard?dates={date}"
+    res = requests.get(url_score)
+    if res.status_code == 200:
+        print(f"Scoreboard SUCCESS: {l}")
+    else:
+        print(f"Scoreboard FAILED: {l} ({res.status_code})")

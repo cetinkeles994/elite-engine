@@ -45,7 +45,9 @@ class StatEngine:
             "uefa.champions": {"goals": 3.0, "home_adv": 0.25},
             "uefa.europa": {"goals": 2.9, "home_adv": 0.30},
             "nba": {"points": 230.0, "home_adv": 3.5},
-            "basketball.euroleague": {"points": 165.0, "home_adv": 4.5}
+            "eur.league": {"points": 165.0, "home_adv": 4.5},
+            "eur.cup": {"points": 162.0, "home_adv": 4.0},
+            "tur.1_basketball": {"points": 160.0, "home_adv": 5.0}
         }
 
         # Load AI Learned Weights
@@ -190,9 +192,11 @@ class StatEngine:
     h_real=None,
     a_real=None,
      sofa_data=None):
-        base = self.baselines.get(
-    league_code, {
-        "goals": 2.7, "home_adv": 0.35, "points": 220.0})
+        code_key = league_code
+        if sport == 'basketball' and league_code == 'tur.1':
+             code_key = 'tur.1_basketball'
+
+        base = self.baselines.get(code_key, {"goals": 2.7, "home_adv": 0.35, "points": 220.0})
 
         preds = {
             "home_goals": 0, "away_goals": 0,
@@ -326,8 +330,39 @@ class StatEngine:
             #     if preds['home_win_rate'] > preds['away_win_rate']: preds['score_pred_away'] = 0
             #     else: preds['score_pred_home'] = 0
 
-        preds['momentum'] = {'home': round(
-            h_momentum, 2), 'away': round(a_momentum, 2)}
+        elif sport == 'basketball':
+            # --- BASKETBALL MODEL ---
+            avg_points = base.get('points', 220.0)
+            home_adv = base.get('home_adv', 3.0)
+            
+            # Strength difference affects the spread
+            h_win_rate = home_win_rate / 100.0
+            a_win_rate = away_win_rate / 100.0
+            
+            # Calculate Expected Spread (Approx 10% diff = 7 points)
+            spread_factor = (h_win_rate - a_win_rate) * 35.0 
+            
+            h_exp = (avg_points / 2) + (home_adv / 2) + (spread_factor / 2)
+            a_exp = (avg_points / 2) - (home_adv / 2) - (spread_factor / 2)
+            
+            preds['home_points_pred'] = int(h_exp)
+            preds['away_points_pred'] = int(a_exp)
+            preds['total_points'] = int(h_exp + a_exp)
+            
+            # Basketball Pick Logic
+            # Total Points Analysis
+            tp = preds['total_points']
+            if tp > avg_points + 5: preds['best_goal_pick'] = f"{tp-3} ÜST"
+            elif tp < avg_points - 5: preds['best_goal_pick'] = f"{tp+3} ALT"
+            else: preds['best_goal_pick'] = f"{tp} ÜST"
+            
+            preds['best_goal_prob'] = 60 + abs(int(spread_factor))
+            
+            # Spread Logic for Recommendation
+            if spread_factor > 8: preds['best_goal_pick'] = f"EV -{int(spread_factor/2)}.5"
+            elif spread_factor < -8: preds['best_goal_pick'] = f"DEP -{int(abs(spread_factor)/2)}.5"
+
+        preds['momentum'] = {'home': round(h_momentum, 2), 'away': round(a_momentum, 2)}
         preds['data_source'] = data_source
 
         # --- BARON SIGNALS 2.0: GLOBAL MARKET CONSENSUS ---
@@ -380,7 +415,9 @@ SUPPORTED_LEAGUES = [
 
     # --- BASKETBALL ---
     {"name": "NBA", "code": "nba", "sport": "basketball"},
-    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball"}  # New!
+    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball", "sofascore_id": 138},
+    {"name": "EuroCup", "code": "eur.cup", "sport": "basketball", "sofascore_id": 141},
+    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 519}
 ]
 
 
@@ -539,7 +576,12 @@ def fetch_h2h_data(event_id, home=None, away=None):
         
         if h_info:
             t_id, l_code = h_info
-            sport = 'soccer' 
+            # Detect sport from league code OR from h_info if we decide to add it
+            # For now, default to soccer but if l_code is nba, it's basketball
+            sport = 'soccer'
+            if l_code == 'nba' or 'mens-college-basketball' in l_code:
+                 sport = 'basketball'
+            
             url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{l_code}/teams/{t_id}/schedule"
             res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
             if res.status_code == 200:
@@ -629,9 +671,9 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                     except: pass
 
                 # Fallback Discovery via SofaScore
-                if league.get('sofascore_id') and league['sport'] == 'soccer':
+                if league.get('sofascore_id'):
                     ss_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-                    ss_events = adapter.fetch_daily_fixtures(ss_date)
+                    ss_events = adapter.fetch_daily_fixtures(ss_date, sport=league['sport'])
                     target_id = league['sofascore_id']
 
                     added_count = 0
