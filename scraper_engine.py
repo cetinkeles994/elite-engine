@@ -475,6 +475,7 @@ class StatEngine:
             preds['home_points_pred'] = int(h_exp)
             preds['away_points_pred'] = int(a_exp)
             preds['total_points'] = int(h_exp + a_exp)
+            preds['total_goals_prediction'] = preds['total_points'] # Map for UI compatibility
             
             # Basketball Pick Logic
             # Total Points Analysis
