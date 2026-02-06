@@ -47,7 +47,11 @@ class StatEngine:
             "nba": {"points": 230.0, "home_adv": 3.5},
             "eur.league": {"points": 165.0, "home_adv": 4.5},
             "eur.cup": {"points": 162.0, "home_adv": 4.0},
-            "tur.1_basketball": {"points": 160.0, "home_adv": 5.0}
+            "tur.1_basketball": {"points": 160.0, "home_adv": 5.0},
+            "spa.1_basketball": {"points": 163.0, "home_adv": 3.5},
+            "ita.1_basketball": {"points": 160.0, "home_adv": 4.0},
+            "fra.1_basketball": {"points": 158.0, "home_adv": 4.5},
+            "ger.1_basketball": {"points": 168.0, "home_adv": 3.0}
         }
 
         # Load AI Learned Weights
@@ -193,10 +197,15 @@ class StatEngine:
     a_real=None,
      sofa_data=None):
         code_key = league_code
-        if sport == 'basketball' and league_code == 'tur.1':
-             code_key = 'tur.1_basketball'
+        if sport == 'basketball' and league_code not in ['nba', 'eur.league', 'eur.cup']:
+             code_key = f"{league_code}_basketball"
 
-        base = self.baselines.get(code_key, {"goals": 2.7, "home_adv": 0.35, "points": 220.0})
+        # Smarter defaults: Basketball should not default to 220 points if it's European
+        default_base = {"goals": 2.7, "home_adv": 0.35, "points": 220.0}
+        if sport == 'basketball':
+            default_base["points"] = 165.0 # Sensible EU average
+            
+        base = self.baselines.get(code_key, default_base)
 
         preds = {
             "home_goals": 0, "away_goals": 0,

@@ -1,139 +1,4 @@
 {
-    "15362429": {
-        "name": "FC St. Pauli vs RB Leipzig",
-        "homeTeam": "FC St. Pauli",
-        "awayTeam": "RB Leipzig",
-        "xG": [
-            0.51,
-            0.67
-        ],
-        "momentum": "Leipzig Üstünlüğü",
-        "momentum_score": 5.8,
-        "global_odds": {
-            "1": 4.33,
-            "X": 2.75,
-            "2": 2.2
-        },
-        "league_id": 35
-    },
-    "15362425": {
-        "name": "SV Werder Bremen vs TSG Hoffenheim",
-        "homeTeam": "SV Werder Bremen",
-        "awayTeam": "TSG Hoffenheim",
-        "xG": [
-            0.14,
-            0.41
-        ],
-        "momentum": "Hoffenheim Baskın",
-        "momentum_score": -15.2,
-        "global_odds": {
-            "1": 13.0,
-            "X": 4.75,
-            "2": 1.29
-        },
-        "league_id": 35
-    },
-    "14787859": {
-        "name": "Fiorentina vs Como",
-        "homeTeam": "Fiorentina",
-        "awayTeam": "Como",
-        "momentum": "Como Aktif",
-        "momentum_score": -7.4,
-        "global_odds": {
-            "1": 4.5,
-            "X": 2.88,
-            "2": 2.05
-        },
-        "league_id": 14787859
-    },
-    "14061199": {
-        "name": "Cardiff City vs Barnsley",
-        "homeTeam": "Cardiff City",
-        "awayTeam": "Barnsley",
-        "momentum": "Cardiff Kontrolünde",
-        "momentum_score": -1.6,
-        "global_odds": {
-            "1": 1.03,
-            "X": 15.0,
-            "2": 41.0
-        }
-    },
-    "14061205": {
-        "name": "Huddersfield Town vs Luton Town",
-        "homeTeam": "Huddersfield Town",
-        "awayTeam": "Luton Town",
-        "momentum_score": -24.4,
-        "global_odds": {
-            "1": 5.5,
-            "X": 2.5,
-            "2": 2.05
-        }
-    },
-    "14061211": {
-        "name": "Plymouth Argyle vs Mansfield Town",
-        "homeTeam": "Plymouth Argyle",
-        "awayTeam": "Mansfield Town",
-        "momentum_score": -34.0,
-        "global_odds": {
-            "1": 2.2,
-            "X": 2.75,
-            "2": 4.33
-        }
-    },
-    "14061194": {
-        "name": "Blackpool vs Stockport County",
-        "homeTeam": "Blackpool",
-        "awayTeam": "Stockport County",
-        "momentum": "Stockport Hücumda",
-        "momentum_score": -5.8,
-        "global_odds": {
-            "1": 41.0,
-            "X": 15.0,
-            "2": 1.04
-        }
-    },
-    "14061222": {
-        "name": "Reading vs Exeter City",
-        "homeTeam": "Reading",
-        "awayTeam": "Exeter City",
-        "momentum_score": 12.4,
-        "global_odds": {
-            "1": 5.0,
-            "X": 3.4,
-            "2": 1.8
-        }
-    },
-    "14061202": {
-        "name": "Doncaster Rovers vs Leyton Orient",
-        "homeTeam": "Doncaster Rovers",
-        "awayTeam": "Leyton Orient",
-        "momentum_score": 30.2,
-        "global_odds": {
-            "1": 1.33,
-            "X": 4.75,
-            "2": 10.0
-        }
-    },
-    "14061219": {
-        "name": "Wycombe Wanderers vs Wigan Athletic",
-        "homeTeam": "Wycombe Wanderers",
-        "awayTeam": "Wigan Athletic",
-        "momentum_score": -27.2,
-        "global_odds": {
-            "1": 1.4,
-            "X": 4.0,
-            "2": 9.5
-        }
-    },
-    "last_update": "2026-01-28 11:20:10",
-    "14500827": {
-        "id": 14500827,
-        "name": "Tofaş Bursa vs Mersin SC",
-        "homeTeam": "Tofaş Bursa",
-        "awayTeam": "Mersin SC",
-        "momentum_score": "Not started",
-        "league_id": 595
-    },
     "14210728": {
         "id": 14210728,
         "name": "BC Dubai vs Real Madrid",
@@ -203,7 +68,7 @@
         "name": "Olympiacos BC vs Virtus Bologna",
         "homeTeam": "Olympiacos BC",
         "awayTeam": "Virtus Bologna",
-        "momentum_score": "1st quarter",
+        "momentum_score": "2nd quarter",
         "league_id": 42527
     },
     "14206335": {
@@ -213,6 +78,518 @@
         "awayTeam": "Barça Basket",
         "momentum_score": "1st quarter",
         "league_id": 42527
+    },
+    "14128352": {
+        "id": 14128352,
+        "name": "Hamburg Towers vs KK Cedevita Olimpija",
+        "homeTeam": "Hamburg Towers",
+        "awayTeam": "KK Cedevita Olimpija",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14128354": {
+        "id": 14128354,
+        "name": "Śląsk Wrocław vs KK Cedevita Olimpija",
+        "homeTeam": "Śląsk Wrocław",
+        "awayTeam": "KK Cedevita Olimpija",
+        "momentum_score": "Not started",
+        "league_id": 2560
+    },
+    "14500827": {
+        "id": 14500827,
+        "name": "Tofaş Bursa vs Mersin SC",
+        "homeTeam": "Tofaş Bursa",
+        "awayTeam": "Mersin SC",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500849": {
+        "id": 14500849,
+        "name": "Trabzonspor vs Yukatel Merkezefendi Belediyesi Basket",
+        "homeTeam": "Trabzonspor",
+        "awayTeam": "Yukatel Merkezefendi Belediyesi Basket",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500845": {
+        "id": 14500845,
+        "name": "Beşiktaş Gain vs Esenler Erokspor",
+        "homeTeam": "Beşiktaş Gain",
+        "awayTeam": "Esenler Erokspor",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500836": {
+        "id": 14500836,
+        "name": "Bahçeşehir Koleji vs Büyükçekmece",
+        "homeTeam": "Bahçeşehir Koleji",
+        "awayTeam": "Büyükçekmece",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500850": {
+        "id": 14500850,
+        "name": "Anadolu Efes vs Karşıyaka",
+        "homeTeam": "Anadolu Efes",
+        "awayTeam": "Karşıyaka",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500851": {
+        "id": 14500851,
+        "name": "Fenerbahçe Beko vs Galatasaray MCT Technic",
+        "homeTeam": "Fenerbahçe Beko",
+        "awayTeam": "Galatasaray MCT Technic",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500824": {
+        "id": 14500824,
+        "name": "Petkim Spor vs Türk Telekom B.K.",
+        "homeTeam": "Petkim Spor",
+        "awayTeam": "Türk Telekom B.K.",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14500848": {
+        "id": 14500848,
+        "name": "Manisa Basket vs Bursaspor Basketbol",
+        "homeTeam": "Manisa Basket",
+        "awayTeam": "Bursaspor Basketbol",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14491527": {
+        "id": 14491527,
+        "name": "Hereda San Pablo Burgos vs La Laguna Tenerife",
+        "homeTeam": "Hereda San Pablo Burgos",
+        "awayTeam": "La Laguna Tenerife",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491528": {
+        "id": 14491528,
+        "name": "Unicaja vs MoraBanc Andorra",
+        "homeTeam": "Unicaja",
+        "awayTeam": "MoraBanc Andorra",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491520": {
+        "id": 14491520,
+        "name": "Dreamland Gran Canaria vs Surne Bilbao Basket",
+        "homeTeam": "Dreamland Gran Canaria",
+        "awayTeam": "Surne Bilbao Basket",
+        "momentum_score": "Postponed",
+        "league_id": 271
+    },
+    "14491633": {
+        "id": 14491633,
+        "name": "Dreamland Gran Canaria vs Bàsquet Girona",
+        "homeTeam": "Dreamland Gran Canaria",
+        "awayTeam": "Bàsquet Girona",
+        "momentum_score": "Postponed",
+        "league_id": 271
+    },
+    "14491525": {
+        "id": 14491525,
+        "name": "Río Breogán vs UCAM Murcia",
+        "homeTeam": "Río Breogán",
+        "awayTeam": "UCAM Murcia",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491630": {
+        "id": 14491630,
+        "name": "Basket Zaragoza vs Surne Bilbao Basket",
+        "homeTeam": "Basket Zaragoza",
+        "awayTeam": "Surne Bilbao Basket",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491521": {
+        "id": 14491521,
+        "name": "Força Lleida CE vs BAXI Manresa",
+        "homeTeam": "Força Lleida CE",
+        "awayTeam": "BAXI Manresa",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491523": {
+        "id": 14491523,
+        "name": "Joventut Badalona vs Valencia Basket",
+        "homeTeam": "Joventut Badalona",
+        "awayTeam": "Valencia Basket",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491524": {
+        "id": 14491524,
+        "name": "Real Madrid vs Fundación CB Granada",
+        "homeTeam": "Real Madrid",
+        "awayTeam": "Fundación CB Granada",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "15438124": {
+        "id": 15438124,
+        "name": "Dreamland Gran Canaria vs Kosner Baskonia",
+        "homeTeam": "Dreamland Gran Canaria",
+        "awayTeam": "Kosner Baskonia",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14491518": {
+        "id": 14491518,
+        "name": "Kosner Baskonia vs Basket Zaragoza",
+        "homeTeam": "Kosner Baskonia",
+        "awayTeam": "Basket Zaragoza",
+        "momentum_score": "Postponed",
+        "league_id": 271
+    },
+    "14491517": {
+        "id": 14491517,
+        "name": "Barça Basket vs Bàsquet Girona",
+        "homeTeam": "Barça Basket",
+        "awayTeam": "Bàsquet Girona",
+        "momentum_score": "Not started",
+        "league_id": 271
+    },
+    "14343952": {
+        "id": 14343952,
+        "name": "Vanoli Basket Cremona vs Pallacanestro Cantù",
+        "homeTeam": "Vanoli Basket Cremona",
+        "awayTeam": "Pallacanestro Cantù",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343949": {
+        "id": 14343949,
+        "name": "GeVi Napoli Basket vs Umana Reyer Venezia",
+        "homeTeam": "GeVi Napoli Basket",
+        "awayTeam": "Umana Reyer Venezia",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343956": {
+        "id": 14343956,
+        "name": "Dolomiti Energia Trento vs Openjobmetis Varese",
+        "homeTeam": "Dolomiti Energia Trento",
+        "awayTeam": "Openjobmetis Varese",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343953": {
+        "id": 14343953,
+        "name": "Bertram Derthona Tortona vs Pallacanestro Trieste",
+        "homeTeam": "Bertram Derthona Tortona",
+        "awayTeam": "Pallacanestro Trieste",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343957": {
+        "id": 14343957,
+        "name": "APU Udine vs Banco di Sardegna Sassari",
+        "homeTeam": "APU Udine",
+        "awayTeam": "Banco di Sardegna Sassari",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343954": {
+        "id": 14343954,
+        "name": "UNAhotels Reggio Emilia vs Trapani Shark",
+        "homeTeam": "UNAhotels Reggio Emilia",
+        "awayTeam": "Trapani Shark",
+        "momentum_score": "Canceled",
+        "league_id": 269
+    },
+    "14343951": {
+        "id": 14343951,
+        "name": "Germani Brescia vs Virtus Bologna",
+        "homeTeam": "Germani Brescia",
+        "awayTeam": "Virtus Bologna",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14343955": {
+        "id": 14343955,
+        "name": "Nutribullet Treviso Basket vs EA7 Emporio Armani Milano",
+        "homeTeam": "Nutribullet Treviso Basket",
+        "awayTeam": "EA7 Emporio Armani Milano",
+        "momentum_score": "Not started",
+        "league_id": 269
+    },
+    "14270242": {
+        "id": 14270242,
+        "name": "JL Bourg Basket vs Boulazac Basket",
+        "homeTeam": "JL Bourg Basket",
+        "awayTeam": "Boulazac Basket",
+        "momentum_score": "1st quarter",
+        "league_id": 272
+    },
+    "14270239": {
+        "id": 14270239,
+        "name": "BCM Gravelines-Dunkerque vs Saint-Quentin",
+        "homeTeam": "BCM Gravelines-Dunkerque",
+        "awayTeam": "Saint-Quentin",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14270241": {
+        "id": 14270241,
+        "name": "Le Mans Sarthe Basket vs JDA Dijon Basket",
+        "homeTeam": "Le Mans Sarthe Basket",
+        "awayTeam": "JDA Dijon Basket",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14270244": {
+        "id": 14270244,
+        "name": "Le Portel vs SIG Strasbourg",
+        "homeTeam": "Le Portel",
+        "awayTeam": "SIG Strasbourg",
+        "momentum_score": "Postponed",
+        "league_id": 272
+    },
+    "14270245": {
+        "id": 14270245,
+        "name": "Paris Basketball vs SLUC Nancy Basket",
+        "homeTeam": "Paris Basketball",
+        "awayTeam": "SLUC Nancy Basket",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14270243": {
+        "id": 14270243,
+        "name": "Limoges CSP vs Cholet Basket",
+        "homeTeam": "Limoges CSP",
+        "awayTeam": "Cholet Basket",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14270246": {
+        "id": 14270246,
+        "name": "LDLC ASVEL Lyon-Villeurbanne vs Nanterre 92",
+        "homeTeam": "LDLC ASVEL Lyon-Villeurbanne",
+        "awayTeam": "Nanterre 92",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14270240": {
+        "id": 14270240,
+        "name": "Élan Chalon vs Monaco Basket",
+        "homeTeam": "Élan Chalon",
+        "awayTeam": "Monaco Basket",
+        "momentum_score": "Not started",
+        "league_id": 272
+    },
+    "14698411": {
+        "id": 14698411,
+        "name": "BV Chemnitz 99 vs SYNTAINICS Mitteldeutscher BC",
+        "homeTeam": "BV Chemnitz 99",
+        "awayTeam": "SYNTAINICS Mitteldeutscher BC",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698410": {
+        "id": 14698410,
+        "name": "Fraport Skyliners Frankfurt vs Gladiators Trier",
+        "homeTeam": "Fraport Skyliners Frankfurt",
+        "awayTeam": "Gladiators Trier",
+        "momentum_score": "Postponed",
+        "league_id": 154
+    },
+    "14698412": {
+        "id": 14698412,
+        "name": "MHP Riesen Ludwigsburg vs Bamberg Baskets",
+        "homeTeam": "MHP Riesen Ludwigsburg",
+        "awayTeam": "Bamberg Baskets",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14470689": {
+        "id": 14470689,
+        "name": "Telekom Baskets Bonn vs Science City Jena",
+        "homeTeam": "Telekom Baskets Bonn",
+        "awayTeam": "Science City Jena",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698414": {
+        "id": 14698414,
+        "name": "ALBA Berlin vs Rasta Vechta",
+        "homeTeam": "ALBA Berlin",
+        "awayTeam": "Rasta Vechta",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698415": {
+        "id": 14698415,
+        "name": "Ratiopharm Ulm vs EWE Baskets Oldenburg",
+        "homeTeam": "Ratiopharm Ulm",
+        "awayTeam": "EWE Baskets Oldenburg",
+        "momentum_score": "Postponed",
+        "league_id": 154
+    },
+    "14698442": {
+        "id": 14698442,
+        "name": "Ratiopharm Ulm vs Gladiators Trier",
+        "homeTeam": "Ratiopharm Ulm",
+        "awayTeam": "Gladiators Trier",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698419": {
+        "id": 14698419,
+        "name": "Hamburg Towers vs Löwen Braunschweig",
+        "homeTeam": "Hamburg Towers",
+        "awayTeam": "Löwen Braunschweig",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698416": {
+        "id": 14698416,
+        "name": "MLP Academics Heidelberg vs Bayern München",
+        "homeTeam": "MLP Academics Heidelberg",
+        "awayTeam": "Bayern München",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698417": {
+        "id": 14698417,
+        "name": "Rostock Seawolves vs Fitness First Würzburg Baskets",
+        "homeTeam": "Rostock Seawolves",
+        "awayTeam": "Fitness First Würzburg Baskets",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14210726": {
+        "id": 14210726,
+        "name": "Virtus Bologna vs LDLC ASVEL Lyon-Villeurbanne",
+        "homeTeam": "Virtus Bologna",
+        "awayTeam": "LDLC ASVEL Lyon-Villeurbanne",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210719": {
+        "id": 14210719,
+        "name": "BC Dubai vs Olympiacos BC",
+        "homeTeam": "BC Dubai",
+        "awayTeam": "Olympiacos BC",
+        "momentum_score": "AET",
+        "league_id": 42527
+    },
+    "14210718": {
+        "id": 14210718,
+        "name": "Anadolu Efes vs Valencia Basket",
+        "homeTeam": "Anadolu Efes",
+        "awayTeam": "Valencia Basket",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210720": {
+        "id": 14210720,
+        "name": "Kauno Žalgiris vs Monaco Basket",
+        "homeTeam": "Kauno Žalgiris",
+        "awayTeam": "Monaco Basket",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210721": {
+        "id": 14210721,
+        "name": "KK Crvena zvezda vs Hapoel Tel-Aviv",
+        "homeTeam": "KK Crvena zvezda",
+        "awayTeam": "Hapoel Tel-Aviv",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210724": {
+        "id": 14210724,
+        "name": "Maccabi Tel Aviv vs KK Partizan Mozzart Bet",
+        "homeTeam": "Maccabi Tel Aviv",
+        "awayTeam": "KK Partizan Mozzart Bet",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210722": {
+        "id": 14210722,
+        "name": "Panathinaikos BC vs Real Madrid",
+        "homeTeam": "Panathinaikos BC",
+        "awayTeam": "Real Madrid",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210725": {
+        "id": 14210725,
+        "name": "Barça Basket vs Fenerbahçe Beko",
+        "homeTeam": "Barça Basket",
+        "awayTeam": "Fenerbahçe Beko",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210727": {
+        "id": 14210727,
+        "name": "Bayern München vs Paris Basketball",
+        "homeTeam": "Bayern München",
+        "awayTeam": "Paris Basketball",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210723": {
+        "id": 14210723,
+        "name": "EA7 Emporio Armani Milano vs Kosner Baskonia",
+        "homeTeam": "EA7 Emporio Armani Milano",
+        "awayTeam": "Kosner Baskonia",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14128351": {
+        "id": 14128351,
+        "name": "Hapoel Jerusalem BC vs U-Banca Transilvania Cluj-Napoca",
+        "homeTeam": "Hapoel Jerusalem BC",
+        "awayTeam": "U-Banca Transilvania Cluj-Napoca",
+        "momentum_score": "AET",
+        "league_id": 2560
+    },
+    "14128350": {
+        "id": 14128350,
+        "name": "Aris BC vs Klaipėdos Neptūnas",
+        "homeTeam": "Aris BC",
+        "awayTeam": "Klaipėdos Neptūnas",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14128353": {
+        "id": 14128353,
+        "name": "BAXI Manresa vs Umana Reyer Venezia",
+        "homeTeam": "BAXI Manresa",
+        "awayTeam": "Umana Reyer Venezia",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14128349": {
+        "id": 14128349,
+        "name": "Bahçeşehir Koleji vs Śląsk Wrocław",
+        "homeTeam": "Bahçeşehir Koleji",
+        "awayTeam": "Śląsk Wrocław",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14500820": {
+        "id": 14500820,
+        "name": "Bursaspor Basketbol vs Trabzonspor",
+        "homeTeam": "Bursaspor Basketbol",
+        "awayTeam": "Trabzonspor",
+        "momentum_score": "Ended",
+        "league_id": 595
+    },
+    "14698408": {
+        "id": 14698408,
+        "name": "Gladiators Trier vs ALBA Berlin",
+        "homeTeam": "Gladiators Trier",
+        "awayTeam": "ALBA Berlin",
+        "momentum_score": "Ended",
+        "league_id": 154
     },
     "14491506": {
         "id": 14491506,
