@@ -1114,16 +1114,41 @@
                                 ${m.pro_stats.sofa_elite ? '<span class="elite-badge" title="SofaScore Elite Data Core">💎</span>' : ''}
                             </div>
                         </td>
-                        <td class="text-center font-bold font-mono text-lg text-white">${m.score}</td>
+                        <td class="text-center font-bold font-mono text-lg text-white">
+                            ${(m.score === '0-0' && currentSport === 'basketball' && m.pro_stats) ?
+                        `<span class="text-blue-400 text-sm opacity-80">${m.pro_stats.home_points_pred}-${m.pro_stats.away_points_pred}</span>` :
+                        m.score}
+                        </td>
                 `;
 
                 // View Specific Columns
                 if (currentView === 'main' || currentView === 'history' || currentView === 'baron') {
                     // Main View
                     if (currentSport === 'basketball') {
+                        const sim = m.pro_stats.sim_details || {};
+                        const thresholds = sim.thresholds || {};
+                        let bballTooltip = `<div class='text-left font-mono'><b>📊 10.000 Maç Simülasyonu:</b><br>`;
+
+                        bballTooltip += `<div class='text-green-400 font-bold mb-1'>Tahmin: ${m.pro_stats.home_points_pred}-${m.pro_stats.away_points_pred}</div>`;
+
+                        const threshList = [150, 160, 170, 180, 190, 200];
+                        threshList.forEach(t => {
+                            const val = thresholds[`over_${t}`];
+                            if (val !== undefined) {
+                                bballTooltip += `<div class='flex justify-between text-gray-400'><span>${t}.5 Üst</span> <span>%${parseInt(val)}</span></div>`;
+                            }
+                        });
+                        bballTooltip += `</div>`;
+
                         row += `
                             <td class="text-center font-mono text-blue-300 font-bold">${m.pro_stats.home_points_pred}</td>
                             <td class="text-center font-mono text-blue-300 font-bold">${m.pro_stats.away_points_pred}</td>
+                            <td class="text-center font-mono text-accent font-bold relative group cursor-help">
+                                ${parseInt(m.pro_stats.home_points_pred + m.pro_stats.away_points_pred)}
+                                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-black border border-gray-700 rounded text-[10px] shadow-xl z-50 pointer-events-none data-tooltip">
+                                    ${bballTooltip}
+                                </div>
+                            </td>
                         `;
                     } else {
                         // Soccer: Show Score Prediction

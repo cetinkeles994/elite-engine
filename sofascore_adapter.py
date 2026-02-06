@@ -147,6 +147,44 @@ class SofaScoreAdapter:
                 print(f"SofaScore Fetch Error ({url}): {e}")
         return []
 
+    def get_odds(self, event_id):
+        """
+        Fetches odds for a specific event. Returns dict with '1', 'X', '2' keys (decimal).
+        """
+        urls = [
+            f"https://api.sofascore.com/api/v1/event/{event_id}/odds/1/all",
+            f"http://api.sofascore.com/api/v1/event/{event_id}/odds/1/all",
+            f"https://www.sofascore.com/api/v1/event/{event_id}/odds/1/all"
+        ]
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+            "Referer": "https://www.sofascore.com/",
+            "Origin": "https://www.sofascore.com",
+            "Accept": "*/*"
+        }
+        
+        for url in urls:
+            try:
+                 res = self.scraper.get(url, headers=headers, timeout=10)
+                 if res.status_code == 200:
+                     data = res.json()
+                     markets = data.get('markets', [])
+                     parsed = self.parse_market_odds(markets)
+                     
+                     # Convert keys to home/away for easier consumption
+                     ret = {}
+                     if '1' in parsed: ret['home'] = parsed['1']
+                     if '2' in parsed: ret['away'] = parsed['2']
+                     if 'X' in parsed: ret['draw'] = parsed['X']
+                     
+                     if ret: return ret # Only return if we actually got something
+                     
+            except Exception as e:
+                 print(f"Odds Fetch Attempt Error ({url}): {e}")
+        
+        return None
+
 # Usage Example
 if __name__ == "__main__":
     adapter = SofaScoreAdapter()

@@ -248,19 +248,25 @@ class StatEngine:
             total_points_list.append(h_score + a_score)
             
         avg_total = sum(total_points_list) / iterations
-        
-        # Probabilities
-        over_150 = len([p for p in total_points_list if p > 150.5]) / iterations * 100
-        over_160 = len([p for p in total_points_list if p > 160.5]) / iterations * 100
-        over_220 = len([p for p in total_points_list if p > 220.5]) / iterations * 100
-        
+
+        # Probabilities for various thresholds
+        thresholds = [150, 160, 170, 180, 190, 200]
+        probs = {}
+        for t in thresholds:
+            probs[f'over_{t}'] = len([p for p in total_points_list if p > t + 0.5]) / iterations * 100
+
         return {
             'home_win_prob': (home_wins / iterations) * 100,
             'away_win_prob': (away_wins / iterations) * 100,
-            'draw_prob': 0, # No draws in basketball (OT included)
-            'over_1_5_prob': over_150, # Recycled for UI logic
-            'over_2_5_prob': over_160 if avg_total < 200 else over_220,
-            'avg_total': avg_total
+            'draw_prob': 0,
+            'avg_total': avg_total,
+            'thresholds': probs,
+            # For UI compatibility with soccer tooltips
+            'over_1_5_prob': probs.get('over_160', 50),
+            'over_2_5_prob': probs.get('over_170', 40),
+            'btts_prob': probs.get('over_150', 60),
+            'mode_score_home': int(h_exp),
+            'mode_score_away': int(a_exp)
         }
 
 
@@ -880,6 +886,20 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                     is_dup = True; break
                             if is_dup: continue
 
+                            # Extract Form logic
+                            h_recs = []
+                            a_recs = []
+                            
+                            try:
+                                h_form = se.get('homeTeamSeasonHistoricalForm', {})
+                                if h_form and 'wins' in h_form and 'losses' in h_form:
+                                    h_recs.append({'type': 'total', 'summary': f"{h_form['wins']}-{h_form['losses']}"})
+                                
+                                a_form = se.get('awayTeamSeasonHistoricalForm', {})
+                                if a_form and 'wins' in a_form and 'losses' in a_form:
+                                    a_recs.append({'type': 'total', 'summary': f"{a_form['wins']}-{a_form['losses']}"})
+                            except: pass
+
                             # Convert to Synthetic Event
                             synthetic_event = {
                                 'id': f"ss-{se['id']}",
@@ -889,9 +909,9 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                 'competitions': [{
                                     'competitors': [
                                         {'homeAway': 'home', 'team': {
-                                            'name': h_name}, 'score': '0', 'records': []},
+                                            'name': h_name}, 'score': '0', 'records': h_recs},
                                         {'homeAway': 'away', 'team': {
-                                            'name': a_name}, 'score': '0', 'records': []}
+                                            'name': a_name}, 'score': '0', 'records': a_recs}
                                     ]
                                 }]
                             }
@@ -1074,39 +1094,6 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                         sofa_adapter.update_match_data(se['id'], sofa_data)
                                         break
 
-                        # --- PRO PREDICTION GENERATION ---
-                        # Pass real stats to engine
-                        pro_stats = stat_engine.predict_match(
-                            home_win_rate, away_win_rate, league["code"], sport,
-                            home_team=home_team,
-                            away_team=away_team,
-                            live_stats=live_stats,
-                            h_real=h_stats_real,
-                            a_real=a_stats_real,
-                            sofa_data=sofa_data
-                        )
-
-                        if sofa_data:
-                            pro_stats['sofa_elite'] = sofa_data
-
-                        # --- PROBABILITY CALC (Match Winner) ---
-                        home_prob = home_win_rate * 1.10  # Home Adv
-                        away_prob = 1.0 - home_prob
-
-                        # Live Decay
-                        is_losing = False
-                        try:
-                            h_s = int(home_score)
-                            a_s = int(away_score)
-                            if status_state == 'in':
-                                 diff = h_s - a_s
-                                 if diff < 0:
-                                     home_prob *= 0.20
-                                     is_losing = True
-                                 elif diff > 0: home_prob *= 1.50
-                        except: pass
-
-                        fair_odds_home = 1 / home_prob if home_prob > 0.01 else 99.00
 
                         # --- ODDS PARSING (MOVED UP FOR PREDICTION) ---
                         odds_data = competitions.get('odds', [])
@@ -1114,6 +1101,18 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         bookie_away_odds = 0
                         spread = None
                         drop_info = None
+
+                        # --- SOFASCORE SYNTHETIC ODDS INJECTION ---
+                        # If this is a synthetic event (e.g. from SofaScore Discovery) and has no odds yet
+                        if str(event.get('id', '')).startswith('ss-'):
+                            try:
+                                ssid = str(event['id']).replace('ss-', '')
+                                ss_odds_data = adapter.get_odds(ssid)
+                                if ss_odds_data and ss_odds_data.get('home') and ss_odds_data.get('away'):
+                                    bookie_home_odds = ss_odds_data['home']
+                                    bookie_away_odds = ss_odds_data['away']
+                            except Exception as e:
+                                print(f"SS Odds Injection Error: {e}")
 
                         if odds_data:
                             try:
@@ -1134,9 +1133,9 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                                 if ml:
                                    bookie_home_odds = am_to_dec(
-                                       ml.get('home', {}).get('current', {}).get('odds'))
+                                       ml.get('home', {}).get('current', {}).get('odds')) if bookie_home_odds == 0 else bookie_home_odds
                                    bookie_away_odds = am_to_dec(
-                                       ml.get('away', {}).get('current', {}).get('odds'))
+                                       ml.get('away', {}).get('current', {}).get('odds')) if bookie_away_odds == 0 else bookie_away_odds
 
                                    # --- DROPPING ODDS ANALYSIS (BARON TRACKING) ---
                                    try:
@@ -1174,6 +1173,42 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             # WEIGHTED BLEND: 40% History / 60% Market
                             home_win_rate = (home_win_rate * 0.40) + (market_h_prob * 0.60)
                             away_win_rate = (away_win_rate * 0.40) + (market_a_prob * 0.60)
+
+                        # --- PRO PREDICTION GENERATION ---
+                        # Pass real stats to engine
+                        pro_stats = stat_engine.predict_match(
+                            home_win_rate, away_win_rate, league["code"], sport,
+                            home_team=home_team,
+                            away_team=away_team,
+                            live_stats=live_stats,
+                            h_real=h_stats_real,
+                            a_real=a_stats_real,
+                            sofa_data=sofa_data
+                        )
+
+                        if sofa_data:
+                            pro_stats['sofa_elite'] = sofa_data
+
+                        # --- PROBABILITY CALC (Match Winner) ---
+                        home_prob = home_win_rate * 1.10  # Home Adv
+                        away_prob = 1.0 - home_prob
+
+                        # Live Decay
+                        is_losing = False
+                        try:
+                            h_s = int(home_score)
+                            a_s = int(away_score)
+                            if status_state == 'in':
+                                 diff = h_s - a_s
+                                 if diff < 0:
+                                     home_prob *= 0.20
+                                     is_losing = True
+                                 elif diff > 0: home_prob *= 1.50
+                        except: pass
+
+                        fair_odds_home = 1 / home_prob if home_prob > 0.01 else 99.00
+
+
 
                         # --- SOFASCORE LOOKUP ---
 
