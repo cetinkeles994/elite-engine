@@ -67,6 +67,42 @@ class StatEngine:
         except Exception as e:
             print(f"AI Load Error: {e}")
 
+    def _get_team_ratings(self, league_code, team_name):
+        """
+        Ordinaryüs Seviye: Dinamik Hücum ve Savunma Reytingi Hesaplama.
+        """
+        try:
+            standings = STANDINGS_CACHE.get(league_code)
+            if not standings or len(standings) < 4: return 1.0, 1.0
+            
+            norm_name = normalize_name(team_name)
+            team_stats = next((s for s in standings if normalize_name(s['team']) == norm_name or norm_name in normalize_name(s['team'])), None)
+            
+            if not team_stats or team_stats.get('played', 0) < 3: return 1.0, 1.0
+            
+            total_played = sum(s.get('played', 0) for s in standings)
+            if total_played == 0: return 1.0, 1.0
+            
+            avg_gf = sum(s.get('gf', 0) for s in standings) / total_played
+            avg_ga = sum(s.get('ga', 0) for s in standings) / total_played
+            
+            if avg_gf == 0: avg_gf = 1
+            if avg_ga == 0: avg_ga = 1
+            
+            t_gf_pg = team_stats['gf'] / team_stats['played']
+            t_ga_pg = team_stats['ga'] / team_stats['played']
+            
+            off_rating = t_gf_pg / avg_gf
+            def_rating = t_ga_pg / avg_ga
+            
+            # Clamp ratings to avoid extreme outliers
+            off_rating = max(0.6, min(1.6, off_rating))
+            def_rating = max(0.6, min(1.6, def_rating))
+            
+            return off_rating, def_rating
+        except:
+            return 1.0, 1.0
+
     def simulate_match(self, h_exp, a_exp, iterations=10000):
         # MONTE CARLO SIMULATION (The "God Mode" Engine)
         # Plays the match 'iterations' times to find true probability
@@ -234,6 +270,8 @@ class StatEngine:
     away_win_rate,
     league_code,
     sport="soccer",
+    home_team=None,
+    away_team=None,
     live_stats=None,
     h_real=None,
     a_real=None,
@@ -248,6 +286,32 @@ class StatEngine:
             default_base["points"] = 165.0 # Sensible EU average
             
         base = self.baselines.get(code_key, default_base)
+
+        # --- ORDINARYUS: OFFENSIVE/DEFENSIVE RATINGS ---
+        h_off, h_def = 1.0, 1.0
+        a_off, a_def = 1.0, 1.0
+        
+        if home_team and away_team:
+            h_off, h_def = self._get_team_ratings(league_code, home_team)
+            a_off, a_def = self._get_team_ratings(league_code, away_team)
+            
+        # Adjust baselines based on ratings
+        # Formula: Expected = Baseline * Team_Offense * Opponent_Defense
+        if sport == 'soccer':
+            h_exp = base.get('goals', 2.7) * h_off * a_def
+            a_exp = base.get('goals', 2.7) * a_off * h_def
+            home_adv = base.get('home_adv', 0.35)
+            h_exp += home_adv
+        else:
+            # Basketball
+            avg_points = base.get('points', 165.0)
+            home_adv = base.get('home_adv', 4.0)
+            
+            # Weighted ratings for basketball (less volatile than soccer)
+            h_exp = (avg_points / 2) * (1.0 + (h_off - 1.0) * 0.5) * (1.0 + (a_def - 1.0) * 0.5)
+            a_exp = (avg_points / 2) * (1.0 + (a_off - 1.0) * 0.5) * (1.0 + (h_def - 1.0) * 0.5)
+            h_exp += (home_adv / 2)
+            a_exp -= (home_adv / 2)
 
         preds = {
             "home_goals": 0, "away_goals": 0,
@@ -981,6 +1045,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         # Pass real stats to engine
                         pro_stats = stat_engine.predict_match(
                             home_win_rate, away_win_rate, league["code"], sport,
+                            home_team=home_team,
+                            away_team=away_team,
                             live_stats=live_stats,
                             h_real=h_stats_real,
                             a_real=a_stats_real,
