@@ -67,7 +67,7 @@ class StatEngine:
         except Exception as e:
             print(f"AI Load Error: {e}")
 
-    def simulate_match(self, h_exp, a_exp, iterations=1000):
+    def simulate_match(self, h_exp, a_exp, iterations=10000):
         # MONTE CARLO SIMULATION (The "God Mode" Engine)
         # Plays the match 'iterations' times to find true probability
 
@@ -185,7 +185,7 @@ class StatEngine:
             'top_scores': top_scores
         }
 
-    def simulate_basketball_match(self, h_exp, a_exp, sport='basketball', iterations=1000):
+    def simulate_basketball_match(self, h_exp, a_exp, sport='basketball', iterations=10000):
         """
         Profesör Seviye: Normal Dağılım (Gaussian) tabanlı Basketbol Simülasyonu.
         """
