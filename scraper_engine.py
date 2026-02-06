@@ -417,7 +417,11 @@ SUPPORTED_LEAGUES = [
     {"name": "NBA", "code": "nba", "sport": "basketball"},
     {"name": "EuroLeague", "code": "eur.league", "sport": "basketball", "sofascore_id": 42527},
     {"name": "EuroCup", "code": "eur.cup", "sport": "basketball", "sofascore_id": 2560},
-    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 595}
+    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 595},
+    {"name": "ACB", "code": "spa.1", "sport": "basketball", "sofascore_id": 271},
+    {"name": "Lega A", "code": "ita.1", "sport": "basketball", "sofascore_id": 269},
+    {"name": "Pro A", "code": "fra.1", "sport": "basketball", "sofascore_id": 272},
+    {"name": "BBL", "code": "ger.1", "sport": "basketball", "sofascore_id": 154}
 ]
 
 
@@ -697,6 +701,14 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             is_match = True
                         elif "bsl" in league['name'].lower() and ("turkish basketball super league" in t_name or "bsl" in t_name):
                             is_match = True
+                        elif "acb" in league['name'].lower() and ("acb" in t_name or "liga endesa" in t_name):
+                            is_match = True
+                        elif "lega a" in league['name'].lower() and ("lega a" in t_name or "italy" in t_name):
+                            is_match = True
+                        elif "pro a" in league['name'].lower() and ("pro a" in t_name or "lnb" in t_name):
+                            is_match = True
+                        elif "bbl" in league['name'].lower() and ("bbl" in t_name or "germany" in t_name):
+                            is_match = True
                         
                         if is_match:
                             h_name = se['homeTeam']['name']
@@ -753,7 +765,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         print(
                             f"SofaScoreDiscovery: Added {added_count} matches for {league['name']} on {date_str}")
                     else:
-                        print(f"SofaScoreDiscovery: No matches for {league['name']} in {len(ss_events)} events. Tournaments seen: {list(tournaments_seen)[:10]}...")
+                        print(f"SofaScoreDiscovery: No matches for {league['name']} in {len(ss_events)} events.")
 
                 if not final_events: continue
 
