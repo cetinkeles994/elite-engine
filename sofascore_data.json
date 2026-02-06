@@ -414,5 +414,181 @@
         "awayTeam": "Science City Jena",
         "momentum_score": "Not started",
         "league_id": 154
+    },
+    "14698414": {
+        "id": 14698414,
+        "name": "ALBA Berlin vs Rasta Vechta",
+        "homeTeam": "ALBA Berlin",
+        "awayTeam": "Rasta Vechta",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698415": {
+        "id": 14698415,
+        "name": "Ratiopharm Ulm vs EWE Baskets Oldenburg",
+        "homeTeam": "Ratiopharm Ulm",
+        "awayTeam": "EWE Baskets Oldenburg",
+        "momentum_score": "Postponed",
+        "league_id": 154
+    },
+    "14698442": {
+        "id": 14698442,
+        "name": "Ratiopharm Ulm vs Gladiators Trier",
+        "homeTeam": "Ratiopharm Ulm",
+        "awayTeam": "Gladiators Trier",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698419": {
+        "id": 14698419,
+        "name": "Hamburg Towers vs Löwen Braunschweig",
+        "homeTeam": "Hamburg Towers",
+        "awayTeam": "Löwen Braunschweig",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698416": {
+        "id": 14698416,
+        "name": "MLP Academics Heidelberg vs Bayern München",
+        "homeTeam": "MLP Academics Heidelberg",
+        "awayTeam": "Bayern München",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14698417": {
+        "id": 14698417,
+        "name": "Rostock Seawolves vs Fitness First Würzburg Baskets",
+        "homeTeam": "Rostock Seawolves",
+        "awayTeam": "Fitness First Würzburg Baskets",
+        "momentum_score": "Not started",
+        "league_id": 154
+    },
+    "14210726": {
+        "id": 14210726,
+        "name": "Virtus Bologna vs LDLC ASVEL Lyon-Villeurbanne",
+        "homeTeam": "Virtus Bologna",
+        "awayTeam": "LDLC ASVEL Lyon-Villeurbanne",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210719": {
+        "id": 14210719,
+        "name": "BC Dubai vs Olympiacos BC",
+        "homeTeam": "BC Dubai",
+        "awayTeam": "Olympiacos BC",
+        "momentum_score": "AET",
+        "league_id": 42527
+    },
+    "14210718": {
+        "id": 14210718,
+        "name": "Anadolu Efes vs Valencia Basket",
+        "homeTeam": "Anadolu Efes",
+        "awayTeam": "Valencia Basket",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210720": {
+        "id": 14210720,
+        "name": "Kauno Žalgiris vs Monaco Basket",
+        "homeTeam": "Kauno Žalgiris",
+        "awayTeam": "Monaco Basket",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210721": {
+        "id": 14210721,
+        "name": "KK Crvena zvezda vs Hapoel Tel-Aviv",
+        "homeTeam": "KK Crvena zvezda",
+        "awayTeam": "Hapoel Tel-Aviv",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210724": {
+        "id": 14210724,
+        "name": "Maccabi Tel Aviv vs KK Partizan Mozzart Bet",
+        "homeTeam": "Maccabi Tel Aviv",
+        "awayTeam": "KK Partizan Mozzart Bet",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210722": {
+        "id": 14210722,
+        "name": "Panathinaikos BC vs Real Madrid",
+        "homeTeam": "Panathinaikos BC",
+        "awayTeam": "Real Madrid",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210725": {
+        "id": 14210725,
+        "name": "Barça Basket vs Fenerbahçe Beko",
+        "homeTeam": "Barça Basket",
+        "awayTeam": "Fenerbahçe Beko",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210727": {
+        "id": 14210727,
+        "name": "Bayern München vs Paris Basketball",
+        "homeTeam": "Bayern München",
+        "awayTeam": "Paris Basketball",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210723": {
+        "id": 14210723,
+        "name": "EA7 Emporio Armani Milano vs Kosner Baskonia",
+        "homeTeam": "EA7 Emporio Armani Milano",
+        "awayTeam": "Kosner Baskonia",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14128351": {
+        "id": 14128351,
+        "name": "Hapoel Jerusalem BC vs U-Banca Transilvania Cluj-Napoca",
+        "homeTeam": "Hapoel Jerusalem BC",
+        "awayTeam": "U-Banca Transilvania Cluj-Napoca",
+        "momentum_score": "AET",
+        "league_id": 2560
+    },
+    "14128350": {
+        "id": 14128350,
+        "name": "Aris BC vs Klaipėdos Neptūnas",
+        "homeTeam": "Aris BC",
+        "awayTeam": "Klaipėdos Neptūnas",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14128353": {
+        "id": 14128353,
+        "name": "BAXI Manresa vs Umana Reyer Venezia",
+        "homeTeam": "BAXI Manresa",
+        "awayTeam": "Umana Reyer Venezia",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14128349": {
+        "id": 14128349,
+        "name": "Bahçeşehir Koleji vs Śląsk Wrocław",
+        "homeTeam": "Bahçeşehir Koleji",
+        "awayTeam": "Śląsk Wrocław",
+        "momentum_score": "Ended",
+        "league_id": 2560
+    },
+    "14500820": {
+        "id": 14500820,
+        "name": "Bursaspor Basketbol vs Trabzonspor",
+        "homeTeam": "Bursaspor Basketbol",
+        "awayTeam": "Trabzonspor",
+        "momentum_score": "Ended",
+        "league_id": 595
+    },
+    "14698408": {
+        "id": 14698408,
+        "name": "Gladiators Trier vs ALBA Berlin",
+        "homeTeam": "Gladiators Trier",
+        "awayTeam": "ALBA Berlin",
+        "momentum_score": "Ended",
+        "league_id": 154
     }
 }

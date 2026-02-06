@@ -1565,7 +1565,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         sim_data = pro_stats.get('sim_details', {'home_win_prob': 0, 'away_win_prob': 0, 'draw_prob': 0, 'over_2_5_prob': 0, 'over_1_5_prob': 0})
                         sim_text = (
                             f"\n---------------\n"
-                            f"🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n"
+                            f"🎰 MONTE CARLO SİMÜLASYONU (10.000 Maç):\n"
                             f"• Ev Sahibi: %{int(sim_data['home_win_prob'])}\n"
                             f"• Deplasman: %{int(sim_data['away_win_prob'])}\n"
                             f"• Beraberlik: %{int(sim_data['draw_prob'])}\n"
