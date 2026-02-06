@@ -15,14 +15,14 @@
         },
         "fair_odds_home": 2.61,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.71'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%20.8\n🎯 Hedef Oran: 1.64 | Alınan: 2.49 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %24\n• Deplasman: %57\n• Beraberlik: %17\n• 1.5 Üst: %92\n• 2.5 Üst: %79\n• KG Var: %77",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %8.71'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%20.8\n🎯 Hedef Oran: 1.64 | Alınan: 2.49 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %27\n• Deplasman: %54\n• Beraberlik: %17\n• 1.5 Üst: %93\n• 2.5 Üst: %81\n• KG Var: %76",
         "recommendation": "💎 KASA: MS 2 [STAKE %8.7]",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.76,
-            "away_goals": 2.59,
-            "total_goals_prediction": 4.35,
-            "over_2_5_prob": 79,
+            "home_goals": 1.74,
+            "away_goals": 2.57,
+            "total_goals_prediction": 4.3,
+            "over_2_5_prob": 81,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -31,32 +31,32 @@
             "home_win_rate": 0.34782608695652173,
             "away_win_rate": 0.6086956521739131,
             "best_goal_pick": "1.5 ÜST",
-            "best_goal_prob": 92,
+            "best_goal_prob": 93,
             "score_pred_home": 1,
             "score_pred_away": 2,
             "sim_details": {
-                "home_win_prob": 24.7,
-                "away_win_prob": 57.699999999999996,
-                "draw_prob": 17.599999999999998,
-                "btts_prob": 77.4,
-                "over_2_5_prob": 79.7,
-                "over_1_5_prob": 92.5,
-                "over_3_5_prob": 62.7,
-                "over_0_5_prob": 98.8,
+                "home_win_prob": 27.900000000000002,
+                "away_win_prob": 54.7,
+                "draw_prob": 17.4,
+                "btts_prob": 76.4,
+                "over_2_5_prob": 81.2,
+                "over_1_5_prob": 93.5,
+                "over_3_5_prob": 62.2,
+                "over_0_5_prob": 99.3,
                 "mode_score_home": 1,
                 "mode_score_away": 2,
-                "mode_score_prob": 9.3,
+                "mode_score_prob": 8.0,
                 "top_scores": [
                     {
                         "score": "1-2",
-                        "prob": 9
+                        "prob": 8
                     },
                     {
-                        "score": "1-3",
+                        "score": "2-2",
                         "prob": 6
                     },
                     {
-                        "score": "1-1",
+                        "score": "1-3",
                         "prob": 6
                     }
                 ]
@@ -103,14 +103,14 @@
         },
         "fair_odds_home": 3.41,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.17'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%39.2\n🎯 Hedef Oran: 1.43 | Alınan: 3.25 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %51\n• Deplasman: %26\n• Beraberlik: %22\n• 1.5 Üst: %79\n• 2.5 Üst: %58\n• KG Var: %59",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.17'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%39.2\n🎯 Hedef Oran: 1.43 | Alınan: 3.25 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %50\n• Deplasman: %25\n• Beraberlik: %24\n• 1.5 Üst: %81\n• 2.5 Üst: %59\n• KG Var: %61",
         "recommendation": "💎 KASA: MS 2 [STAKE %14.2]",
         "dropping_odds": null,
         "pro_stats": {
             "home_goals": 1.79,
-            "away_goals": 1.2,
-            "total_goals_prediction": 2.99,
-            "over_2_5_prob": 58,
+            "away_goals": 1.24,
+            "total_goals_prediction": 3.04,
+            "over_2_5_prob": 59,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -118,26 +118,26 @@
             "away_points_pred": 0,
             "home_win_rate": 0.26666666666666666,
             "away_win_rate": 0.03333333333333333,
-            "best_goal_pick": "GOL ANALİZ",
-            "best_goal_prob": 50,
-            "score_pred_home": 2,
+            "best_goal_pick": "1.5 ÜST",
+            "best_goal_prob": 81,
+            "score_pred_home": 1,
             "score_pred_away": 1,
             "sim_details": {
-                "home_win_prob": 51.1,
-                "away_win_prob": 26.700000000000003,
-                "draw_prob": 22.2,
-                "btts_prob": 59.099999999999994,
-                "over_2_5_prob": 58.099999999999994,
-                "over_1_5_prob": 79.3,
-                "over_3_5_prob": 35.3,
-                "over_0_5_prob": 95.7,
-                "mode_score_home": 2,
+                "home_win_prob": 50.1,
+                "away_win_prob": 25.8,
+                "draw_prob": 24.099999999999998,
+                "btts_prob": 61.3,
+                "over_2_5_prob": 59.0,
+                "over_1_5_prob": 81.39999999999999,
+                "over_3_5_prob": 37.9,
+                "over_0_5_prob": 95.39999999999999,
+                "mode_score_home": 1,
                 "mode_score_away": 1,
-                "mode_score_prob": 9.700000000000001,
+                "mode_score_prob": 11.4,
                 "top_scores": [
                     {
                         "score": "1-1",
-                        "prob": 10
+                        "prob": 11
                     },
                     {
                         "score": "2-1",
@@ -145,7 +145,7 @@
                     },
                     {
                         "score": "1-0",
-                        "prob": 9
+                        "prob": 8
                     }
                 ]
             },
@@ -191,14 +191,14 @@
         },
         "fair_odds_home": 1.7,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %51\n• Deplasman: %26\n• Beraberlik: %22\n• 1.5 Üst: %79\n• 2.5 Üst: %57\n• KG Var: %57",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %49\n• Deplasman: %27\n• Beraberlik: %23\n• 1.5 Üst: %82\n• 2.5 Üst: %61\n• KG Var: %62",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.8,
-            "away_goals": 1.24,
-            "total_goals_prediction": 3.04,
-            "over_2_5_prob": 57,
+            "home_goals": 1.77,
+            "away_goals": 1.22,
+            "total_goals_prediction": 2.99,
+            "over_2_5_prob": 61,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -206,34 +206,34 @@
             "away_points_pred": 0,
             "home_win_rate": 0.5333333333333333,
             "away_win_rate": 0.36666666666666664,
-            "best_goal_pick": "GOL ANALİZ",
-            "best_goal_prob": 50,
-            "score_pred_home": 1,
-            "score_pred_away": 0,
+            "best_goal_pick": "1.5 ÜST",
+            "best_goal_prob": 82,
+            "score_pred_home": 2,
+            "score_pred_away": 1,
             "sim_details": {
-                "home_win_prob": 51.300000000000004,
-                "away_win_prob": 26.0,
-                "draw_prob": 22.7,
-                "btts_prob": 57.99999999999999,
-                "over_2_5_prob": 57.599999999999994,
-                "over_1_5_prob": 79.60000000000001,
-                "over_3_5_prob": 36.9,
-                "over_0_5_prob": 94.6,
-                "mode_score_home": 1,
-                "mode_score_away": 0,
-                "mode_score_prob": 10.0,
+                "home_win_prob": 49.1,
+                "away_win_prob": 27.200000000000003,
+                "draw_prob": 23.7,
+                "btts_prob": 62.5,
+                "over_2_5_prob": 61.8,
+                "over_1_5_prob": 82.19999999999999,
+                "over_3_5_prob": 38.1,
+                "over_0_5_prob": 95.19999999999999,
+                "mode_score_home": 2,
+                "mode_score_away": 1,
+                "mode_score_prob": 10.4,
                 "top_scores": [
+                    {
+                        "score": "2-1",
+                        "prob": 10
+                    },
                     {
                         "score": "1-1",
                         "prob": 10
                     },
                     {
                         "score": "1-0",
-                        "prob": 10
-                    },
-                    {
-                        "score": "2-0",
-                        "prob": 8
+                        "prob": 7
                     }
                 ]
             },
@@ -279,13 +279,13 @@
         },
         "fair_odds_home": 3.51,
         "value_found": true,
-        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.65'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%41.1\n🎯 Hedef Oran: 1.41 | Alınan: 3.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %50\n• Deplasman: %26\n• Beraberlik: %22\n• 1.5 Üst: %82\n• 2.5 Üst: %58\n• KG Var: %60",
+        "reasoning": "🧠 KELLY ANALİZİ: Kasanın %14.65'si Basılmalı.\n📊 Matematiksel Avantaj (Edge): +%41.1\n🎯 Hedef Oran: 1.41 | Alınan: 3.34 | Güven: MAX (KASA)\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %53\n• Deplasman: %21\n• Beraberlik: %25\n• 1.5 Üst: %79\n• 2.5 Üst: %58\n• KG Var: %56",
         "recommendation": "💎 KASA: MS 2 [STAKE %14.7]",
         "dropping_odds": null,
         "pro_stats": {
             "home_goals": 1.83,
-            "away_goals": 1.28,
-            "total_goals_prediction": 3.11,
+            "away_goals": 1.24,
+            "total_goals_prediction": 3.07,
             "over_2_5_prob": 58,
             "cards_prediction": 0,
             "corners_prediction": 0,
@@ -294,23 +294,27 @@
             "away_points_pred": 0,
             "home_win_rate": 0.25925925925925924,
             "away_win_rate": 0.5,
-            "best_goal_pick": "1.5 ÜST",
-            "best_goal_prob": 82,
+            "best_goal_pick": "GOL ANALİZ",
+            "best_goal_prob": 50,
             "score_pred_home": 1,
-            "score_pred_away": 1,
+            "score_pred_away": 0,
             "sim_details": {
-                "home_win_prob": 50.6,
-                "away_win_prob": 26.6,
-                "draw_prob": 22.8,
-                "btts_prob": 60.5,
-                "over_2_5_prob": 58.5,
-                "over_1_5_prob": 82.19999999999999,
-                "over_3_5_prob": 38.2,
-                "over_0_5_prob": 95.39999999999999,
+                "home_win_prob": 53.6,
+                "away_win_prob": 21.3,
+                "draw_prob": 25.1,
+                "btts_prob": 56.599999999999994,
+                "over_2_5_prob": 58.599999999999994,
+                "over_1_5_prob": 79.60000000000001,
+                "over_3_5_prob": 36.1,
+                "over_0_5_prob": 94.1,
                 "mode_score_home": 1,
-                "mode_score_away": 1,
-                "mode_score_prob": 10.9,
+                "mode_score_away": 0,
+                "mode_score_prob": 10.6,
                 "top_scores": [
+                    {
+                        "score": "1-0",
+                        "prob": 10
+                    },
                     {
                         "score": "1-1",
                         "prob": 10
@@ -318,10 +322,6 @@
                     {
                         "score": "2-1",
                         "prob": 9
-                    },
-                    {
-                        "score": "2-0",
-                        "prob": 8
                     }
                 ]
             },
@@ -365,14 +365,14 @@
         },
         "fair_odds_home": 2.27,
         "value_found": false,
-        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n\n🤖 YAPAY ZEKA UYARISI (%17). Model bu maça güvenmiyor.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %51\n• Deplasman: %26\n• Beraberlik: %22\n• 1.5 Üst: %79\n• 2.5 Üst: %57\n• KG Var: %58",
+        "reasoning": "Yeterli veri güveni oluşmadı (%65 altı).\n\n🤖 YAPAY ZEKA UYARISI (%17). Model bu maça güvenmiyor.\n---------------\n🎰 MONTE CARLO SİMÜLASYONU (1000 Maç):\n• Ev Sahibi: %50\n• Deplasman: %27\n• Beraberlik: %21\n• 1.5 Üst: %79\n• 2.5 Üst: %59\n• KG Var: %60",
         "recommendation": "PAS",
         "dropping_odds": null,
         "pro_stats": {
-            "home_goals": 1.84,
-            "away_goals": 1.26,
-            "total_goals_prediction": 3.09,
-            "over_2_5_prob": 57,
+            "home_goals": 1.82,
+            "away_goals": 1.28,
+            "total_goals_prediction": 3.1,
+            "over_2_5_prob": 59,
             "cards_prediction": 0,
             "corners_prediction": 0,
             "total_points": 0,
@@ -380,33 +380,33 @@
             "away_points_pred": 0,
             "home_win_rate": 0.4,
             "away_win_rate": 0.2,
-            "best_goal_pick": "GOL ANALİZ",
-            "best_goal_prob": 50,
-            "score_pred_home": 2,
-            "score_pred_away": 1,
+            "best_goal_pick": "KG VAR",
+            "best_goal_prob": 60,
+            "score_pred_home": 1,
+            "score_pred_away": 0,
             "sim_details": {
-                "home_win_prob": 51.5,
-                "away_win_prob": 26.200000000000003,
-                "draw_prob": 22.3,
-                "btts_prob": 58.4,
-                "over_2_5_prob": 57.49999999999999,
-                "over_1_5_prob": 79.7,
-                "over_3_5_prob": 34.300000000000004,
-                "over_0_5_prob": 94.69999999999999,
-                "mode_score_home": 2,
-                "mode_score_away": 1,
-                "mode_score_prob": 11.3,
+                "home_win_prob": 50.7,
+                "away_win_prob": 27.500000000000004,
+                "draw_prob": 21.8,
+                "btts_prob": 60.199999999999996,
+                "over_2_5_prob": 59.599999999999994,
+                "over_1_5_prob": 79.5,
+                "over_3_5_prob": 40.400000000000006,
+                "over_0_5_prob": 95.39999999999999,
+                "mode_score_home": 1,
+                "mode_score_away": 0,
+                "mode_score_prob": 9.2,
                 "top_scores": [
                     {
-                        "score": "2-1",
-                        "prob": 11
-                    },
-                    {
-                        "score": "1-1",
+                        "score": "1-0",
                         "prob": 9
                     },
                     {
-                        "score": "1-0",
+                        "score": "2-1",
+                        "prob": 9
+                    },
+                    {
+                        "score": "1-1",
                         "prob": 8
                     }
                 ]
