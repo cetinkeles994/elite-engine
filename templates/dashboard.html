@@ -1131,7 +1131,7 @@
                         const simDetails = m.pro_stats.sim_details || { top_scores: [] };
                         let tooltipContent = "";
                         if (simDetails.top_scores && simDetails.top_scores.length > 0) {
-                            tooltipContent = `<div class='text-left font-mono'><b>📊 1000 Maç Simülasyonu:</b><br>`;
+                            tooltipContent = `<div class='text-left font-mono'><b>📊 10.000 Maç Simülasyonu:</b><br>`;
                             simDetails.top_scores.forEach((s, idx) => {
                                 const isSelected = (s.score === `${m.pro_stats.score_pred_home}-${m.pro_stats.score_pred_away}`);
                                 tooltipContent += `<div class='flex justify-between ${isSelected ? "text-green-400 font-bold" : "text-gray-400"}'><span>${idx + 1}. Skor [${s.score}]</span> <span>%${s.prob}</span></div>`;

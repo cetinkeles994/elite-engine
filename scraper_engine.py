@@ -413,8 +413,8 @@ class StatEngine:
             preds['away_goals'] = round(a_exp, 2)
             preds['total_goals_prediction'] = round(h_exp + a_exp, 2)
 
-            # --- GOD MODE: RUN 1000 SIMULATIONS ---
-            sim_results = self.simulate_match(h_exp, a_exp, iterations=1000)
+            # --- GOD MODE: RUN 10000 SIMULATIONS ---
+            sim_results = self.simulate_match(h_exp, a_exp, iterations=10000)
 
             # Use Simulated Probability
             home_prob = sim_results['home_win_prob'] / 100.0
