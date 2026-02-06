@@ -415,9 +415,9 @@ SUPPORTED_LEAGUES = [
 
     # --- BASKETBALL ---
     {"name": "NBA", "code": "nba", "sport": "basketball"},
-    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball", "sofascore_id": 138},
-    {"name": "EuroCup", "code": "eur.cup", "sport": "basketball", "sofascore_id": 141},
-    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 519}
+    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball", "sofascore_id": 42527},
+    {"name": "EuroCup", "code": "eur.cup", "sport": "basketball", "sofascore_id": 2560},
+    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 595}
 ]
 
 
@@ -678,25 +678,50 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                     added_count = 0
                     for se in ss_events:
-                        if se.get('tournament', {}).get('id') == target_id:
+                        t_name = se.get('tournament', {}).get('name', '').lower()
+                        t_id = se.get('tournament', {}).get('id')
+                        
+                        # --- BASKETBALL FILTERS (Avoid Noise) ---
+                        if league['sport'] == 'basketball':
+                            noise_keywords = ["cyber", "esport", "simulated", "virtual", "women"]
+                            if any(k in t_name for k in noise_keywords):
+                                continue # Skip fake/women games for now unless requested
+                                
+                        # Match by ID or Name
+                        is_match = False
+                        if t_id and target_id and str(t_id) == str(target_id): 
+                            is_match = True
+                        elif "eurocup" in league['name'].lower() and "eurocup" in t_name:
+                            is_match = True
+                        elif "euroleague" in league['name'].lower() and "euroleague" in t_name:
+                            is_match = True
+                        elif "bsl" in league['name'].lower() and ("turkish basketball super league" in t_name or "bsl" in t_name):
+                            is_match = True
+                        
+                        if is_match:
                             h_name = se['homeTeam']['name']
                             a_name = se['awayTeam']['name']
+
+                            # Convert Timestamp to ESPN-like ISO format
+                            ts = se.get('startTimestamp', 0)
+                            dt_iso = datetime.fromtimestamp(ts).strftime("%Y-%m-%dT%H:%MZ") if ts else ""
 
                             # Skip if already in ESPN (simple check)
                             pattern = f"{h_name.lower()}-{a_name.lower()}"
                             if pattern in espn_event_ids: continue
 
                             # Fuzzy check (reversed or contains)
-                            is_duplicate = False
+                            is_dup = False
                             for p in espn_event_ids:
                                 if h_name.lower() in p and a_name.lower() in p:
-                                    is_duplicate = True; break
-                            if is_duplicate: continue
+                                    is_dup = True; break
+                            if is_dup: continue
 
                             # Convert to Synthetic Event
                             synthetic_event = {
                                 'id': f"ss-{se['id']}",
                                 'name': f"{h_name} vs {a_name}",
+                                'date': dt_iso,
                                 'status': {'type': {'state': 'pre', 'shortDetail': 'NS'}},
                                 'competitions': [{
                                     'competitors': [
@@ -727,6 +752,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                     if added_count > 0:
                         print(
                             f"SofaScoreDiscovery: Added {added_count} matches for {league['name']} on {date_str}")
+                    else:
+                        print(f"SofaScoreDiscovery: No matches for {league['name']} in {len(ss_events)} events. Tournaments seen: {list(tournaments_seen)[:10]}...")
 
                 if not final_events: continue
 

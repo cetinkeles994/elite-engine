@@ -7,7 +7,7 @@
             0.51,
             0.67
         ],
-        "momentum": "Leipzig \u00dcst\u00fcnl\u00fc\u011f\u00fc",
+        "momentum": "Leipzig Üstünlüğü",
         "momentum_score": 5.8,
         "global_odds": {
             "1": 4.33,
@@ -24,7 +24,7 @@
             0.14,
             0.41
         ],
-        "momentum": "Hoffenheim Bask\u0131n",
+        "momentum": "Hoffenheim Baskın",
         "momentum_score": -15.2,
         "global_odds": {
             "1": 13.0,
@@ -50,7 +50,7 @@
         "name": "Cardiff City vs Barnsley",
         "homeTeam": "Cardiff City",
         "awayTeam": "Barnsley",
-        "momentum": "Cardiff Kontrol\u00fcnde",
+        "momentum": "Cardiff Kontrolünde",
         "momentum_score": -1.6,
         "global_odds": {
             "1": 1.03,
@@ -84,7 +84,7 @@
         "name": "Blackpool vs Stockport County",
         "homeTeam": "Blackpool",
         "awayTeam": "Stockport County",
-        "momentum": "Stockport H\u00fccumda",
+        "momentum": "Stockport Hücumda",
         "momentum_score": -5.8,
         "global_odds": {
             "1": 41.0,
@@ -125,5 +125,93 @@
             "2": 9.5
         }
     },
-    "last_update": "2026-01-28 11:20:10"
+    "last_update": "2026-01-28 11:20:10",
+    "14500827": {
+        "id": 14500827,
+        "name": "Tofaş Bursa vs Mersin SC",
+        "homeTeam": "Tofaş Bursa",
+        "awayTeam": "Mersin SC",
+        "momentum_score": "Not started",
+        "league_id": 595
+    },
+    "14210728": {
+        "id": 14210728,
+        "name": "BC Dubai vs Real Madrid",
+        "homeTeam": "BC Dubai",
+        "awayTeam": "Real Madrid",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210729": {
+        "id": 14210729,
+        "name": "Hapoel Tel-Aviv vs Valencia Basket",
+        "homeTeam": "Hapoel Tel-Aviv",
+        "awayTeam": "Valencia Basket",
+        "momentum_score": "AET",
+        "league_id": 42527
+    },
+    "14210731": {
+        "id": 14210731,
+        "name": "Bayern München vs Monaco Basket",
+        "homeTeam": "Bayern München",
+        "awayTeam": "Monaco Basket",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210730": {
+        "id": 14210730,
+        "name": "KK Partizan Mozzart Bet vs Panathinaikos BC",
+        "homeTeam": "KK Partizan Mozzart Bet",
+        "awayTeam": "Panathinaikos BC",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210732": {
+        "id": 14210732,
+        "name": "Paris Basketball vs Fenerbahçe Beko",
+        "homeTeam": "Paris Basketball",
+        "awayTeam": "Fenerbahçe Beko",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14210733": {
+        "id": 14210733,
+        "name": "Anadolu Efes vs Kauno Žalgiris",
+        "homeTeam": "Anadolu Efes",
+        "awayTeam": "Kauno Žalgiris",
+        "momentum_score": "Ended",
+        "league_id": 42527
+    },
+    "14206426": {
+        "id": 14206426,
+        "name": "KK Crvena zvezda vs Maccabi Tel Aviv",
+        "homeTeam": "KK Crvena zvezda",
+        "awayTeam": "Maccabi Tel Aviv",
+        "momentum_score": "2nd quarter",
+        "league_id": 42527
+    },
+    "14206326": {
+        "id": 14206326,
+        "name": "LDLC ASVEL Lyon-Villeurbanne vs EA7 Emporio Armani Milano",
+        "homeTeam": "LDLC ASVEL Lyon-Villeurbanne",
+        "awayTeam": "EA7 Emporio Armani Milano",
+        "momentum_score": "2nd quarter",
+        "league_id": 42527
+    },
+    "14206333": {
+        "id": 14206333,
+        "name": "Olympiacos BC vs Virtus Bologna",
+        "homeTeam": "Olympiacos BC",
+        "awayTeam": "Virtus Bologna",
+        "momentum_score": "1st quarter",
+        "league_id": 42527
+    },
+    "14206335": {
+        "id": 14206335,
+        "name": "Kosner Baskonia vs Barça Basket",
+        "homeTeam": "Kosner Baskonia",
+        "awayTeam": "Barça Basket",
+        "momentum_score": "1st quarter",
+        "league_id": 42527
+    }
 }

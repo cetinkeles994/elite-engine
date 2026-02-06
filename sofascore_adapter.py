@@ -114,22 +114,28 @@ class SofaScoreAdapter:
         Fetches all events for a specific date from SofaScore for a given sport.
         Format: YYYY-MM-DD
         """
+        # Ensure date format is YYYY-MM-DD
+        if len(date_str) == 8 and '-' not in date_str:
+            date_str = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+
         urls = [
-            f"https://www.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}",
-            f"https://api.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}"
+            f"http://api.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}",
+            f"http://www.sofascore.com/api/v1/sport/{sport}/scheduled-events/{date_str}"
         ]
         headers = {
             "Accept": "application/json, text/plain, */*",
-            "X-Requested-With": "4795b7",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
             "Referer": "https://www.sofascore.com/",
             "Origin": "https://www.sofascore.com",
-            "Accept-Language": "en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7"
+            "Accept-Language": "en-US,en;q=0.9"
         }
         for url in urls:
             try:
-                # Use scraper.get which handles cloudflare
-                res = self.scraper.get(url, headers=headers, timeout=15)
+                # Try raw requests for http (less likely to be blocked by TLS fingerprinters)
+                if url.startswith("http://"):
+                    res = requests.get(url, headers=headers, timeout=15)
+                else:
+                    res = self.scraper.get(url, headers=headers, timeout=15)
                 if res.status_code == 200:
                     data = res.json()
                     events = data.get('events', [])
