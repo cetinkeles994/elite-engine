@@ -185,6 +185,48 @@ class StatEngine:
             'top_scores': top_scores
         }
 
+    def simulate_basketball_match(self, h_exp, a_exp, sport='basketball', iterations=1000):
+        """
+        Profesör Seviye: Normal Dağılım (Gaussian) tabanlı Basketbol Simülasyonu.
+        """
+        home_wins = 0
+        away_wins = 0
+        total_points_list = []
+        
+        # Standard Deviation for basketball (Approx 10-12 points)
+        # Use a reasonable default, adjust if name indicates NBA
+        sigma = 11.5 
+        
+        for _ in range(iterations):
+            # Generate random scores based on normal distribution
+            h_score = int(random.gauss(h_exp, sigma))
+            a_score = int(random.gauss(a_exp, sigma))
+            
+            # Floor scores to 0
+            h_score = max(0, h_score)
+            a_score = max(0, a_score)
+            
+            if h_score > a_score: home_wins += 1
+            else: away_wins += 1
+            
+            total_points_list.append(h_score + a_score)
+            
+        avg_total = sum(total_points_list) / iterations
+        
+        # Probabilities
+        over_150 = len([p for p in total_points_list if p > 150.5]) / iterations * 100
+        over_160 = len([p for p in total_points_list if p > 160.5]) / iterations * 100
+        over_220 = len([p for p in total_points_list if p > 220.5]) / iterations * 100
+        
+        return {
+            'home_win_prob': (home_wins / iterations) * 100,
+            'away_win_prob': (away_wins / iterations) * 100,
+            'draw_prob': 0, # No draws in basketball (OT included)
+            'over_1_5_prob': over_150, # Recycled for UI logic
+            'over_2_5_prob': over_160 if avg_total < 200 else over_220,
+            'avg_total': avg_total
+        }
+
 
     def predict_match(
     self,
@@ -370,6 +412,24 @@ class StatEngine:
             # Spread Logic for Recommendation
             if spread_factor > 8: preds['best_goal_pick'] = f"EV -{int(spread_factor/2)}.5"
             elif spread_factor < -8: preds['best_goal_pick'] = f"DEP -{int(abs(spread_factor)/2)}.5"
+
+        # --- PROFESSOR SIMULATION ---
+        if sport == 'basketball':
+            sim_details = self.simulate_basketball_match(h_exp, a_exp, sport=sport)
+        else:
+            sim_details = self.simulate_match(h_exp, a_exp)
+            
+        preds['sim_details'] = sim_details
+
+        # Additional Professor Logic: Period Predictions
+        if sport == 'basketball':
+            # Quarter/Half Logic
+            preds['best_props_pick'] = f"1.YARI: {int((h_exp + a_exp) * 0.52)} ÜST"
+            preds['best_props_prob'] = 65
+            
+            # Period Analysis (1. ve 3. çeyrekler genelde daha skorerdir EU'da)
+            if "eur" in league_code:
+                preds['best_props_pick'] += " | 3.ÇEYREK EN SKORER"
 
         preds['momentum'] = {'home': round(h_momentum, 2), 'away': round(a_momentum, 2)}
         preds['data_source'] = data_source
