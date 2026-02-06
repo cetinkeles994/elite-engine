@@ -277,7 +277,19 @@ class StatEngine:
     a_real=None,
      sofa_data=None):
         code_key = league_code
-        if sport == 'basketball' and league_code not in ['nba', 'eur.league', 'eur.cup']:
+        # Map ESPN slugs back to baseline keys
+        code_map = {
+            "mens-euroleague": "eur.league",
+            "mens-eurocup": "eur.cup",
+            "mens-turkish-super-league": "tur.1_basketball",
+            "mens-spanish-liga-acb": "spa.1_basketball",
+            "mens-italian-lega-basket-serie-a": "ita.1_basketball",
+            "mens-french-lnb-pro-a": "fra.1_basketball",
+            "mens-german-bbl": "ger.1_basketball"
+        }
+        code_key = code_map.get(league_code, league_code)
+        
+        if sport == 'basketball' and code_key == league_code and league_code != 'nba':
              code_key = f"{league_code}_basketball"
 
         # Smarter defaults: Basketball should not default to 220 points if it's European
@@ -300,18 +312,25 @@ class StatEngine:
         if sport == 'soccer':
             h_exp = base.get('goals', 2.7) * h_off * a_def
             a_exp = base.get('goals', 2.7) * a_off * h_def
-            home_adv = base.get('home_adv', 0.35)
-            h_exp += home_adv
+            h_exp += base.get('home_adv', 0.35)
         else:
             # Basketball
             avg_points = base.get('points', 165.0)
-            home_adv = base.get('home_adv', 4.0)
+            h_adv = base.get('home_adv', 4.0)
             
-            # Weighted ratings for basketball (less volatile than soccer)
-            h_exp = (avg_points / 2) * (1.0 + (h_off - 1.0) * 0.5) * (1.0 + (a_def - 1.0) * 0.5)
-            a_exp = (avg_points / 2) * (1.0 + (a_off - 1.0) * 0.5) * (1.0 + (h_def - 1.0) * 0.5)
-            h_exp += (home_adv / 2)
-            a_exp -= (home_adv / 2)
+            # 1. Rating Based Spread (Style)
+            h_style = (h_off - 1.0) * 8.0 # Offset from avg
+            a_style = (a_off - 1.0) * 8.0
+            
+            # 2. Win Rate Based Spread (Strength)
+            # Ensure win_rate is 0-1. If > 1, it's 0-100 scale.
+            h_wr = home_win_rate if home_win_rate <= 1.0 else home_win_rate / 100.0
+            a_wr = away_win_rate if away_win_rate <= 1.0 else away_win_rate / 100.0
+            
+            wr_spread = (h_wr - a_wr) * 30.0 # Approx 10% diff = 3 points
+            
+            h_exp = (avg_points / 2) + (h_adv / 2) + (wr_spread / 2) + (h_style / 2)
+            a_exp = (avg_points / 2) - (h_adv / 2) - (wr_spread / 2) + (a_style / 2)
 
         preds = {
             "home_goals": 0, "away_goals": 0,
@@ -446,20 +465,7 @@ class StatEngine:
             #     else: preds['score_pred_home'] = 0
 
         elif sport == 'basketball':
-            # --- BASKETBALL MODEL ---
-            avg_points = base.get('points', 220.0)
-            home_adv = base.get('home_adv', 3.0)
-            
-            # Strength difference affects the spread
-            h_win_rate = home_win_rate / 100.0
-            a_win_rate = away_win_rate / 100.0
-            
-            # Calculate Expected Spread (Approx 10% diff = 7 points)
-            spread_factor = (h_win_rate - a_win_rate) * 35.0 
-            
-            h_exp = (avg_points / 2) + (home_adv / 2) + (spread_factor / 2)
-            a_exp = (avg_points / 2) - (home_adv / 2) - (spread_factor / 2)
-            
+            # --- BASKETBALL OUTPUT PACKING ---
             preds['home_points_pred'] = int(h_exp)
             preds['away_points_pred'] = int(a_exp)
             preds['total_points'] = int(h_exp + a_exp)
@@ -471,11 +477,12 @@ class StatEngine:
             elif tp < avg_points - 5: preds['best_goal_pick'] = f"{tp+3} ALT"
             else: preds['best_goal_pick'] = f"{tp} ÜST"
             
-            preds['best_goal_prob'] = 60 + abs(int(spread_factor))
+            # Spread factor for prob
+            spread_f = abs(h_exp - a_exp)
+            preds['best_goal_prob'] = 60 + int(min(35, spread_f * 2))
             
-            # Spread Logic for Recommendation
-            if spread_factor > 8: preds['best_goal_pick'] = f"EV -{int(spread_factor/2)}.5"
-            elif spread_factor < -8: preds['best_goal_pick'] = f"DEP -{int(abs(spread_factor)/2)}.5"
+            if (h_exp - a_exp) > 8: preds['best_goal_pick'] = f"EV -{int((h_exp-a_exp)/2)}.5"
+            elif (a_exp - h_exp) > 8: preds['best_goal_pick'] = f"DEP -{int((a_exp-h_exp)/2)}.5"
 
         # --- PROFESSOR SIMULATION ---
         if sport == 'basketball':
@@ -548,13 +555,13 @@ SUPPORTED_LEAGUES = [
 
     # --- BASKETBALL ---
     {"name": "NBA", "code": "nba", "sport": "basketball"},
-    {"name": "EuroLeague", "code": "eur.league", "sport": "basketball", "sofascore_id": 42527},
-    {"name": "EuroCup", "code": "eur.cup", "sport": "basketball", "sofascore_id": 2560},
-    {"name": "BSL", "code": "tur.1", "sport": "basketball", "sofascore_id": 595},
-    {"name": "ACB", "code": "spa.1", "sport": "basketball", "sofascore_id": 271},
-    {"name": "Lega A", "code": "ita.1", "sport": "basketball", "sofascore_id": 269},
-    {"name": "Pro A", "code": "fra.1", "sport": "basketball", "sofascore_id": 272},
-    {"name": "BBL", "code": "ger.1", "sport": "basketball", "sofascore_id": 154}
+    {"name": "EuroLeague", "code": "mens-euroleague", "sport": "basketball", "sofascore_id": 42527},
+    {"name": "EuroCup", "code": "mens-eurocup", "sport": "basketball", "sofascore_id": 2560},
+    {"name": "BSL", "code": "mens-turkish-super-league", "sport": "basketball", "sofascore_id": 595},
+    {"name": "ACB", "code": "mens-spanish-liga-acb", "sport": "basketball", "sofascore_id": 271},
+    {"name": "Lega A", "code": "mens-italian-lega-basket-serie-a", "sport": "basketball", "sofascore_id": 269},
+    {"name": "Pro A", "code": "mens-french-lnb-pro-a", "sport": "basketball", "sofascore_id": 272},
+    {"name": "BBL", "code": "mens-german-bbl", "sport": "basketball", "sofascore_id": 154}
 ]
 
 
@@ -608,9 +615,20 @@ def fetch_standings(league_code, sport='soccer'):
             team_stats = []
 
             children = data.get('children', [])
-            if children:
+            if not children and 'standings' in data:
+                 # Some basketball APIs have standings at top
+                 entries = data.get('standings', {}).get('entries', [])
+            elif children:
+                # Common path
                 entries = children[0].get('standings', {}).get('entries', [])
-                for entry in entries:
+                # If NBA, maybe check all children
+                if len(children) > 1 and league_code == 'nba':
+                    for c in children[1:]:
+                        entries.extend(c.get('standings', {}).get('entries', []))
+            else:
+                entries = []
+
+            for entry in entries:
                     try:
                         team_data = entry.get('team', {})
                         display_name = team_data.get('displayName', '???')
@@ -955,7 +973,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         home_win_rate = get_win_rate(home_rec)
                         away_win_rate = get_win_rate(away_rec)
-
+                        
                         # --- STANDINGS LOOKUP (New GF/GA Data) ---
                         h_stats_real = None
                         a_stats_real = None
@@ -964,10 +982,25 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             # Search in list
                             for stand in league_standings:
                                 s_team = stand['team'].lower()
-                                if home_team.lower() in s_team or s_team in home_team.lower():
+                                normalize_s = normalize_name(s_team)
+                                normalize_h = normalize_name(home_team)
+                                normalize_a = normalize_name(away_team)
+                                
+                                if normalize_h in normalize_s or normalize_s in normalize_h:
                                     h_stats_real = stand
-                                if away_team.lower() in s_team or s_team in away_team.lower():
+                                if normalize_a in normalize_s or normalize_s in normalize_a:
                                     a_stats_real = stand
+                        
+                        # Fallback for Win Rates if records are missing
+                        if home_win_rate == 0.40 and h_stats_real:
+                            h_w = h_stats_real.get('w', 0)
+                            h_p = h_stats_real.get('played', 0)
+                            if h_p > 0: home_win_rate = h_w / h_p
+                            
+                        if away_win_rate == 0.40 and a_stats_real:
+                            a_w = a_stats_real.get('w', 0)
+                            a_p = a_stats_real.get('played', 0)
+                            if a_p > 0: away_win_rate = a_w / a_p
 
                         # --- LIVE STATS ---
                         live_stats = {'goals': 0, 'minute': 0}
