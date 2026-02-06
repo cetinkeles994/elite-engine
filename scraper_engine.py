@@ -433,30 +433,46 @@ def fetch_standings(league_code, sport='soccer'):
             data = res.json()
             team_stats = []
 
-            if 'children' in data:
-                entries = data['children'][0].get('standings', {}).get('entries', [])
+            children = data.get('children', [])
+            if children:
+                entries = children[0].get('standings', {}).get('entries', [])
                 for entry in entries:
-                    stats = {
-                        'rank': entry.get('stats', [{}])[0].get('value', 0), # Usually first is rank
-                        'team': entry['team']['displayName'],
-                        'played': 0, 'w': 0, 'd': 0, 'l': 0, 'gf': 0, 'ga': 0, 'pts': 0
-                    }
-                    for s in entry.get('stats', []):
-                        if s['name'] == 'rank': stats['rank'] = int(s['value'])
-                        if s['name'] == 'gamesPlayed': stats['played'] = int(s['value'])
-                        if s['name'] == 'wins': stats['w'] = int(s['value'])
-                        if s['name'] == 'draws': stats['d'] = int(s['value'])
-                        if s['name'] == 'losses': stats['l'] = int(s['value'])
-                        if s['name'] == 'pointsFor': stats['gf'] = int(s['value'])
-                        if s['name'] == 'pointsAgainst': stats['ga'] = int(s['value'])
-                        if s['name'] == 'points': stats['pts'] = int(s['value'])
-                    
-                    team_stats.append(stats)
-                    # Cache Team ID for H2H fallback
-                    TEAM_ID_MAP[normalize_name(entry['team']['displayName'])] = (entry['team']['id'], league_code)
-                    # Also cache by shorter name if available
-                    if 'shortDisplayName' in entry['team']:
-                        TEAM_ID_MAP[normalize_name(entry['team']['shortDisplayName'])] = (entry['team']['id'], league_code)
+                    try:
+                        team_data = entry.get('team', {})
+                        display_name = team_data.get('displayName', '???')
+                        
+                        stats_list = entry.get('stats', [])
+                        # Safety for rank access
+                        rank_val = stats_list[0].get('value', 0) if stats_list else 0
+                        
+                        stats = {
+                            'rank': rank_val,
+                            'team': display_name,
+                            'played': 0, 'w': 0, 'd': 0, 'l': 0, 'gf': 0, 'ga': 0, 'pts': 0
+                        }
+                        for s in stats_list:
+                            name = s.get('name')
+                            val = s.get('value', 0)
+                            if name == 'rank': stats['rank'] = int(val)
+                            if name == 'gamesPlayed': stats['played'] = int(val)
+                            if name == 'wins': stats['w'] = int(val)
+                            if name == 'draws': stats['d'] = int(val)
+                            if name == 'losses': stats['l'] = int(val)
+                            if name == 'pointsFor': stats['gf'] = int(val)
+                            if name == 'pointsAgainst': stats['ga'] = int(val)
+                            if name == 'points': stats['pts'] = int(val)
+                        
+                        team_stats.append(stats)
+                        
+                        # Cache Team ID for H2H fallback
+                        t_id = team_data.get('id')
+                        if display_name != '???' and t_id:
+                            TEAM_ID_MAP[normalize_name(display_name)] = (t_id, league_code)
+                            if 'shortDisplayName' in team_data:
+                                TEAM_ID_MAP[normalize_name(team_data['shortDisplayName'])] = (t_id, league_code)
+                    except Exception as te:
+                        print(f"Entry Error: {te}")
+                        continue
 
             print(f"Loaded Standings for {league_code}: {len(team_stats)} teams")
             STANDINGS_CACHE[league_code] = team_stats

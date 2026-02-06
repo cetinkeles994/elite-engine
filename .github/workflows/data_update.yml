@@ -36,4 +36,5 @@ jobs:
         git config --global user.email "bot@elite.com"
         git add sofascore_data.json matches_cache.json history_cache.json
         git commit -m "Auto-update: Elite Data, Matches & History Cache" || echo "No changes to commit"
+        git pull --rebase
         git push
