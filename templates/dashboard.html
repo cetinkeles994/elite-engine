@@ -549,12 +549,9 @@
             }
         }
 
-        // Bridge function for opening modal from chat (needs to handle find match index)
+        // Bridge function for opening modal from chat
         function openModalMatch(matchId) {
-            // Find index in lastData
-            const idx = lastData.findIndex(m => m.id === matchId);
-            if (idx >= 0) openModal(idx);
-            else alert("Bu maç şu anki görünümde yüklü değil, Ana Tablo'ya geçin.");
+            openModal(matchId);
         }
 
         function setFilter(type, val) {
@@ -602,8 +599,8 @@
             filterLeague = leagueSel.value;
         }
 
-        function openModal(index) {
-            const m = lastData[index];
+        function openModal(id) {
+            const m = lastData.find(x => x.id == id);
             if (!m) return;
 
             const stats = m.live_details || {};
@@ -945,11 +942,15 @@
 
             if (v === 'history') {
                 fetchHistory();
-            } else if (v === 'main' && lastData.length < 5) {
-                // If switching back to main and empty, fetch fresh
-                fetchData();
             } else {
-                renderTable();
+                // For all other views, we need to ensure we have fixture data
+                // If the last data was history (arşiv), we must refetch
+                const isArşiv = document.getElementById('match-counter').innerText.includes("Arşiv");
+                if (isArşiv || lastData.length === 0) {
+                    fetchData();
+                } else {
+                    renderTable();
+                }
             }
         }
 
@@ -960,6 +961,7 @@
                 const matches = await res.json();
                 lastData = matches;
                 document.getElementById('match-counter').innerText = `${matches.length} Arşiv`;
+                populateFilters();
                 renderTable();
             } catch (e) {
                 console.error(e);
@@ -1097,7 +1099,7 @@
 
                 // Common Columns
                 let row = `
-                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal(${index})">
+                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal('${m.id}')">
                         <td class="pl-4 py-3">
                              <div class="${timeClass} font-mono font-bold text-sm mb-1">${m.time}</div>
                              <div class="text-[10px] font-bold text-muted uppercase tracking-wider text-gray-500">${m.league} ${resultBadge}</div>
@@ -1204,7 +1206,7 @@
                     const valueScore = parseInt((parseFloat(targetOdds) - 2.0) * 100);
 
                     row = `
-                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal(${index})">
+                    <tr class="group border-b border-gray-800 hover:bg-gray-900 cursor-pointer transition-colors" onclick="openModal('${m.id}')">
                          <td class="pl-4 py-3 text-xs text-muted font-mono">
                             <div>${m.time}</div>
                             <div class="text-[10px] text-gray-500 uppercase">${m.league}</div>

@@ -578,7 +578,7 @@ def fetch_h2h_data(event_id, home=None, away=None):
                 
                 if h2h_list:
                     h2h_list.sort(key=lambda x: datetime.strptime(x['date'], "%d.%m.%Y"), reverse=True)
-                    return h2h_list[:5]
+                    return h2h_list[:10]
     except Exception as e:
         print(f"H2H ESPN Fallback Error: {e}")
 
