@@ -988,6 +988,7 @@
                 } else {
                     cols += `
                         <th class="w-20 text-center text-gray-400">SKOR TAHMİNİ</th>
+                        <th class="w-16 text-center text-gray-500">1.5 ÜST</th>
                         <th class="w-20 text-right text-gray-400">EV ORAN</th>
                         <th class="w-20 text-right text-gray-400">DEP ORAN</th>
                         <th class="w-48 text-center text-white">SİSTEM ÖNERİSİ</th>
@@ -1177,6 +1178,25 @@
                                         ${tooltipContent}
                                     </div>
                                 ` : ''}
+                            </td>
+                            <td class="text-center font-bold">
+                                ${(() => {
+                                if (!m.score || !m.score.includes('-')) return '<span class="text-gray-700">-</span>';
+                                const parts = m.score.split('-');
+                                const h = parseInt(parts[0]);
+                                const a = parseInt(parts[1]);
+                                if (isNaN(h) || isNaN(a)) return '<span class="text-gray-700">-</span>';
+
+                                // 1.5 Over Check (Total Goals >= 2)
+                                if ((h + a) >= 2) return '<span class="text-green-500 text-lg">✅</span>';
+
+                                // If finished and < 2 goals -> Red Cross
+                                if (m.status === 'Completed' || m.time.includes('Bitti') || m.time.includes('FT')) {
+                                    return '<span class="text-red-500 text-lg">❌</span>';
+                                }
+                                // Else pending/live
+                                return '<span class="text-yellow-600 font-mono text-xs">...</span>';
+                            })()}
                             </td>
                             <td class="text-right font-mono ${drp.side === 'home' ? 'text-red-500 font-bold underline' : 'text-gray-400'}">
                                 ${m.odds.home}
