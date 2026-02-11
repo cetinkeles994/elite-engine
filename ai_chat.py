@@ -4,17 +4,17 @@ from datetime import datetime
 import scraper_engine
 
 class MatchChatBot:
-    def __init__(self, cache_file="matches_cache.json"):
-        self.cache_file = cache_file
-        self.matches = []
+    def __init__(self):
+        from db_manager import db_manager
+        self.db_manager = db_manager
         self.sessions = {} # Memory: sessionId -> last_filters
+        self.matches = []
         self.load_data()
 
     def load_data(self):
         try:
-            with open(self.cache_file, "r", encoding="utf-8") as f:
-                self.matches = json.load(f)
-            print(f"ChatBot Loaded {len(self.matches)} matches.")
+            self.matches = self.db_manager.get_all_matches()
+            print(f"ChatBot Loaded {len(self.matches)} matches from DB.")
         except Exception as e:
             print(f"ChatBot Load Error: {e}")
             self.matches = []
@@ -177,7 +177,7 @@ class MatchChatBot:
                 else:
                     return f"<b>{target_match['home']} vs {target_match['away']}</b> maçı için SofaScore ID bulunamadı, H2H çekilemedi."
             else:
-                return "Hangi maçın aralarındaki sonuçlarını merak ediyorsun? (Örn: 'Porto Sporting son maçları')"
+                return "Hangi maçın aralarındaki sonuçlarını merak ediyorsun? (Örn: 'Aston Villa Brighton son maçları')"
 
         if filters['type'] == 'combo':
             # Strategy: Select 2-3 very high confidence matches
@@ -188,7 +188,7 @@ class MatchChatBot:
                     combo_matches.append({'match': m, 'score': ps.get('best_goal_prob', 0)})
             
             combo_matches.sort(key=lambda x: x['score'], reverse=True)
-            return self.format_strategy_response(combo_matches[:3], "ORDINARYÜS: GÜNÜN BANKO KOMBİNESİ")
+            return self.format_strategy_response(combo_matches[:3], "🔮 KAHİN: GÜNÜN ELMAS KOMBİNESİ")
 
         if filters['type'] == 'strategy':
             # Strategy: Mixed bag (1 Banko, 1 High Prob, 1 Value)

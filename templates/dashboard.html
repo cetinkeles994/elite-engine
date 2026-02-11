@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULTRA-PRO ANALİZ v5.0</title>
+    <title>KAHİN v5.0 | GLOBAL ANALİZ MOTORU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -274,7 +274,7 @@
         <div class="flex items-center gap-4">
             <div class="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(0,255,65,0.8)]"></div>
             <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                SİSTEM DASHBOARD
+                KAHİN: GLOBAL ANALİZ MOTORU
                 <span id="match-counter"
                     class="ml-2 text-sm text-accent border border-accent rounded px-2 py-0.5 align-middle">0 Maç</span>
             </h1>
@@ -317,6 +317,9 @@
             <button onclick="setView('history')" id="tab-history"
                 class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-accent border border-accent hover:bg-accent hover:text-black">GEÇMİŞ
                 SONUÇLAR</button>
+            <button onclick="setView('coupons')" id="tab-coupons"
+                class="tab-btn px-4 py-2 rounded text-sm font-bold transition-all text-purple-400 border border-purple-400 hover:bg-purple-400 hover:text-black animate-pulse">🎟️
+                KUPONLAR</button>
         </div>
     </div>
 
@@ -352,7 +355,8 @@
                         <div class="flex items-center gap-2 mb-4">
                             <span class="text-yellow-500 animate-pulse text-2xl">🔮</span>
                             <div>
-                                <h2 class="text-yellow-500 font-bold tracking-widest text-xs uppercase">ORACLE'IN SEÇİMİ
+                                <h2 class="text-yellow-500 font-bold tracking-widest text-xs uppercase">KAHİN'İN ÖZEL
+                                    SEÇİMİ
                                     (VALUE)</h2>
                                 <h3 class="text-gray-400 text-[10px] uppercase tracking-wide">Yüksek Kazanç / Akıllı
                                     Risk</h3>
@@ -410,6 +414,11 @@
                 </div>
             </div>
 
+            <!-- Coupons Table -->
+            <div id="coupons-container" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Coupons injected via JS -->
+            </div>
+
             <!-- Data Table -->
             <div class="bg-panel border border-border rounded shadow-2xl">
                 <table class="w-full data-table">
@@ -446,12 +455,12 @@
 
     <div id="chat-window" class="chat-window">
         <div class="chat-header">
-            <div class="font-bold text-accent text-sm">🤖 FUTBOL GPT</div>
+            <div class="font-bold text-accent text-sm">🤖 KAHİN GPT</div>
             <button onclick="toggleChat()" class="text-gray-500 hover:text-white">✕</button>
         </div>
         <div id="chat-body" class="chat-body">
             <div class="chat-msg bot">
-                Merhaba! Ben Yapay Zeka Analistiyim.<br>
+                Merhaba! Ben KAHİN, dünyanın en gelişmiş yapay zeka analiz motoruyum.<br>
                 Bana istediğini sorabilirsin. Örnek:<br>
                 <span class="text-accent text-xs">"En banko 3 maç hangisi?"</span><br>
                 <span class="text-accent text-xs">"2.5 Üst bitecek maçlar"</span>
@@ -944,6 +953,8 @@
 
             if (v === 'history') {
                 fetchHistory();
+            } else if (v === 'coupons') {
+                fetchCoupons();
             } else {
                 // For all other views, we need to ensure we have fixture data
                 // If the last data was history (arşiv), we must refetch
@@ -1046,6 +1057,17 @@
         function renderTable() {
             renderHeaders();
             const tbody = document.getElementById('table-body');
+            const couponsContainer = document.getElementById('coupons-container');
+            const dataTable = document.querySelector('.bg-panel.border.border-border.rounded.shadow-2xl');
+
+            if (currentView === 'coupons') {
+                couponsContainer.classList.remove('hidden');
+                dataTable.classList.add('hidden');
+                return;
+            } else {
+                couponsContainer.classList.add('hidden');
+                dataTable.classList.remove('hidden');
+            }
 
             // Filter Data based on View
             let displayData = lastData.filter(m => {
@@ -1419,6 +1441,61 @@
                             </td>
                         </tr>`;
                 }
+            }
+        }
+
+        async function fetchCoupons() {
+            document.getElementById('table-body').innerHTML = `<tr><td colspan="10" class="text-center py-12 text-purple-400 animate-pulse">KAHİN KUPONLARI HAZIRLANIYOR...</td></tr>`;
+            const container = document.getElementById('coupons-container');
+            container.innerHTML = "";
+            container.classList.remove('hidden');
+            document.querySelector('.bg-panel.border.border-border.rounded.shadow-2xl').classList.add('hidden');
+
+            try {
+                const res = await fetch('/api/coupons');
+                const coupons = await res.json();
+
+                if (coupons.length === 0) {
+                    container.innerHTML = `<div class="col-span-3 text-center py-12 text-muted">Şu an aktif maç bulunmadığı için kupon oluşturulamadı.</div>`;
+                    return;
+                }
+
+                coupons.forEach(c => {
+                    let mHtml = "";
+                    c.matches.forEach(m => {
+                        mHtml += `
+                            <div class="flex justify-between items-center bg-black/40 p-3 rounded border border-gray-800 mb-2">
+                                <div class="text-left">
+                                    <div class="text-[10px] text-gray-500 uppercase font-bold">${m.league}</div>
+                                    <div class="text-xs text-white font-bold">${m.home} - ${m.away}</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-accent font-black">${m.coupon_pick}</div>
+                                    <div class="text-[9px] text-gray-500">%${m.coupon_prob} Güven</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    container.innerHTML += `
+                        <div class="bg-gradient-to-b from-purple-900/20 to-black border border-purple-500/30 rounded-xl p-5 shadow-[0_0_20px_rgba(168,85,247,0.15)] relative overflow-hidden">
+                            <div class="bg-purple-600 text-white text-[10px] font-black px-2 py-0.5 rounded absolute top-3 right-3 shadow-lg">${c.total_odds} ORAN</div>
+                            <h3 class="text-purple-400 font-black text-sm mb-4 flex items-center gap-2">
+                                🎟️ ${c.name}
+                            </h3>
+                            <div class="space-y-1 mb-4">
+                                ${mHtml}
+                            </div>
+                            <button onclick="openModal('${c.matches[0].id}')" class="w-full bg-purple-600/20 border border-purple-500/50 text-purple-300 text-[10px] py-2 rounded hover:bg-purple-500 hover:text-white transition-all font-bold">
+                                ANALİZİ GÖR
+                            </button>
+                        </div>
+                    `;
+                });
+
+                document.getElementById('table-body').innerHTML = ""; // Clear table body 
+            } catch (e) {
+                console.error(e);
             }
         }
 

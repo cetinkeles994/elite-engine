@@ -664,3 +664,604 @@ FT,EuroLeague,Anadolu Efes,Valencia Basket,2.5,1.53,💎 KASA: MS 2 [STAKE %9.2]
 FT,EuroCup,Hamburg Towers,KK Cedevita Olimpija,3.9,1.23,💎 KASA: MS 2 [STAKE %9.5],0,won,74,88
 FT,BSL,Bursaspor Basketbol,Trabzonspor,2.72,1.41,💎 KASA: MS 2 [STAKE %10.8],0,won,75,83
 FT,BBL,Gladiators Trier,ALBA Berlin,2.4,1.55,MS 2 [STAKE %1.9],0,won,92,99
+FT,Süper Lig,Kayserispor,Kocaelispor,9.09,1.06,💎 KASA: MS 2 [STAKE %24.7],0,won,1,2
+FT,BSL,Petkim Spor,Türk Telekom B.K.,3.35,1.29,💎 KASA: MS 2 [STAKE %13.2],0,lost,86,77
+FT,ACB,Joventut Badalona,Valencia Basket,2.7,1.45,💎 KASA: MS 2 [STAKE %10.7],0,lost,90,87
+FT,Pro A,Élan Chalon,Monaco Basket,2.3,1.55,MS 2 [STAKE %1.1],0,won,78,92
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %12.0],0,won,63,106
+FT,Premier League,Brighton & Hove Albion,Crystal Palace,3.09,1.38,💎 KASA: MS 2 [STAKE %8.0],0,won,0,1
+FT,Premier League,AFC Bournemouth,Aston Villa,2.71,1.47,💎 KASA: MS 2 [STAKE %10.7],0,lost,1,1
+FT,Premier League,Burnley,West Ham United,7.22,1.1,💎 KASA: MS 2 [STAKE %20.9],0,won,0,2
+FT,Premier League,Fulham,Everton,2.16,1.7,💎 KASA: MS 2 [STAKE %4.1],0,won,1,2
+FT,Premier League,Wolverhampton Wanderers,Chelsea,12.0,1.05,💎 KASA: MS 2 [STAKE %19.5],0,won,1,3
+FT,Premier League,Newcastle United,Brentford,2.41,1.58,💎 KASA: MS 2 [STAKE %7.9],0,won,2,3
+FT,Premier League,Leeds United,Nottingham Forest,3.09,1.38,💎 KASA: MS 2 [STAKE %8.0],0,lost,3,1
+FT,La Liga,Alavés,Getafe,2.84,1.43,💎 KASA: MS 2 [STAKE %6.1],0,won,0,2
+FT,La Liga,Athletic Club,Levante,2.49,1.54,💎 KASA: MS 2 [STAKE %8.7],0,lost,4,2
+FT,La Liga,Sevilla,Girona,2.84,1.43,💎 KASA: MS 2 [STAKE %6.1],0,lost,1,1
+FT,La Liga,Valencia,Real Madrid,3.98,1.25,💎 KASA: MS 2 [STAKE %12.0],0,won,0,2
+Postponed,La Liga,Rayo Vallecano,Real Oviedo,3.64,1.29,💎 KASA: MS 2 [STAKE %15.7],0,lost,0,0
+FT,La Liga,Barcelona,Mallorca,1.05,10.43,💎 KASA: MS 1 [STAKE %25.0],0,won,3,0
+FT,La Liga,Real Sociedad,Elche,2.49,1.54,💎 KASA: MS 2 [STAKE %8.7],0,lost,3,1
+FT,La Liga,Celta Vigo,Osasuna,2.49,1.54,💎 KASA: MS 2 [STAKE %8.7],0,won,1,2
+FT,Bundesliga,FC Cologne,RB Leipzig,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,won,1,2
+FT,Bundesliga,Bayern Munich,TSG Hoffenheim,1.07,8.7,💎 KASA: MS 1,89,won,5,1
+FT,Bundesliga,1. FC Heidenheim 1846,Hamburg SV,6.06,1.13,💎 KASA: MS 2 [STAKE %15.7],0,won,0,2
+FT,Bundesliga,Mainz,FC Augsburg,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,lost,2,0
+FT,Bundesliga,St. Pauli,VfB Stuttgart,4.55,1.2,💎 KASA: MS 2 [STAKE %13.5],0,lost,2,1
+FT,Bundesliga,VfL Wolfsburg,Borussia Dortmund,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,won,1,2
+FT,Bundesliga,Borussia Mönchengladbach,Bayer Leverkusen,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,lost,1,1
+FT,Bundesliga,1. FC Union Berlin,Eintracht Frankfurt,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,lost,1,1
+FT,Serie A,Bologna,Parma,2.6,1.5,💎 KASA: MS 2 [STAKE %10.0],0,won,0,1
+FT,Serie A,Lecce,Udinese,4.16,1.24,💎 KASA: MS 2 [STAKE %12.5],0,lost,2,1
+FT,Serie A,Sassuolo,Internazionale,2.6,1.5,💎 KASA: MS 2 [STAKE %10.0],0,won,0,5
+FT,Serie A,Genoa,Napoli,4.16,1.24,💎 KASA: MS 2 [STAKE %12.5],0,won,2,3
+FT,Serie A,Fiorentina,Torino,6.93,1.1,💎 KASA: MS 2 [STAKE %20.9],0,lost,2,2
+FT,Serie A,Hellas Verona,Pisa,10.39,1.05,💎 KASA: MS 2 [STAKE %22.2],0,lost,0,0
+FT,Ligue 1,Nice,AS Monaco,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,lost,0,0
+FT,Ligue 1,AJ Auxerre,Paris FC,6.06,1.13,💎 KASA: MS 2 [STAKE %23.2],0,lost,0,0
+FT,Ligue 1,Angers,Toulouse,2.27,1.64,💎 KASA: MS 2 [STAKE %6.2],0,lost,1,0
+FT,Ligue 1,Le Havre AC,Strasbourg,3.64,1.29,💎 KASA: MS 2 [STAKE %15.7],0,lost,2,1
+FT,Ligue 1,Paris Saint-Germain,Marseille,1.14,5.88,💎 KASA: MS 1 [STAKE %10.8],0,won,5,0
+FT,Ligue 1,Lens,Stade Rennais,1.14,5.88,💎 KASA: MS 1 [STAKE %10.8],0,won,3,1
+FT,Ligue 1,Brest,Lorient,2.6,1.5,💎 KASA: MS 2 [STAKE %10.0],0,lost,2,0
+FT,Ligue 1,Nantes,Lyon,6.06,1.13,💎 KASA: MS 2 [STAKE %23.2],0,won,0,1
+FT,Ligue 1,Metz,Lille,6.06,1.13,💎 KASA: MS 2 [STAKE %23.2],0,lost,0,0
+FT,Süper Lig,Eyupspor,Istanbul Basaksehir,4.55,1.2,💎 KASA: MS 2 [STAKE %13.5],0,won,1,2
+FT,Süper Lig,Caykur Rizespor,Galatasaray,4.55,1.2,💎 KASA: MS 2 [STAKE %13.5],0,won,0,3
+FT,Süper Lig,Konyaspor,Goztepe,4.55,1.2,💎 KASA: MS 2 [STAKE %13.5],0,lost,0,0
+FT,Süper Lig,Fatih Karagümrük,Antalyaspor,6.06,1.13,💎 KASA: MS 2 [STAKE %20.2],0,lost,1,0
+FT,Süper Lig,Samsunspor,Trabzonspor,2.6,1.5,🔥 BANKO: MS 2 [STAKE %3.9],0,won,0,3
+FT,Eredivisie,FC Utrecht,Feyenoord Rotterdam,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,won,0,1
+FT,Eredivisie,Go Ahead Eagles,Telstar,4.55,1.2,💎 KASA: MS 2 [STAKE %13.5],0,lost,1,1
+FT,Eredivisie,PEC Zwolle,FC Volendam,2.72,1.47,💎 KASA: MS 2 [STAKE %14.7],0,won,1,2
+FT,Eredivisie,FC Twente,Heerenveen,2.38,1.59,MS 2 [STAKE %1.3],0,lost,5,0
+FT,Eredivisie,Fortuna Sittard,Sparta Rotterdam,2.72,1.47,💎 KASA: MS 2 [STAKE %14.7],0,lost,2,2
+FT,Eredivisie,NAC Breda,Excelsior,6.35,1.12,💎 KASA: MS 2 [STAKE %16.1],0,won,0,2
+FT,Primeira Liga,C.D. Nacional,Casa Pia,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,lost,0,0
+FT,Primeira Liga,Estrela,Santa Clara,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,lost,1,0
+FT,Primeira Liga,Arouca,Vitória de Guimaraes,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,lost,3,2
+FT,Championship,Norwich City,Blackburn Rovers,2.68,1.48,💎 KASA: MS 2 [STAKE %10.6],0,lost,2,0
+FT,Championship,Southampton,Watford,2.44,1.56,MS 2 [STAKE %1.7],0,lost,1,0
+FT,Championship,West Bromwich Albion,Stoke City,2.98,1.4,💎 KASA: MS 2 [STAKE %7.3],0,lost,0,0
+FT,Championship,Charlton Athletic,Queens Park Rangers,2.89,1.42,💎 KASA: MS 2 [STAKE %6.7],0,lost,0,0
+FT,Serie B,Carrarese,Suditrol,2.84,1.43,💎 KASA: MS 2 [STAKE %6.1],0,lost,0,0
+FT,Serie B,Juve Stabia,Padova,2.49,1.54,💎 KASA: MS 2 [STAKE %8.7],0,lost,3,3
+FT,Serie B,Mantova,Bari,3.32,1.34,💎 KASA: MS 2 [STAKE %14.6],0,lost,2,1
+FT,Serie B,Spezia,Virtus Entella,3.98,1.25,💎 KASA: MS 2 [STAKE %12.0],0,lost,1,1
+FT,2. Bundesliga,Arminia Bielefeld,TSV Eintracht Braunschweig,3.03,1.39,💎 KASA: MS 2 [STAKE %7.5],0,lost,3,2
+FT,2. Bundesliga,Karlsruher SC,Fortuna Düsseldorf,2.6,1.5,💎 KASA: MS 2 [STAKE %10.0],0,lost,1,1
+FT,2. Bundesliga,Preußen Münster,VfL Bochum,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,lost,1,1
+FT,2. Bundesliga,SpVgg Greuther Fürth,1. FC Magdeburg,3.64,1.29,💎 KASA: MS 2 [STAKE %10.5],0,won,4,5
+FT,Belgian Pro League,Racing Genk,Anderlecht,2.6,1.5,💎 KASA: MS 2 [STAKE %10.0],0,lost,2,0
+FT,Belgian Pro League,Zulte-Waregem,Dender,2.97,1.4,💎 KASA: MS 2 [STAKE %6.9],0,lost,1,0
+FT,Belgian Pro League,KVC Westerlo,Sint-Truidense,2.97,1.4,💎 KASA: MS 2 [STAKE %6.9],0,won,0,4
+Bitti,NBA,Wizards,Heat,3.22,1.35,💎 KASA: MS 2 [STAKE %8.7],0,won,101,132
+Bitti,NBA,Nets,Wizards,3.15,1.36,💎 KASA: MS 2 [STAKE %8.2],0,lost,127,113
+Bitti,NBA,Thunder,Rockets,1.15,5.61,💎 KASA: MS 1 [STAKE %11.6],0,lost,106,112
+Bitti,NBA,Spurs,Mavericks,1.25,3.99,🔥 BANKO: MS 1,76,won,138,125
+Bitti,NBA,Lakers,Warriors,1.38,3.07,💎 KASA: MS 1 [STAKE %5.9],0,won,105,99
+Bitti,NBA,Kings,Cavaliers,3.9,1.26,💎 KASA: MS 2 [STAKE %16.6],0,won,126,132
+Bitti,NBA,Pistons,Knicks,1.16,5.28,🔥 BANKO: MS 1,81,won,118,80
+Bitti,NBA,Kings,Clippers,3.82,1.27,💎 KASA: MS 2 [STAKE %16.5],0,won,111,114
+FT,EuroLeague,LDLC ASVEL Lyon-Villeurbanne,EA7 Emporio Armani Milano,2.3,1.61,MS 2 [STAKE %1.1],0,won,76,77
+FT,EuroLeague,Bayern München,Monaco Basket,2.4,1.55,MS 2 [STAKE %1.9],0,lost,91,82
+FT,EuroLeague,KK Partizan Mozzart Bet,Panathinaikos BC,2.95,1.38,💎 KASA: MS 2 [STAKE %6.1],0,lost,78,62
+FT,EuroLeague,Paris Basketball,Fenerbahçe Beko,2.82,1.42,💎 KASA: MS 2 [STAKE %5.2],0,won,90,92
+FT,EuroLeague,LDLC ASVEL Lyon-Villeurbanne,EA7 Emporio Armani Milano,2.3,1.61,MS 2 [STAKE %1.1],0,won,76,77
+FT,EuroCup,Hamburg Towers,KK Cedevita Olimpija,3.9,1.23,💎 KASA: MS 2 [STAKE %9.5],0,won,74,88
+FT,BSL,Petkim Spor,Türk Telekom B.K.,3.35,1.29,💎 KASA: MS 2 [STAKE %13.2],0,lost,86,77
+FT,ACB,Joventut Badalona,Valencia Basket,2.7,1.45,💎 KASA: MS 2 [STAKE %10.7],0,lost,90,87
+FT,ACB,Joventut Badalona,Valencia Basket,2.7,1.45,💎 KASA: MS 2 [STAKE %10.7],0,lost,90,87
+FT,Pro A,Élan Chalon,Monaco Basket,2.3,1.55,MS 2 [STAKE %1.1],0,won,78,92
+FT,Pro A,Giants Leverkusen,Gießen 46ers,3.6,1.26,💎 KASA: MS 2 [STAKE %8.7],0,lost,83,72
+FT,Pro A,SBB Baskets Wolmirstedt,Eisbären Bremerhaven,2.65,1.43,💎 KASA: MS 2 [STAKE %10.5],0,lost,87,84
+FT,Pro A,Sparkassenstars Bochum,BG Göttingen,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,86
+FT,Pro A,Uni Baskets Paderborn,Phoenix Hagen,7.25,1.08,💎 KASA: MS 2 [STAKE %13.4],0,won,93,99
+FT,Pro A,VFL Kirchheim Knights,Crailsheim Merlins,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,87
+FT,Pro A,Giants Leverkusen,Gießen 46ers,3.6,1.26,💎 KASA: MS 2 [STAKE %8.7],0,lost,83,72
+FT,Pro A,SBB Baskets Wolmirstedt,Eisbären Bremerhaven,2.65,1.43,💎 KASA: MS 2 [STAKE %10.5],0,lost,87,84
+FT,Pro A,Sparkassenstars Bochum,BG Göttingen,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,86
+FT,Pro A,Uni Baskets Paderborn,Phoenix Hagen,7.25,1.08,💎 KASA: MS 2 [STAKE %13.4],0,won,93,99
+FT,Pro A,VFL Kirchheim Knights,Crailsheim Merlins,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,87
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %12.0],0,won,63,106
+FT,BBL,Giants Leverkusen,Gießen 46ers,3.6,1.26,💎 KASA: MS 2 [STAKE %8.7],0,lost,83,72
+FT,BBL,SBB Baskets Wolmirstedt,Eisbären Bremerhaven,2.65,1.43,💎 KASA: MS 2 [STAKE %10.5],0,lost,87,84
+FT,BBL,Sparkassenstars Bochum,BG Göttingen,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,86
+FT,BBL,Uni Baskets Paderborn,Phoenix Hagen,7.25,1.08,💎 KASA: MS 2 [STAKE %13.4],0,won,93,99
+FT,BBL,VFL Kirchheim Knights,Crailsheim Merlins,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,87
+FT,BBL,Giants Leverkusen,Gießen 46ers,3.6,1.26,💎 KASA: MS 2 [STAKE %8.7],0,lost,83,72
+FT,BBL,SBB Baskets Wolmirstedt,Eisbären Bremerhaven,2.65,1.43,💎 KASA: MS 2 [STAKE %10.5],0,lost,87,84
+FT,BBL,Sparkassenstars Bochum,BG Göttingen,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,86
+FT,BBL,Uni Baskets Paderborn,Phoenix Hagen,7.25,1.08,💎 KASA: MS 2 [STAKE %13.4],0,won,93,99
+FT,BBL,VFL Kirchheim Knights,Crailsheim Merlins,2.25,1.57,MS 2 [STAKE %0.2],0,won,81,87
+FT,EuroCup,Dolomiti Energia Trento,Ratiopharm Ulm,1.32,3.15,🔥 BANKO: MS 1,75,won,76,68
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,82,won,79,62
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,78,won,109,74
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,82,won,79,62
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,La Liga,Valencia,Real Madrid,7.24,1.1,💎 KASA: MS 2 [STAKE %10.8],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,4.89,1.18,💎 KASA: MS 2 [STAKE %7.1],0,won,0,5
+FT,Süper Lig,Fenerbahce,Genclerbirligi,1.26,3.95,🔥 BANKO: MS 1,75,won,3,1
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.44,1.15,💎 KASA: MS 2 [STAKE %9.1],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.55,1.2,💎 KASA: MS 2 [STAKE %6.4],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.23,4.23,🔥 BANKO: MS 1,77,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.25,4.05,🔥 BANKO: MS 1,76,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.44,💎 KASA: MS 1 [STAKE %9.7],0,lost,134,137
+Bitti,NBA,Rockets,Clippers,1.33,3.37,💎 KASA: MS 1 [STAKE %5.9],0,won,102,95
+Bitti,NBA,Suns,Mavericks,1.26,3.9,🔥 BANKO: MS 1,75,won,120,111
+Bitti,NBA,Hornets,Pistons,2.38,1.59,💎 KASA: MS 2 [STAKE %7.8],0,won,104,110
+Bitti,NBA,Raptors,Pacers,1.16,5.25,🔥 BANKO: MS 1,81,won,122,104
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %1.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %8.7],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,80,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,💎 KASA: MS 1,86,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,81,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,🔥 BANKO: MS 1 [STAKE %3.4],0,won,89,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %2.2],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.7],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,84,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.0],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,77,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,🔥 BANKO: MS 1,84,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.1],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,84,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.3],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,🔥 BANKO: MS 1 [STAKE %2.7],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,78,won,96,73
+FT,La Liga,Valencia,Real Madrid,6.8,1.11,💎 KASA: MS 2 [STAKE %10.3],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,4.9,1.18,💎 KASA: MS 2 [STAKE %7.1],0,won,0,5
+FT,Süper Lig,Fenerbahce,Genclerbirligi,1.26,3.87,🔥 BANKO: MS 1,75,won,3,1
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.33,1.16,💎 KASA: MS 2 [STAKE %8.7],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.38,1.22,💎 KASA: MS 2 [STAKE %5.6],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.23,4.16,🔥 BANKO: MS 1,77,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.25,4.03,🔥 BANKO: MS 1,76,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.56,💎 KASA: MS 1 [STAKE %9.7],0,lost,134,137
+Bitti,NBA,Rockets,Clippers,1.33,3.35,💎 KASA: MS 1 [STAKE %5.9],0,won,102,95
+Bitti,NBA,Suns,Mavericks,1.25,4.02,🔥 BANKO: MS 1,76,won,120,111
+Bitti,NBA,Hornets,Pistons,2.44,1.56,💎 KASA: MS 2 [STAKE %8.5],0,won,104,110
+Bitti,NBA,Nuggets,Cavaliers,1.52,2.55,💎 KASA: MS 1 [STAKE %4.5],0,lost,117,119
+Bitti,NBA,Warriors,Grizzlies,1.33,3.33,💎 KASA: MS 1 [STAKE %5.9],0,won,114,113
+Bitti,NBA,Raptors,Pacers,1.16,5.28,🔥 BANKO: MS 1,81,won,122,104
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %1.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %8.7],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,79,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,💎 KASA: MS 1,86,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,81,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,76,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %2.4],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,💎 KASA: MS 1 [STAKE %4.1],0,won,89,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %1.8],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.1],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.0],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,78,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,🔥 BANKO: MS 1,84,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %1.8],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,81,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.1],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,80,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,82,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %0.0],0,won,86,62
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,🔥 BANKO: MS 1 [STAKE %2.7],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,76,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %1.5],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %0.0],0,won,86,62
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,MS 1 [STAKE %1.9],0,won,96,84
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,82,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,🔥 BANKO: MS 1 [STAKE %2.6],0,won,96,84
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,78,won,109,74
+FT,La Liga,Valencia,Real Madrid,7.25,1.1,💎 KASA: MS 2 [STAKE %10.8],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,4.91,1.18,💎 KASA: MS 2 [STAKE %7.4],0,won,0,5
+FT,Süper Lig,Fenerbahce,Genclerbirligi,1.26,3.87,🔥 BANKO: MS 1,75,won,3,1
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.29,1.16,💎 KASA: MS 2 [STAKE %8.7],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.7,1.19,💎 KASA: MS 2 [STAKE %6.9],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.25,4.02,🔥 BANKO: MS 1,76,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.24,4.07,🔥 BANKO: MS 1,76,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.53,💎 KASA: MS 1 [STAKE %9.7],0,lost,134,137
+Bitti,NBA,Rockets,Clippers,1.33,3.33,💎 KASA: MS 1 [STAKE %5.9],0,won,102,95
+Bitti,NBA,Suns,Mavericks,1.25,4.02,🔥 BANKO: MS 1,76,won,120,111
+Bitti,NBA,Hornets,Pistons,2.4,1.58,💎 KASA: MS 2 [STAKE %7.9],0,won,104,110
+Bitti,NBA,Nuggets,Cavaliers,1.54,2.49,💎 KASA: MS 1 [STAKE %4.3],0,lost,117,119
+Bitti,NBA,Raptors,Pacers,1.16,5.3,🔥 BANKO: MS 1,82,won,122,104
+FT,EuroCup,Dolomiti Energia Trento,Ratiopharm Ulm,1.32,3.15,🔥 BANKO: MS 1,75,won,76,68
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,82,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %1.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %6.3],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,78,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,🔥 BANKO: MS 1,84,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,82,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,🔥 BANKO: MS 1 [STAKE %3.4],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.8],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,82,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.8],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,76,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %2.2],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %2.4],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,🔥 BANKO: MS 1 [STAKE %2.7],0,won,89,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,78,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,80,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,🔥 BANKO: MS 1 [STAKE %3.4],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,84,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.9],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,77,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,🔥 BANKO: MS 1,84,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,🔥 BANKO: MS 1 [STAKE %3.4],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Ratiopharm Ulm,Gladiators Trier,1.42,2.82,MS 1 [STAKE %0.5],0,won,97,67
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.3],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,76,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,76,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %1.5],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,78,won,96,73
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,76,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.3],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,78,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,MS 1 [STAKE %1.1],0,won,96,84
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,MS 1 [STAKE %1.9],0,won,96,84
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,82,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,MS 1 [STAKE %1.9],0,won,96,84
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,82,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,MS 1 [STAKE %1.9],0,won,96,84
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,78,won,109,74
+FT,La Liga,Valencia,Real Madrid,7.1,1.1,💎 KASA: MS 2 [STAKE %10.7],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,5.05,1.17,💎 KASA: MS 2 [STAKE %7.5],0,won,0,5
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.54,1.15,💎 KASA: MS 2 [STAKE %9.1],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.57,1.2,💎 KASA: MS 2 [STAKE %6.4],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.24,4.15,🔥 BANKO: MS 1,77,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.26,3.9,🔥 BANKO: MS 1,75,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.56,💎 KASA: MS 1 [STAKE %9.7],0,lost,134,137
+Bitti,NBA,Suns,Mavericks,1.26,3.87,🔥 BANKO: MS 1,75,won,120,111
+Bitti,NBA,Magic,Bucks,1.38,3.09,💎 KASA: MS 1 [STAKE %5.9],0,won,118,99
+Bitti,NBA,Nuggets,Cavaliers,1.54,2.49,💎 KASA: MS 1 [STAKE %4.3],0,lost,117,119
+Bitti,NBA,Warriors,Grizzlies,1.34,3.3,💎 KASA: MS 1 [STAKE %6.3],0,won,114,113
+Bitti,NBA,Raptors,Pacers,1.15,5.5,💎 KASA: MS 1 [STAKE %9.7],0,won,122,104
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %0.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %6.3],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,79,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,💎 KASA: MS 1,85,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,🔥 BANKO: MS 1 [STAKE %3.4],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.0],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,81,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.8],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,🔥 BANKO: MS 1 [STAKE %2.7],0,won,89,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,76,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,80,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.1],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.0],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,77,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,🔥 BANKO: MS 1,83,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,79,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,80,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.1],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,80,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.3],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %0.0],0,won,86,62
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,MS 1 [STAKE %2.1],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.3],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %0.9],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,76,won,96,73
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,🔥 BANKO: MS 1 [STAKE %2.6],0,won,96,84
+FT,EuroCup,Türk Telekom B.K.,BV Chemnitz 99,1.07,7.5,🔥 BANKO: MS 1,83,won,79,62
+FT,EuroCup,KK Budućnost VOLI,JL Bourg Basket,1.48,2.55,🔥 BANKO: MS 1 [STAKE %2.6],0,won,96,84
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,78,won,109,74
+FT,La Liga,Valencia,Real Madrid,6.93,1.1,💎 KASA: MS 2 [STAKE %10.7],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,4.84,1.19,💎 KASA: MS 2 [STAKE %7.0],0,won,0,5
+FT,Süper Lig,Fenerbahce,Genclerbirligi,1.26,3.9,🔥 BANKO: MS 1,75,won,3,1
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.45,1.15,💎 KASA: MS 2 [STAKE %8.8],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.46,1.21,💎 KASA: MS 2 [STAKE %6.0],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.24,4.09,🔥 BANKO: MS 1,76,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.26,3.94,🔥 BANKO: MS 1,75,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.56,💎 KASA: MS 1 [STAKE %9.7],0,lost,134,137
+Bitti,NBA,Suns,Mavericks,1.24,4.13,🔥 BANKO: MS 1,76,won,120,111
+Bitti,NBA,Hornets,Pistons,2.38,1.59,💎 KASA: MS 2 [STAKE %7.8],0,won,104,110
+Bitti,NBA,Magic,Bucks,1.37,3.1,💎 KASA: MS 1 [STAKE %5.6],0,won,118,99
+Bitti,NBA,Timberwolves,Hawks,1.38,3.08,💎 KASA: MS 1 [STAKE %5.9],0,won,138,116
+Bitti,NBA,Nuggets,Cavaliers,1.51,2.56,💎 KASA: MS 1 [STAKE %4.3],0,lost,117,119
+Bitti,NBA,Raptors,Pacers,1.15,5.5,💎 KASA: MS 1 [STAKE %9.7],0,won,122,104
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,EuroCup,Dolomiti Energia Trento,Ratiopharm Ulm,1.32,3.15,🔥 BANKO: MS 1,75,won,76,68
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,🔥 BANKO: MS 1 [STAKE %3.4],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %1.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %6.3],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,79,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,💎 KASA: MS 1,85,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.8],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,81,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.2],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %1.8],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,82,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,76,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,🔥 BANKO: MS 1 [STAKE %2.7],0,won,89,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,75,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %0.9],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,79,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,80,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,🔥 BANKO: MS 1 [STAKE %3.4],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,84,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %2.4],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.9],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,77,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,🔥 BANKO: MS 1,84,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %1.8],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,80,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,🔥 BANKO: MS 1 [STAKE %3.4],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,78,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,78,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %1.5],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,🔥 BANKO: MS 1 [STAKE %2.7],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,77,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,76,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %1.5],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,La Liga,Valencia,Real Madrid,7.16,1.1,💎 KASA: MS 2 [STAKE %10.8],0,won,0,2
+FT,Serie A,Sassuolo,Internazionale,4.99,1.18,💎 KASA: MS 2 [STAKE %7.5],0,won,0,5
+FT,Süper Lig,Fenerbahce,Genclerbirligi,1.26,3.88,🔥 BANKO: MS 1,75,won,3,1
+FT,Süper Lig,Caykur Rizespor,Galatasaray,5.64,1.15,💎 KASA: MS 2 [STAKE %8.9],0,won,0,3
+FT,Eredivisie,FC Groningen,PSV Eindhoven,4.59,1.2,💎 KASA: MS 2 [STAKE %6.5],0,won,1,2
+FT,Primeira Liga,FC Famalicao,AVS,1.24,4.09,🔥 BANKO: MS 1,76,won,3,1
+FT,Belgian Pro League,Union St.-Gilloise,RAAL La Louvière,1.25,4.0,🔥 BANKO: MS 1,76,won,2,1
+Bitti/OT,NBA,Knicks,Pacers,1.15,5.63,💎 KASA: MS 1 [STAKE %11.6],0,lost,134,137
+Bitti,NBA,Rockets,Clippers,1.34,3.28,💎 KASA: MS 1 [STAKE %5.3],0,won,102,95
+Bitti,NBA,Suns,Mavericks,1.24,4.07,🔥 BANKO: MS 1,76,won,120,111
+Bitti,NBA,Hornets,Pistons,2.39,1.58,💎 KASA: MS 2 [STAKE %7.8],0,won,104,110
+Bitti,NBA,Magic,Bucks,1.37,3.1,💎 KASA: MS 1 [STAKE %5.6],0,won,118,99
+Bitti,NBA,Raptors,Pacers,1.16,5.37,🔥 BANKO: MS 1,82,won,122,104
+FT,EuroCup,Panionios BC,Beşiktaş Gain,5.25,1.13,💎 KASA: MS 2 [STAKE %8.0],0,won,74,114
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,🔥 BANKO: MS 1,84,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,🔥 BANKO: MS 1 [STAKE %3.4],0,won,94,76
+FT,BSL,Tofaş Bursa,Mersin SC,1.34,3.05,MS 1 [STAKE %1.4],0,lost,83,88
+FT,BSL,Trabzonspor,Yukatel Merkezefendi Belediyesi Basket,1.12,5.5,💎 KASA: MS 1 [STAKE %8.7],0,won,91,76
+FT,BSL,Beşiktaş Gain,Esenler Erokspor,1.24,3.75,🔥 BANKO: MS 1,79,won,88,68
+FT,BSL,Bahçeşehir Koleji,Büyükçekmece,1.04,9.5,💎 KASA: MS 1,85,won,81,58
+FT,BSL,Anadolu Efes,Karşıyaka,1.06,8.25,💎 KASA: MS 1,85,won,98,81
+FT,BSL,Fenerbahçe Beko,Galatasaray MCT Technic,1.15,4.75,🔥 BANKO: MS 1,81,won,79,77
+FT,BSL,Manisa Basket,Bursaspor Basketbol,1.56,2.3,💎 KASA: MS 1 [STAKE %4.1],0,won,94,76
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,ACB,Unicaja,MoraBanc Andorra,1.1,7.0,🔥 BANKO: MS 1,82,won,91,79
+FT,ACB,Basket Zaragoza,Surne Bilbao Basket,1.67,2.2,🔥 BANKO: MS 1 [STAKE %2.6],0,lost,82,84
+FT,ACB,Força Lleida CE,BAXI Manresa,1.55,2.4,MS 1 [STAKE %2.5],0,lost,90,99
+FT,ACB,Real Madrid,Fundación CB Granada,1.01,17.0,💎 KASA: MS 1,85,won,94,79
+FT,ACB,Barça Basket,Bàsquet Girona,1.07,8.5,🔥 BANKO: MS 1,83,won,97,92
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,🔥 BANKO: MS 1 [STAKE %3.8],0,lost,79,87
+FT,Lega A,Dolomiti Energia Trento,Openjobmetis Varese,1.3,3.4,🔥 BANKO: MS 1,76,won,84,78
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Lega A,Germani Brescia,Virtus Bologna,1.67,2.2,💎 KASA: MS 1 [STAKE %4.4],0,lost,79,87
+FT,Lega A,Vanoli Basket Cremona,Pallacanestro Cantù,1.56,2.4,🔥 BANKO: MS 1 [STAKE %3.4],0,won,89,87
+FT,Lega A,Bertram Derthona Tortona,Pallacanestro Trieste,1.42,2.82,MS 1 [STAKE %1.3],0,won,104,99
+FT,Lega A,APU Udine,Banco di Sardegna Sassari,1.45,2.7,MS 1 [STAKE %1.6],0,won,92,79
+FT,Pro A,Chorale Roanne Basket,Vichy,1.25,3.7,🔥 BANKO: MS 1,77,won,109,74
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,MS 1 [STAKE %1.8],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,💎 KASA: MS 1 [STAKE %4.7],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,83,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,79,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,Pro A,BCM Gravelines-Dunkerque,Saint-Quentin,1.37,2.85,MS 1 [STAKE %0.9],0,won,91,75
+FT,Pro A,Le Mans Sarthe Basket,JDA Dijon Basket,1.26,3.6,🔥 BANKO: MS 1,78,won,92,86
+FT,Pro A,Paris Basketball,SLUC Nancy Basket,1.06,8.0,💎 KASA: MS 1,85,won,102,73
+FT,Pro A,LDLC ASVEL Lyon-Villeurbanne,Nanterre 92,1.41,2.72,🔥 BANKO: MS 1 [STAKE %2.6],0,lost,64,77
+FT,Pro A,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,80,won,91,72
+FT,Pro A,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,79,won,92,69
+FT,Pro A,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,🔥 BANKO: MS 1 [STAKE %3.4],0,lost,82,88
+FT,Pro A,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,84,won,65,63
+FT,Pro A,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,80,won,96,73
+FT,Pro A,Rheinstars Köln,Uni Baskets Münster,1.45,2.6,MS 1 [STAKE %1.6],0,won,86,62
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,78,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %2.2],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,80,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,77,won,96,73
+FT,BBL,MHP Riesen Ludwigsburg,Bamberg Baskets,1.74,2.05,🔥 BANKO: MS 1 [STAKE %2.7],0,lost,74,86
+FT,BBL,ALBA Berlin,Rasta Vechta,1.08,7.5,🔥 BANKO: MS 1,81,won,84,82
+FT,BBL,Hamburg Towers,Löwen Braunschweig,1.2,4.5,🔥 BANKO: MS 1,77,won,95,85
+FT,BBL,MLP Academics Heidelberg,Bayern München,5.25,1.15,💎 KASA: MS 2 [STAKE %8.6],0,won,63,106
+FT,BBL,Eisbären Bremerhaven,Uni Baskets Paderborn,1.17,4.5,🔥 BANKO: MS 1,78,won,91,72
+FT,BBL,Gießen 46ers,Tigers Tübingen,1.18,4.4,🔥 BANKO: MS 1,77,won,92,69
+FT,BBL,Nürnberg Falcons BC,VFL Kirchheim Knights,1.65,2.12,MS 1 [STAKE %1.5],0,lost,82,88
+FT,BBL,BG Göttingen,Giants Leverkusen,1.08,7.25,🔥 BANKO: MS 1,81,won,65,63
+FT,BBL,Phoenix Hagen,Artland Dragons,1.18,4.4,🔥 BANKO: MS 1,76,won,96,73

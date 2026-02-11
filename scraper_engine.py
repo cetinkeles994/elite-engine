@@ -271,17 +271,20 @@ class StatEngine:
 
 
     def predict_match(
-    self,
-    home_win_rate,
-    away_win_rate,
-    league_code,
-    sport="soccer",
-    home_team=None,
-    away_team=None,
-    live_stats=None,
-    h_real=None,
-    a_real=None,
-     sofa_data=None):
+        self,
+        home_win_rate,
+        away_win_rate,
+        league_code,
+        sport="soccer",
+        home_team=None,
+        away_team=None,
+        live_stats=None,
+        h_real=None,
+        a_real=None,
+        sofa_data=None,
+        drop_info=None,
+        missing_players=None # Added for Phase 4
+    ):
         code_key = league_code
         # Map ESPN slugs back to baseline keys
         code_map = {
@@ -319,24 +322,21 @@ class StatEngine:
             h_exp = base.get('goals', 2.7) * h_off * a_def
             a_exp = base.get('goals', 2.7) * a_off * h_def
             h_exp += base.get('home_adv', 0.35)
+        if sport == 'basketball':
+             # Basketball specific adjustments
+             avg_points = base.get('points', 165.0)
+             h_adv = base.get('home_adv', 4.0)
+             
+             # 1. Style based adjustment (Offensive Rating)
+             h_style = (h_off - 1.0) * 8.0 
+             a_style = (a_off - 1.0) * 8.0
+             
+             # Initial h_exp/a_exp (will be refined after form)
+             h_exp = (avg_points / 2) + (h_adv / 2) + (h_style / 2)
+             a_exp = (avg_points / 2) - (h_adv / 2) + (a_style / 2)
         else:
-            # Basketball
-            avg_points = base.get('points', 165.0)
-            h_adv = base.get('home_adv', 4.0)
-            
-            # 1. Rating Based Spread (Style)
-            h_style = (h_off - 1.0) * 8.0 # Offset from avg
-            a_style = (a_off - 1.0) * 8.0
-            
-            # 2. Win Rate Based Spread (Strength)
-            # Ensure win_rate is 0-1. If > 1, it's 0-100 scale.
-            h_wr = home_win_rate if home_win_rate <= 1.0 else home_win_rate / 100.0
-            a_wr = away_win_rate if away_win_rate <= 1.0 else away_win_rate / 100.0
-            
-            wr_spread = (h_wr - a_wr) * 30.0 # Approx 10% diff = 3 points
-            
-            h_exp = (avg_points / 2) + (h_adv / 2) + (wr_spread / 2) + (h_style / 2)
-            a_exp = (avg_points / 2) - (h_adv / 2) - (wr_spread / 2) + (a_style / 2)
+             h_exp = base.get('goals', 2.7)
+             a_exp = base.get('goals', 2.7)
 
         preds = {
             "home_goals": 0, "away_goals": 0,
@@ -355,9 +355,13 @@ class StatEngine:
             "score_pred_away": 0
         }
 
-        # --- 1. STRENGTH CALCULATION ---
-        home_strength = (home_win_rate / 100.0) + 0.1  # Base strength
-        away_strength = (away_win_rate / 100.0)
+        # --- 1. BASE STRENGTH (Unified) ---
+        # Convert win rates to 0.0 - 1.0 range
+        h_wr = home_win_rate / 100.0 if home_win_rate > 1.0 else home_win_rate
+        a_wr = away_win_rate / 100.0 if away_win_rate > 1.0 else away_win_rate
+        
+        home_strength = h_wr + 0.05 # Tiny home bias
+        away_strength = a_wr
 
         # --- 2. MOMENTUM ---
         h_momentum = 1.0; a_momentum = 1.0
@@ -365,60 +369,151 @@ class StatEngine:
             h_momentum = live_stats.get('home_momentum', 1.0)
             a_momentum = live_stats.get('away_momentum', 1.0)
 
-        # Apply Momentum
         home_strength *= h_momentum
         away_strength *= a_momentum
 
+        # --- PHASE 4: INJURY & SUSPENSION IMPACT ---
+        injury_notes = []
+        if sport == 'soccer' and missing_players:
+            # SofaScore missing players usually looks like:
+            # {"away": [{"player": {...}, "type": "injury", "importance": 1}, ...], "home": [...]}
+            # OR sometimes it's just a flat list if the endpoint was sport-specific
+            for side in ['home', 'away']:
+                side_missing = []
+                if isinstance(missing_players, dict):
+                    side_missing = missing_players.get(side, [])
+                
+                impact_factor = 0
+                for p in side_missing:
+                    importance = p.get('importance', 1) 
+                    p_name = p.get('player', {}).get('name', 'Bilinmeyen Oyuncu')
+                    
+                    if importance >= 3:
+                        impact_factor += 0.08 # 8% per Star
+                        injury_notes.append(f"{'Ev' if side=='home' else 'Dep'}: {p_name} 🌟 (Yıldız Eksik)")
+                    elif importance >= 2:
+                        impact_factor += 0.04 # 4% per Key
+                        injury_notes.append(f"{'Ev' if side=='home' else 'Dep'}: {p_name} 🔑 (Önemli Eksik)")
+                
+                if side == 'home': home_strength *= (1.0 - impact_factor)
+                else: away_strength *= (1.0 - impact_factor)
+
         data_source = "SofaScore + Elite Eng v2"
 
+        # --- AI 2.0: FORM ANALYSIS INTEGRATION ---
+        if home_team and away_team:
+            h_form_str, h_form_score = fetch_team_form(home_team, league_code, sport)
+            a_form_str, a_form_score = fetch_team_form(away_team, league_code, sport)
+            
+            preds['home_form'] = h_form_str
+            preds['away_form'] = a_form_str
+            
+            form_diff = h_form_score - a_form_score
+            form_impact = form_diff * 0.05 
+            form_impact = max(-0.20, min(0.20, form_impact))
+            
+            home_strength += form_impact
+            away_strength -= form_impact
+            
+            if h_form_score >= 4.0: preds['home_badge'] = "🔥 FORMDA"
+            if a_form_score >= 4.0: preds['away_badge'] = "🔥 FORMDA"
+            if h_form_score <= -3.0: preds['home_badge'] = "📉 KRİZDE"
+            if a_form_score <= -3.0: preds['away_badge'] = "📉 KRİZDE"
+            
+            if form_impact != 0:
+                data_source += f" | AI Form (Etki: %{int(form_impact*100)})"
+
+        # --- PHASE 4: LIVE MOMENTUM (Next Goal & Comeback) ---
+        pressure_notes = []
+        if sport == 'soccer' and live_stats:
+            h_momentum = live_stats.get('home_momentum', 45)
+            a_momentum = live_stats.get('away_momentum', 45)
+            h_pressure = (h_momentum / 100.0) + (live_stats.get('home_shots', 0) * 0.05) + (live_stats.get('home_corners', 0) * 0.03)
+            a_pressure = (a_momentum / 100.0) + (live_stats.get('away_shots', 0) * 0.05) + (live_stats.get('away_corners', 0) * 0.03)
+            
+            # Next Goal Prob
+            total_pressure = h_pressure + a_pressure
+            if total_pressure > 0:
+                h_next_goal = (h_pressure / total_pressure) * 100
+                a_next_goal = (a_pressure / total_pressure) * 100
+                preds['next_goal_probs'] = {'home': round(h_next_goal, 1), 'away': round(a_next_goal, 1)}
+                
+                if h_next_goal > 65: pressure_notes.append("🔮 KAHİN: Ev Sahibi golü kokluyor! Baskı hat safhada.")
+                elif a_next_goal > 65: pressure_notes.append("🔮 KAHİN: Deplasman ekibi baskıyı kurdu, gol her an gelebilir.")
+
+            # Comeback (Geri Dönüş) Logic
+            h_score = int(live_stats.get('home_score', 0))
+            a_score = int(live_stats.get('away_score', 0))
+            if h_score < a_score and h_next_goal > 60:
+                preds['comeback_signal'] = "EV SAHİBİ GERİ DÖNÜŞ POTANSİYELİ"
+                pressure_notes.append("🚨 GERİ DÖNÜŞ SİNYALİ: Mağlup olan ev sahibi vites yükseltti!")
+            elif a_score < h_score and a_next_goal > 60:
+                preds['comeback_signal'] = "DEPLASMAN GERİ DÖNÜŞ POTANSİYELİ"
+                pressure_notes.append("🚨 GERİ DÖNÜŞ SİNYALİ: Deplasman ekibi skoru eşitlemek için yükleniyor!")
+
+        # --- 3. FINAL EXPECTANCY CALCULATION ---
         if sport == 'soccer':
-            # --- SOCCER MODEL ---
             avg_goals = base['goals']
             home_adv = base['home_adv']
 
-            # Expected Goals (Poisson Means)
-            h_exp = (avg_goals / 2) + home_adv + \
-                     (home_strength - away_strength)
-            a_exp = (avg_goals / 2) - (home_strength - away_strength)
+            # Strength difference impact (scaled for soccer)
+            # 10% strength diff = ~0.3 goals
+            strength_diff = (home_strength - away_strength) * 3.0
+            
+            h_exp = (avg_goals / 2) + home_adv + (strength_diff / 2)
+            a_exp = (avg_goals / 2) - (strength_diff / 2)
 
-            # Clamp values
             h_exp = max(0.1, h_exp)
             a_exp = max(0.1, a_exp)
-
-            # [INSERTION POINT for Tight Match Logic]
-            # --- ALGORITHMIC IMPROVEMENT: TIGHT MATCH LOGIC (TUNED v2) ---
-            # If teams are equal strength AND league is tight (avg < 2.4)
-            strength_diff = abs(home_strength - away_strength)
-            if strength_diff < 0.15 and avg_goals < 2.4:
-                # Force tighter game (Relaxed to 5% reduction)
+            
+            # Tight Match Logic
+            if abs(home_strength - away_strength) < 0.15 and avg_goals < 2.4:
                 h_exp *= 0.95
                 a_exp *= 0.95
                 data_source += " | Sıkışık Maç Modu (x%95)"
             
-            # --- VARIANCE INJECTION ---
-            # Add micro-randomness to prevent identical outputs for identical stats
-            h_exp += random.uniform(-0.05, 0.05)
-            a_exp += random.uniform(-0.05, 0.05)
+        else:
+            # Basketball
+            avg_points = base.get('points', 165.0)
+            # Strength difference impact (scaled for basketball)
+            # 10% strength diff = 3 points
+            wr_spread = (home_strength - away_strength) * 30.0
+            
+            h_exp += (wr_spread / 2)
+            a_exp -= (wr_spread / 2)
 
-            # --- FAVORITE BOOST ---
-            # If a team is a clear favorite (>50%), give them a slight attack boost
-            if home_win_rate > 50: h_exp *= 1.05
-            if away_win_rate > 50: a_exp *= 1.05
-
-            # --- FAVORITE BOOST (UPDATED) ---
-            # Now using Blended Rates (History + Market)
-            # If a team is a dominant favorite (>60%), FORCE consistent xG gap
-            if home_win_rate > 0.60:
-                h_exp = max(h_exp, a_exp + 0.6) # Ensure at least 0.6 goal gap
-                h_exp *= 1.10 # Boost further
-            if away_win_rate > 0.60:
+        # --- 4. FAVORITE BOOST ---
+        # If a team is a dominant favorite (>60%), ensure gap
+        if home_win_rate > 60:
+            boost = 1.10
+            if sport == 'soccer':
+                h_exp = max(h_exp, a_exp + 0.6)
+                h_exp *= boost
+            else:
+                h_exp = max(h_exp, a_exp + 5.0)
+                h_exp += 2.0
+        
+        if away_win_rate > 60:
+            boost = 1.10
+            if sport == 'soccer':
                 a_exp = max(a_exp, h_exp + 0.6)
-                a_exp *= 1.10
+                a_exp *= boost
+            else:
+                a_exp = max(a_exp, h_exp + 5.0)
+                a_exp += 2.0
 
-            preds['home_goals'] = round(h_exp, 2)
-            preds['away_goals'] = round(a_exp, 2)
-            preds['total_goals_prediction'] = round(h_exp + a_exp, 2)
+        # --- 5. KAHİN MARKET BIAS (Phase 2: Barem Avcısı) ---
+        if drop_info:
+            b_val = min(0.3, drop_info['pct'] / 50.0) # Market lag reflected in goals
+            if drop_info['side'] == 'home': h_exp += b_val
+            else: a_exp += b_val
 
+        # Assign back to preds
+        preds['home_goals'] = round(h_exp, 2)
+        preds['away_goals'] = round(a_exp, 2)
+        preds['total_goals_prediction'] = round(h_exp + a_exp, 2)
+
+        if sport == 'soccer':
             # --- GOD MODE: RUN 10000 SIMULATIONS ---
             sim_results = self.simulate_match(h_exp, a_exp, iterations=10000)
 
@@ -516,6 +611,9 @@ class StatEngine:
         if sofa_data and sofa_data.get('global_odds'):
             preds['global_market'] = sofa_data['global_odds']
 
+        if pressure_notes:
+            preds['reasoning'] += "\n\n" + " | ".join(pressure_notes)
+
         return preds
 
 
@@ -560,6 +658,11 @@ SUPPORTED_LEAGUES = [
     {"name": "Europa League", "code": "uefa.europa", "sport": "soccer"},
     {"name": "Conference Lg", "code": "uefa.europa.conf", "sport": "soccer"},
 
+    # --- INTERNATIONAL / GLOBAL ---
+    {"name": "Brazil Serie A", "code": "bra.1", "sport": "soccer", "sofascore_id": 325},
+    {"name": "Argentina Liga Prof", "code": "arg.1", "sport": "soccer", "sofascore_id": 155},
+    {"name": "MLS", "code": "usa.1", "sport": "soccer", "sofascore_id": 242},
+
     # --- BASKETBALL ---
     {"name": "NBA", "code": "nba", "sport": "basketball"},
     {"name": "EuroLeague", "code": "mens-euroleague", "sport": "basketball", "sofascore_id": 42527},
@@ -589,6 +692,35 @@ def scrape_todays_fixtures():
         dates_to_fetch.append(target.strftime("%Y%m%d"))
 
     return fetch_matches_for_dates(dates_to_fetch, LEAGUES)
+
+
+# --- AI 2.0: FORM ANALYSIS ENGINE ---
+SOFA_TEAM_CACHE = {} # Cache for team IDs: {name: id}
+
+def fetch_team_form(team_name, league_code, sport='soccer'):
+    """
+    Fetches the last 5 matches for a team to calculate a Form Score.
+    Returns: (form_string, form_score)
+    e.g. ("W-W-D-L-W", 3) where Win=1, Draw=0.5, Loss=-1
+    """
+    try:
+        adapter = sofa_adapter
+        team_id = SOFA_TEAM_CACHE.get(team_name)
+        
+        if not team_id:
+            # Try to resolve ID
+            team_id = adapter.find_team_id(team_name)
+            if team_id:
+                SOFA_TEAM_CACHE[team_name] = team_id
+        
+        if team_id:
+            return adapter.get_team_form(team_id)
+            
+        return "???", 0
+
+    except Exception as e:
+        print(f"Form Fetch Error for {team_name}: {e}")
+        return "???", 0
 
 
 def scrape_history():
@@ -1073,6 +1205,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
 
                         # --- SOFASCORE LOOKUP & REFRESH ---
                         sofa_data = sofa_adapter.get_deep_stats(home_team, away_team)
+                        missing_players = None
                         
                         # If NOT found in adapter, try to discover it from ss_events
                         if not sofa_data and 'ss_events' in locals():
@@ -1094,6 +1227,10 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                                         # Save to adapter cache
                                         sofa_adapter.update_match_data(se['id'], sofa_data)
                                         break
+                        
+                        # PHASE 4: Fetch Missing Players if we have an event ID
+                        if sofa_data and sofa_data.get('id'):
+                            missing_players = sofa_adapter.get_missing_players(sofa_data['id'])
 
 
                         # --- ODDS PARSING (MOVED UP FOR PREDICTION) ---
@@ -1184,15 +1321,37 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                             live_stats=live_stats,
                             h_real=h_stats_real,
                             a_real=a_stats_real,
-                            sofa_data=sofa_data
+                            sofa_data=sofa_data,
+                            drop_info=drop_info,
+                            missing_players=missing_players # Pass Phase 4 data
                         )
 
                         if sofa_data:
                             pro_stats['sofa_elite'] = sofa_data
 
                         # --- PROBABILITY CALC (Match Winner) ---
-                        home_prob = home_win_rate * 1.10  # Home Adv
-                        away_prob = 1.0 - home_prob
+                        # CRITICAL FIX: Use the Simulation Result, not the raw input!
+                        if 'sim_details' in pro_stats:
+                            home_prob = pro_stats['sim_details']['home_win_prob'] / 100.0
+                            away_prob = pro_stats['sim_details']['away_win_prob'] / 100.0
+                        else:
+                            home_prob = home_win_rate * 1.10  # Fallback
+                            away_prob = 1.0 - home_prob
+
+                        # --- MARKET SENTIMENT BIAS (Phase 2) ---
+                        if drop_info:
+                            # Apply a 5-10% bias toward the dropping side
+                            bias = min(0.10, drop_info['pct'] / 100.0)
+                            if drop_info['side'] == 'home':
+                                home_prob += bias
+                                away_prob -= bias
+                            else:
+                                away_prob += bias
+                                home_prob -= bias
+                            # Re-normalize
+                            total_p = home_prob + away_prob + (1.0 / 3.5) # rough draw
+                            home_prob /= total_p
+                            away_prob /= total_p
 
                         # Live Decay
                         is_losing = False
@@ -1406,20 +1565,20 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         if sys_confidence >= 85:
                             match['value_found'] = True
                             match['recommendation'] = f"💎 KASA: {sys_rec}"
-                            match['reasoning'] = f"SİSTEM MAX GÜVEN: %{sys_confidence} | İstatistiksel Hakimiyet"
+                            match['reasoning'] = f"🔮 KAHİN MAX GÜVEN: %{sys_confidence} | Mutlak İstatistiksel Hakimiyet"
                         elif sys_confidence >= 75:
                             match['value_found'] = True
                             match['recommendation'] = f"🔥 BANKO: {sys_rec}"
-                            match['reasoning'] = f"Yüksek Güven: %{sys_confidence} | Form ve Kadro Avantajı"
+                            match['reasoning'] = f"🔮 KAHİN ONAYLI: %{sys_confidence} | Derin Form ve Momentum Analizi"
                         elif sys_confidence >= 65:
                             match['recommendation'] = sys_rec
-                            match['reasoning'] = f"Analiz: {sys_rec} (Güven: %{sys_confidence})"
+                            match['reasoning'] = f"Yapay Zeka Analiz: {sys_rec} (Güven: %{sys_confidence})"
                         else:
                              match['recommendation'] = "PAS"
                              match['reasoning'] = "Yeterli veri güveni oluşmadı (%65 altı)."
 
                         if ai_note_text:
-                            match['reasoning'] += f"\n\n🤖 {ai_note_text}"
+                            match['reasoning'] += f"\n\n🔮 KAHİN NOTU: {ai_note_text}"
 
                         # --- WORLD CLASS ODDS ANALYSIS (KELLY CRITERION) ---
                         # The "Gold Standard" in professional betting
@@ -1469,14 +1628,14 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
     match['recommendation']}"
 
                                   match['reasoning'] = (
-                                      f"🧠 KELLY ANALİZİ: Kasanın %{
+                                      f"🔮 KAHİN MATEMATİKSEL ANALİZ (Kelly): Kasanın %{
     safe_stake:.2f}'si Basılmalı.\n"
                                       f"📊 Matematiksel Avantaj (Edge): +%{
     edge:.1f}\n"
-                                      f"🎯 Hedef Oran: {
+                                      f"🎯 Kahin Hedefi: {
     round(
         1 / real_prob,
-         2)} | Alınan: {decimal_odds} | Güven: {stake_advice}"
+         2)} | Piyasa Oranı: {decimal_odds} | Tahmin Gücü: {stake_advice}"
                                   )
 
 
@@ -1488,8 +1647,8 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                              d = match['dropping_odds']
                              side_tr = "EV SAHİBİ" if d['side'] == 'home' else "DEPLASMAN"
                              match['value_found'] = True # Always highlight dropping odds
-                             match['recommendation'] = f"📉 ORAN DÜŞÜYOR: {side_tr}"
-                             match['reasoning'] = f"⚠️ BARON OPERASYONU TESPİT EDİLDİ!\nOran açılıştan bu yana sert düştü.\nAçılış: {d['open']} -> Güncel: {d['curr']} (Düşüş: %{d['pct']})"
+                             match['recommendation'] = f"🔮 KAHİN SİNYALİ: {side_tr}"
+                             match['reasoning'] = f"⚠️ KAHİN PAZAR ANALİZİ: BARON OPERASYONU TESPİT EDİLDİ!\nOran açılıştan bu yana sert düştü.\nAçılış: {d['open']} -> Güncel: {d['curr']} (Düşüş: %{d['pct']})"
                         
                         # --- RESULT VERIFICATION ---
                         match['result'] = 'pending'
@@ -1566,7 +1725,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         sim_data = pro_stats.get('sim_details', {'home_win_prob': 0, 'away_win_prob': 0, 'draw_prob': 0, 'over_2_5_prob': 0, 'over_1_5_prob': 0})
                         sim_text = (
                             f"\n---------------\n"
-                            f"🎰 MONTE CARLO SİMÜLASYONU (10.000 Maç):\n"
+                            f"🔮 KAHİN DERİN SİMÜLASYON (10.000 Maç):\n"
                             f"• Ev Sahibi: %{int(sim_data['home_win_prob'])}\n"
                             f"• Deplasman: %{int(sim_data['away_win_prob'])}\n"
                             f"• Beraberlik: %{int(sim_data['draw_prob'])}\n"
@@ -1579,7 +1738,7 @@ def fetch_matches_for_dates(dates_to_fetch, LEAGUES):
                         match['reasoning'] += sim_text
                         
                         if match.get('ai_note'):
-                             match['reasoning'] += f"\n\n🤖 {match['ai_note']}"
+                             match['reasoning'] += f"\n\n🔮 KAHİN AI: {match['ai_note']}"
 
                         match['live_details'] = live_stats
                         matches.append(match)
