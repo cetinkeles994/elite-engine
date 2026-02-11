@@ -420,7 +420,7 @@
             </div>
 
             <!-- Data Table -->
-            <div class="bg-panel border border-border rounded shadow-2xl">
+            <div id="main-data-table" class="bg-panel border border-border rounded shadow-2xl">
                 <table class="w-full data-table">
                     <thead id="table-head">
                         <!-- Dynamic Headers -->
@@ -1058,7 +1058,7 @@
             renderHeaders();
             const tbody = document.getElementById('table-body');
             const couponsContainer = document.getElementById('coupons-container');
-            const dataTable = document.querySelector('.bg-panel.border.border-border.rounded.shadow-2xl');
+            const dataTable = document.getElementById('main-data-table');
 
             if (currentView === 'coupons') {
                 couponsContainer.classList.remove('hidden');
@@ -1066,7 +1066,7 @@
                 return;
             } else {
                 couponsContainer.classList.add('hidden');
-                dataTable.classList.remove('hidden');
+                if (dataTable) dataTable.classList.remove('hidden');
             }
 
             // Filter Data based on View
@@ -1092,8 +1092,9 @@
                 // Logic: High Market Odds (>2.00) BUT Good Valid Suggestion (Not PAS)
                 displayData = lastData.filter(m => {
                     if (!m.recommendation || m.recommendation.includes("PAS")) return false;
-                    const homeOdds = parseFloat(m.odds.home);
-                    const awayOdds = parseFloat(m.odds.away);
+                    if (!m.odds) return false;
+                    const homeOdds = parseFloat(m.odds.home || 0);
+                    const awayOdds = parseFloat(m.odds.away || 0);
                     const pick = m.recommendation.includes("MS 1") ? 1 : (m.recommendation.includes("MS 2") ? 2 : 0);
 
                     if (pick === 1 && homeOdds > 2.05) return true; // Home Underdog
@@ -1134,7 +1135,7 @@
                                 <span class="text-white font-bold">${m.home}</span>
                                 <span class="text-muted text-xs">vs</span>
                                 <span class="text-gray-400">${m.away}</span>
-                                ${m.pro_stats.sofa_elite ? '<span class="elite-badge" title="SofaScore Elite Data Core">💎</span>' : ''}
+                                ${m.pro_stats && m.pro_stats.sofa_elite ? '<span class="elite-badge" title="SofaScore Elite Data Core">💎</span>' : ''}
                             </div>
                         </td>
                         <td class="text-center font-bold font-mono text-lg text-white">
@@ -1449,7 +1450,8 @@
             const container = document.getElementById('coupons-container');
             container.innerHTML = "";
             container.classList.remove('hidden');
-            document.querySelector('.bg-panel.border.border-border.rounded.shadow-2xl').classList.add('hidden');
+            const dataTable = document.getElementById('main-data-table');
+            if (dataTable) dataTable.classList.add('hidden');
 
             try {
                 const res = await fetch('/api/coupons');
