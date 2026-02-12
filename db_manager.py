@@ -100,6 +100,42 @@ class DatabaseManager:
             rows = cursor.fetchall()
             return [json.loads(row['prediction_json']) for row in rows]
 
+    def get_active_matches(self, days_limit=1):
+        """Returns only matches from today and onwards."""
+        all_matches = self.get_all_matches()
+        now = datetime.now()
+        active = []
+        for m in all_matches:
+            try:
+                # Expected format: "12.02 23:00" or "HT" or "15'"
+                time_str = m.get('time', '')
+                if '.' in time_str and ' ' in time_str:
+                    m_date_str = time_str.split(' ')[0] # "12.02"
+                    m_date = datetime.strptime(f"{m_date_str}.{now.year}", "%d.%m.%Y")
+                    # If match date is today or future
+                    if m_date.date() >= now.date():
+                        active.append(m)
+                elif any(live in time_str for live in ['HT', "'", 'Live']):
+                    # Keep live matches for now, but we will clean them if they are too old elsewhere
+                    active.append(m)
+            except:
+                # If date parsing fails, keep it just in case if it's upcoming
+                if m.get('status') == 'Upcoming':
+                    active.append(m)
+        return active
+
+    def cleanup_stale_matches(self):
+        """Deletes matches that are stuck in Live/HT for more than 12 hours."""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            # If last_update is more than 12 hours ago and status is not 'Finished'
+            cursor.execute("""
+                DELETE FROM matches 
+                WHERE status != 'Finished' 
+                AND last_update < datetime('now', '-12 hours')
+            """)
+            conn.commit()
+
     def get_success_report(self):
         """Calculates win rate for finished matches."""
         with self._get_connection() as conn:

@@ -10,7 +10,7 @@ CACHE_FILE = "matches_cache.json"
 from db_manager import db_manager
 
 def load_cached_matches():
-    return db_manager.get_all_matches()
+    return db_manager.get_active_matches()
 
 @app.route('/')
 def dashboard():
@@ -32,9 +32,8 @@ HISTORY_CACHE_FILE = "history_cache.json"
 @app.route('/api/history')
 def api_history():
     sport_filter = request.args.get('sport')
-    # Use DB for history as well, filtering by Finished status
-    # Note: db_manager currently treats history items as matches with Finished status
-    all_matches = db_manager.get_all_matches()
+    # Use ALL matches from DB for history, filtering by Finished status
+    all_matches = db_manager.get_all_matches() 
     history_matches = [m for m in all_matches if m.get('status') == 'Finished' or m.get('result') != 'pending']
     
     if sport_filter:
@@ -140,4 +139,4 @@ def api_coupons():
     return jsonify(coupons)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

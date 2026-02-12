@@ -11,7 +11,11 @@ def run_elite_update():
     print(f"--- 🔮 KAHİN DATA GÜNCELLEME BAŞLADI: {datetime.now()} ---")
     
     try:
-        # 0. Reset SofaScore Cache (Ensure fresh IDs for H2H)
+        # 0. Cleanup and Reset SofaScore Cache
+        from db_manager import db_manager
+        print("🧹 Cleaning up stale matches from DB...")
+        db_manager.cleanup_stale_matches()
+
         print("🧹 Clearing SofaScore cache for fresh data...")
         sofa_adapter.reset_cache()
 

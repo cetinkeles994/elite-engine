@@ -13,7 +13,7 @@
             "name": "Maccabi Tel Aviv vs Bayern München",
             "homeTeam": "Maccabi Tel Aviv",
             "awayTeam": "Bayern München",
-            "momentum_score": "1st quarter",
+            "momentum_score": "2nd quarter",
             "league_id": 42527
         },
         "14206330": {
@@ -29,7 +29,7 @@
             "name": "Barça Basket vs Paris Basketball",
             "homeTeam": "Barça Basket",
             "awayTeam": "Paris Basketball",
-            "momentum_score": "Not started",
+            "momentum_score": "1st quarter",
             "league_id": 42527
         },
         "14206342": {
@@ -295,86 +295,6 @@
             "awayTeam": "APU Udine",
             "momentum_score": "Not started",
             "league_id": 269
-        },
-        "14343960": {
-            "id": 14343960,
-            "name": "Trapani Shark vs Nutribullet Treviso Basket",
-            "homeTeam": "Trapani Shark",
-            "awayTeam": "Nutribullet Treviso Basket",
-            "momentum_score": "Canceled",
-            "league_id": 269
-        },
-        "14343958": {
-            "id": 14343958,
-            "name": "Vanoli Basket Cremona vs EA7 Emporio Armani Milano",
-            "homeTeam": "Vanoli Basket Cremona",
-            "awayTeam": "EA7 Emporio Armani Milano",
-            "momentum_score": "Not started",
-            "league_id": 269
-        },
-        "14270248": {
-            "id": 14270248,
-            "name": "Cholet Basket vs BCM Gravelines-Dunkerque",
-            "homeTeam": "Cholet Basket",
-            "awayTeam": "BCM Gravelines-Dunkerque",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270254": {
-            "id": 14270254,
-            "name": "SIG Strasbourg vs JL Bourg Basket",
-            "homeTeam": "SIG Strasbourg",
-            "awayTeam": "JL Bourg Basket",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270247": {
-            "id": 14270247,
-            "name": "Boulazac Basket vs Le Portel",
-            "homeTeam": "Boulazac Basket",
-            "awayTeam": "Le Portel",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270252": {
-            "id": 14270252,
-            "name": "JDA Dijon Basket vs Limoges CSP",
-            "homeTeam": "JDA Dijon Basket",
-            "awayTeam": "Limoges CSP",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270251": {
-            "id": 14270251,
-            "name": "SLUC Nancy Basket vs LDLC ASVEL Lyon-Villeurbanne",
-            "homeTeam": "SLUC Nancy Basket",
-            "awayTeam": "LDLC ASVEL Lyon-Villeurbanne",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270250": {
-            "id": 14270250,
-            "name": "Élan Chalon vs Le Mans Sarthe Basket",
-            "homeTeam": "Élan Chalon",
-            "awayTeam": "Le Mans Sarthe Basket",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270249": {
-            "id": 14270249,
-            "name": "Saint-Quentin vs Paris Basketball",
-            "homeTeam": "Saint-Quentin",
-            "awayTeam": "Paris Basketball",
-            "momentum_score": "Not started",
-            "league_id": 272
-        },
-        "14270253": {
-            "id": 14270253,
-            "name": "Nanterre 92 vs Monaco Basket",
-            "homeTeam": "Nanterre 92",
-            "awayTeam": "Monaco Basket",
-            "momentum_score": "Not started",
-            "league_id": 272
         }
     },
     "teams": {}
