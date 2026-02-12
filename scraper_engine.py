@@ -352,7 +352,8 @@ class StatEngine:
             "best_goal_pick": "",
             "best_goal_prob": 0,
             "score_pred_home": 0,
-            "score_pred_away": 0
+            "score_pred_away": 0,
+            "reasoning": ""
         }
 
         # --- 1. BASE STRENGTH (Unified) ---
@@ -612,6 +613,7 @@ class StatEngine:
             preds['global_market'] = sofa_data['global_odds']
 
         if pressure_notes:
+            if 'reasoning' not in preds: preds['reasoning'] = ""
             preds['reasoning'] += "\n\n" + " | ".join(pressure_notes)
 
         return preds
