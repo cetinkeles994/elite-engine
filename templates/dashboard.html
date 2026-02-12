@@ -576,10 +576,14 @@
             const leagueSet = new Set();
 
             lastData.forEach(m => {
+                if (!m) return;
                 // Extract simple date (DD.MM) from string like "06.02 23:00"
-                const simpleDate = m.time.split(' ')[0];
-                dateSet.add(simpleDate);
-                leagueSet.add(m.league);
+                if (m.time) {
+                    const parts = m.time.split(' ');
+                    const simpleDate = parts[0];
+                    dateSet.add(simpleDate);
+                }
+                if (m.league) leagueSet.add(m.league);
             });
 
             const dateSel = document.getElementById('filter-date');
@@ -860,11 +864,12 @@
 
             candidates.sort((a, b) => {
                 const getStake = (str) => {
+                    if (!str) return 0;
                     const match = str.match(/STAKE %([\d\.]+)/);
                     return match ? parseFloat(match[1]) : 0;
                 };
-                const stakeA = a.recommendation ? getStake(a.recommendation) : 0;
-                const stakeB = b.recommendation ? getStake(b.recommendation) : 0;
+                const stakeA = getStake(a.recommendation);
+                const stakeB = getStake(b.recommendation);
                 return stakeB - stakeA; // Descending
             });
 
@@ -892,8 +897,11 @@
                 pickTitle.innerText = cleanPick;
 
                 // Extract stake for confidence display
-                const matchVal = best.recommendation.match(/STAKE %([\d\.]+)/);
-                const stakeVal = matchVal ? matchVal[1] : 0;
+                let stakeVal = 0;
+                if (best.recommendation) {
+                    const matchVal = best.recommendation.match(/STAKE %([\d\.]+)/);
+                    stakeVal = matchVal ? matchVal[1] : 0;
+                }
 
                 confTitle.innerText = `GÜVEN SKORU: ${parseInt(stakeVal * 10)} / 1000`; // Dramatic score
             }
