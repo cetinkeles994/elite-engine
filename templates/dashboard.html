@@ -909,13 +909,15 @@
             // Sort by lowest odds (Highest Probability)
             candidates.sort((a, b) => {
                 const getOdds = (m) => {
-                    if (m.recommendation.includes("MS 1")) return parseFloat(m.odds.home);
-                    return parseFloat(m.odds.away);
+                    if (!m.odds) return 10; // High odds fallback
+                    if (m.recommendation.includes("MS 1")) return parseFloat(m.odds.home || 10);
+                    return parseFloat(m.odds.away || 10);
                 };
                 return getOdds(a) - getOdds(b); // Ascending Odds (1.05 < 1.10)
             });
 
             const box = document.getElementById('safe-box');
+            const best = candidates[0];
 
             if (best) {
                 const matchTitle = document.getElementById('safe-match');
@@ -1149,7 +1151,8 @@
                 if (currentView === 'main' || currentView === 'history' || currentView === 'baron') {
                     // Main View
                     if (currentSport === 'basketball') {
-                        const sim = m.pro_stats.sim_details || {};
+                        const pro = m.pro_stats || {};
+                        const sim = pro.sim_details || {};
                         const thresholds = sim.thresholds || {};
                         let bballTooltip = `<div class='text-left font-mono'><b>📊 10.000 Maç Simülasyonu:</b><br>`;
 
@@ -1177,7 +1180,8 @@
                     } else {
                         // Soccer: Show Score Prediction
                         const drp = m.dropping_odds || {};
-                        const simDetails = m.pro_stats.sim_details || { top_scores: [] };
+                        const pro = m.pro_stats || {};
+                        const simDetails = pro.sim_details || { top_scores: [] };
                         let tooltipContent = "";
                         if (simDetails.top_scores && simDetails.top_scores.length > 0) {
                             tooltipContent = `<div class='text-left font-mono'><b>📊 10.000 Maç Simülasyonu:</b><br>`;
@@ -1222,11 +1226,11 @@
                             })()}
                             </td>
                             <td class="text-right font-mono ${drp.side === 'home' ? 'text-red-500 font-bold underline' : 'text-gray-400'}">
-                                ${m.odds.home}
+                                ${m.odds ? m.odds.home : '-'}
                                 ${drp.side === 'home' ? `<span class="block text-[8px] font-bold">-%${drp.pct}</span>` : ''}
                             </td>
                             <td class="text-right font-mono ${drp.side === 'away' ? 'text-red-500 font-bold underline' : 'text-gray-400'}">
-                                ${m.odds.away}
+                                ${m.odds ? m.odds.away : '-'}
                                 ${drp.side === 'away' ? `<span class="block text-[8px] font-bold">-%${drp.pct}</span>` : ''}
                             </td>
                         `;
@@ -1327,9 +1331,9 @@
                      `;
                 } else if (currentView === 'goals') {
                     // Goals / Points View
-                    const p = m.pro_stats;
+                    const p = m.pro_stats || {};
                     if (currentSport === 'soccer') {
-                        let mom = m.pro_stats.momentum || { home: 1.0, away: 1.0 };
+                        let mom = p.momentum || { home: 1.0, away: 1.0 };
                         let momBadge = `<span class="text-gray-500 text-xs">-</span>`;
                         if (mom.home > 1.2) momBadge = `<span class="text-green-500 font-bold text-xs">🔥 EV</span>`;
                         else if (mom.away > 1.2) momBadge = `<span class="text-red-500 font-bold text-xs">🔥 DEP</span>`;
